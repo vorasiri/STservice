@@ -21,7 +21,7 @@ input[type=text] {
 }
 
 input[type=submit] {
-    background-color: rgb(178, 214, 212);
+    background-color: #ffa000;
     border: none;
     border-radius: 5px;
     color: white;
@@ -29,6 +29,76 @@ input[type=submit] {
     text-decoration: none;
     margin: 5px 4px;
     cursor: pointer;
-    font-size: 14pt;
+    font-size: 16pt;
     font-weight: bold;
+}
+
+/* Fixed sidenav, full height */
+
+.sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #f1f1f1;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+/* Style the sidenav links and the dropdown button */
+
+.sidenav a, .dropdown-btn {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #818181;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+}
+
+/* On mouse-over */
+
+.sidenav a:hover, .dropdown-btn:hover {
+    background-color: #9e9e9e  ;
+    color: white;
+}
+
+/* Main content */
+
+.main {
+    margin-left: 200px;
+    /* Same as the width of the sidenav */
+    font-size: 20px;
+    /* Increased text to enable scrolling */
+    padding: 0px 10px;
+}
+
+/* Add an active class to the active dropdown button */
+
+.active {
+    background-color: #757575
+    ;
+    color: white;
+}
+
+/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+
+.dropdown-container {
+    display: none;
+    background-color: #262626;
+    padding-left: 8px;
+}
+
+/* Optional: Style the caret down icon */
+
+.fa-caret-down {
+    float: right;
+    padding-right: 8px;
 }
