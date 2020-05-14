@@ -1,0 +1,108 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <form action="#">
+        <div class="customerInfo">
+            <input class="btn" type="submit" value="Search Customer">
+            <input class="btn" type="submit" value="New Customer">
+            <br><br>
+            <!-- display only -->
+            <label for="customerID">รหัสลูกค้า</label>
+            <input type="number" id="customerID" name="customerID">
+            <br><br>
+            <label for="customerName">ชื่อ-นามสกุล ลูกค้า</label>
+            <input type="text" id="customerName" name="customerName">
+            <br><br>
+            <label for="customerAddress">ที่อยู่</label>
+            <input type="text" id="customerAddress" name="customerAddress">
+            <br><br>
+            <label for="customerTel">หมายเลขโทรศัพท์</label>
+            <input type="text" id="customerTel" name="customerTel">
+            <br><br>
+        </div>
+
+        <div class="purchaseInfo">
+            <label for="receiveDate">วันที่-เวลา ขาย</label>
+            <input type="datetime" id="receiveDate" name="customerID">
+            <br><br>
+            <p>พนักงานขาย</p>
+            <label for="staffID">รหัสพนักงาน</label>
+            <input type="number" id="staffID" name="staffID">
+            <br><br>
+            <!-- display only -->
+            <label for="staffName">ชื่อพนักงาน</label>
+            <input type="text" id="staffName" name="staffName">
+            <br><br>
+        </div>
+
+        <div class="productInfo">
+            <label for="productName">สินค้า</label>
+            <input type="text" id="productName" name="productName">
+            <br><br>
+            <label for="productBrand">ยี่ห้อ</label>
+            <select id="productBrand" name="productBrand">
+                <option value="Brand">Product Brand</option>
+                <!-- data from brand table -->
+            </select>
+            <br><br>
+            <label for="productModel">รุ่น LNB</label>
+            <input type="text" id="productModel" name="productModel">
+            <br><br>
+            <label for="productSN">หมายเลขเครื่อง LNB</label>
+            <input type="text" id="productSN" name="productSN">
+            <br><br>
+            <span>จำนวนกล่องรับสัญญาณ</span>
+            <input type="number" id="productAcc" name="productAcc">
+            <span>กล่อง</span>
+            <br><br>
+            <label for="productModel">รุ่น กล่องรับสัญญาณ</label>
+            <input type="text" id="productModel" name="productModel">
+            <br><br>
+            <label for="productSN">หมายเลขเครื่อง กล่องรับสัญญาณ</label>
+            <input type="text" id="productSN" name="productSN">
+            <br><br>
+        </div>
+
+        <div class="installationInfo">
+            <label for="appointmentDate">วันที่-เวลา การนัดหมาย</label>
+            <input type="datetime" id="receiveDate" name="customerID">
+            <br><br>
+            <p>พนักงานติดตั้ง</p>
+            <label for="staffID">รหัสพนักงาน</label>
+            <input type="number" id="staffID" name="staffID">
+            <br><br>
+            <!-- display only -->
+            <label for="staffName">ชื่อพนักงาน</label>
+            <input type="text" id="staffName" name="staffName">
+            <br><br>
+            <p>อุปกรณ์ที่ใช้ในการติดตั้ง เพิ่มเติม</p>
+            <input type="radio" id="productEquip" name="productEquip">
+            <label for="productEquip">ไม่มี</label>
+            <br>
+            <input type="radio" id="productEquip" name="productEquip">
+            <label for="productEquip">มี</label>
+            <br><br>
+            <input type="checkbox" id="productEquip" name="productEquip">
+            <label for="productEquip">สายสัญญาณ</label>
+            <input type="number" id="productEquip" name="productEquip">
+            <span>เมตร</span>
+            <br><br>
+            <!-- <input type="checkbox" id="productEquip" name="productEquip">
+            <label for="productEquip">ท่อน้ำยา</label>
+            <input type="number" id="productEquip" name="productEquip">
+            <span>เมตร</span>
+            <br><br>
+            <input type="checkbox" id="productEquip" name="productEquip">
+            <label for="productEquip">รางครอบท่อ</label>
+            <br><br> -->
+        </div>
+
+        <input class="btn" type="submit" value="Submit">
+    </form>
+</body>
+
+</html>
