@@ -13,24 +13,36 @@
     font-family: CSPraKas;
 }
 
-input[type=text] {
-    width: 150px;
-    border: 2px solid #bdbdbd;
-    border-radius: 4px;
-    font-size: 16pt;
+body {
+    background-color: #E0E0E0;
 }
 
 input[type=submit] {
-    background-color: #ffa000;
-    border: none;
-    border-radius: 5px;
+    width: 100%;
+    background-color: #FF9800;
     color: white;
-    padding: 18px 36px;
-    text-decoration: none;
-    margin: 5px 4px;
+    padding: 4%;
+    margin: 2%;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 16pt;
-    font-weight: bold;
+}
+
+.login {
+    height: 30%;
+    width: 32%;
+    margin: auto;
+    border: 1px #BDBDBD solid;
+    background-color: #FFFFFF;
+    padding: 6%;
+    border-radius: 5px;
+}
+
+.login input {
+    padding: 4%;
+    margin: 2%;
+    width: 95%;
+    height: 25%;
 }
 
 /* Fixed sidenav, full height */
@@ -42,7 +54,7 @@ input[type=submit] {
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #f1f1f1;
+    background-color: #F1F1F1;
     overflow-x: hidden;
     padding-top: 20px;
 }
@@ -66,7 +78,7 @@ input[type=submit] {
 /* On mouse-over */
 
 .sidenav a:hover, .dropdown-btn:hover {
-    background-color: #9e9e9e  ;
+    background-color: #FF9800;
     color: white;
 }
 
@@ -83,8 +95,7 @@ input[type=submit] {
 /* Add an active class to the active dropdown button */
 
 .active {
-    background-color: #757575
-    ;
+    background-color: #FF9800;
     color: white;
 }
 
@@ -92,7 +103,7 @@ input[type=submit] {
 
 .dropdown-container {
     display: none;
-    background-color: #262626;
+    background-color: #FFCC80;
     padding-left: 8px;
 }
 
