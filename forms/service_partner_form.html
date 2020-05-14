@@ -1,0 +1,51 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <form action="#">
+        <label for="partnerID">รหัสศูนย์บริการ</label>
+        <input type="number" id="partnerID" name="partnerID">  <!-- auto generate -->
+        <br><br>
+        <input type="radio" id="partnerType" name="partnerType">
+        <label for="partnerType">บุคคลธรรมดา</label>
+        <input type="radio" id="partnerType" name="partnerType">
+        <label for="partnerType">นิติบุคคล</label>
+        <br><br>
+
+        <!-- enable for general person -->
+        <label for="partnerName">ชื่อ</label>
+        <input type="text" id="partnerName" name="partnerName">
+        <label for="partnerLastName">นามสกุล</label>
+        <input type="text" id="partnerLastName" name="partnerLastName">
+        <br><br>
+
+        <!-- enable for niti -->
+        <label for="companyName">ชื่อบริษัท/สถานประกอบการ</label>
+        <input type="text" id="companyName" name="companyName">
+        <br><br>
+
+        <!-- enable for general person -->
+        <label for="IDCardNumber">เลขบัตรประจำตัวประชาชน</label>
+        <input type="text" id="IDCardNumber" name="IDCardNumber">
+        <br><br>
+
+        <!-- enable for niti -->
+        <label for="TaxIDNumber">เลขประจำตัวผู้เสียภาษี</label>
+        <input type="text" id="TaxIDNumber" name="TaxIDNumber">
+        <br><br>
+
+        <label for="partnerAddress">ที่อยู่</label>
+        <input type="text" id="partnerAddress" name="partnerAddress">
+        <br><br>
+        <label for="partnerTel">หมายเลขโทรศัพท์</label>
+        <input type="text" id="partnerTel" name="partnerTel">
+        <br><br>
+
+        <input class="btn" type="submit" value="Save">
+    </form>
+</body>
+
+</html>

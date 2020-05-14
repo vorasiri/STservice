@@ -1,15 +1,51 @@
-<form action="/action_page.php">
-    <label for="customerName">ชื่อ-นามสกุล</label>
-    <input type="text" id="customerName" name="customerName">
-    <br><br>
+<html>
 
-    <label for="customerAddress">ที่อยู่</label>
-    <input type="text" id="customerAddress" name="customerAddress">
-    <br><br>
+<head>
 
-    <label for="customerTel">หมายเลขโทรศัพท์</label>
-    <input type="text" id="customerTel" name="customerTel">
-    <br><br>
+</head>
 
-    <input class="btn" type="submit" value="Submit">
-</form>
+<body>
+    <form action="#">
+        <label for="customerID">รหัสลูกค้า</label>
+        <input type="number" id="customerID" name="customerID">  <!-- auto generate -->
+        <br><br>
+        <input type="radio" id="customerType" name="customerType">
+        <label for="customerType">บุคคลธรรมดา</label>
+        <input type="radio" id="customerType" name="customerType">
+        <label for="customerType">นิติบุคคล</label>
+        <br><br>
+
+        <!-- enable for general person -->
+        <label for="customerName">ชื่อ</label>
+        <input type="text" id="customerName" name="customerName">
+        <label for="customerLastName">นามสกุล</label>
+        <input type="text" id="customerLastName" name="customerLastName">
+        <br><br>
+
+        <!-- enable for niti -->
+        <label for="companyName">ชื่อบริษัท/สถานประกอบการ</label>
+        <input type="text" id="companyName" name="companyName">
+        <br><br>
+
+        <!-- enable for general person -->
+        <label for="IDCardNumber">เลขบัตรประจำตัวประชาชน</label>
+        <input type="text" id="IDCardNumber" name="IDCardNumber">
+        <br><br>
+
+        <!-- enable for niti -->
+        <label for="TaxIDNumber">เลขประจำตัวผู้เสียภาษี</label>
+        <input type="text" id="TaxIDNumber" name="TaxIDNumber">
+        <br><br>
+
+        <label for="customerAddress">ที่อยู่</label>
+        <input type="text" id="customerAddress" name="customerAddress">
+        <br><br>
+        <label for="customerTel">หมายเลขโทรศัพท์</label>
+        <input type="text" id="customerTel" name="customerTel">
+        <br><br>
+
+        <input class="btn" type="submit" value="Save">
+    </form>
+</body>
+
+</html>
