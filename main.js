@@ -24,6 +24,7 @@ function createWindow () {
     slashes: true
   }));
 
+  win.maximize()
 
   win.on('closed', () => {
     win = null
