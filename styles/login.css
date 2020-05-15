@@ -1,0 +1,42 @@
+@font-face {
+    font-family: CSPraKas;
+    src: url("fonts/CSPraKas.otf") format("opentype");
+}
+
+@font-face {
+    font-family: CSPraKas;
+    font-weight: bold;
+    src: url("fonts/CSPraKasBold.otf") format("opentype");
+}
+
+* {
+    font-family: CSPraKas;
+}
+
+.login {
+    height: 30%;
+    width: 32%;
+    margin: auto;
+    border: 1px #BDBDBD solid;
+    background-color: #FFFFFF;
+    padding: 6%;
+    border-radius: 5px;
+}
+
+.login input {
+    padding: 4%;
+    margin: 2%;
+    width: 95%;
+    height: 25%;
+}
+
+.login input[type=submit] {
+    width: 100%;
+    background-color: #FF9800;
+    color: white;
+    padding: 4%;
+    margin: 2%;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
