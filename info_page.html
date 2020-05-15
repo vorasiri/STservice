@@ -2,36 +2,48 @@
 
 <head>
     <title>Seutrong Service</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/info_page.css">
 </head>
 
 <body>
-    <h1 id="pageHeader">Page Header</h1>
-    <form action="#">
-        <label for="search">Search</label>
-        <select id="searchField" name="searchField">
-            <option value="field">Field</option>
-            <!-- option from database fields -->
-        </select>
-        <input type="search" id="searchBox" name="searchBox">
-        <input type="submit">
-    </form>
-    <form action="#">
-        <input class="addBtn" type="submit" value="Add new record">
-    </form>
-    <table class="infoTable" id="infoTable">
-        <tr>
-            <th>Column Header</th>
-            <th>Column Header</th>
-        </tr>
-        <tr>
-            <td>data1</td>
-            <td>data2</td>
-        </tr>
-    </table>
-    <div class="arrow">
-        <a href="#" class="previous">Previous</a>
-        <a href="#" class="next">Next</a>
+    <div class="grid-container">
+        <div class="header">
+            <h1 id="pageHeader">Page Header</h1>
+        </div>
+        <div class="search-box">
+            <form action="#">
+                <label for="searchDropdown">Search</label>
+                <select id="searchDropdown" name="searchDropdown">
+                    <option value="field">Field</option>
+                    <!-- option from database fields -->
+                </select>
+                <input type="search" id="searchField" name="searchField">
+                <input type="submit" value="Se">
+            </form>
+        </div>
+        <div class="add-button">
+            <form action="#">
+                <input type="submit" value="Add new record">
+            </form>
+        </div>
+        <div class="info-table">
+            <table class="infoTable" id="infoTable">
+                <tr>
+                    <th>Column Header</th>
+                    <th>Column Header</th>
+                </tr>
+                <tr>
+                    <td>data1</td>
+                    <td>data2</td>
+                </tr>
+            </table>
+        </div>
+        <div class="page-nav">
+            <div class="pageNav">
+                <a href="#" class="previous">Previous</a>
+                <a href="#" class="next">Next</a>
+            </div>
+        </div>
     </div>
 </body>
 
