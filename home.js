@@ -16,9 +16,13 @@ for (i = 0; i < dropdown.length; i++) {
 // button for load external html to mainpage
 var fs = require('fs');
 
-document.getElementById('navButton').addEventListener('click', function (e) {
-  fs.readFile('info_page.html', function (err, data) {
-    console.log(e.target.innerText)
-    document.getElementById('mainContent').innerHTML = data.toString()
+const allNavButton = document.getElementsByClassName('navButton');
+Array.from(allNavButton).forEach(navButton => {
+  navButton.addEventListener('click', function (e) {
+    fs.readFile('info_page.html', function (err, data) {
+      console.log(e.target.innerText)
+      document.getElementById('mainContent').innerHTML = data.toString();
+      document.getElementById('pageHeader').innerText = e.target.innerText;
+    })
   })
-})
+});
