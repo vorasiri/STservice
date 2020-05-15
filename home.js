@@ -16,8 +16,9 @@ for (i = 0; i < dropdown.length; i++) {
 // button for load external html to mainpage
 var fs = require('fs');
 
-document.getElementById('my-button').addEventListener('click', function () {
+document.getElementById('navButton').addEventListener('click', function (e) {
   fs.readFile('info_page.html', function (err, data) {
-    document.getElementById('my-div').innerHTML = data.toString()
+    console.log(e.target.innerText)
+    document.getElementById('mainContent').innerHTML = data.toString()
   })
 })
