@@ -56,7 +56,7 @@ input[type=submit] {
     left: 0;
     background-color: #F1F1F1;
     overflow-x: hidden;
-    padding-top: 20px;
+    /* padding-top: 20px; */
 }
 
 /* Style the sidenav links and the dropdown button */
