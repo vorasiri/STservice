@@ -19,7 +19,7 @@ function createWindow () {
   })
 
   win.loadURL(url.format({
-    pathname: path.join(__dirname, 'info_page.html'),
+    pathname: path.join(__dirname, 'home.html'),
     protocol: 'file:',
     slashes: true
   }));

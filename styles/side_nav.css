@@ -1,12 +1,12 @@
 @font-face {
     font-family: CSPraKas;
-    src: url("fonts/CSPraKas.otf") format("opentype");
+    src: url("../fonts/CSPraKas.otf") format("opentype");
 }
 
 @font-face {
     font-family: CSPraKas;
     font-weight: bold;
-    src: url("fonts/CSPraKasBold.otf") format("opentype");
+    src: url("../fonts/CSPraKasBold.otf") format("opentype");
 }
 
 * {
