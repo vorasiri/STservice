@@ -8,8 +8,9 @@
 <body>
     <form action="#">
         <div class="customerInfo">
-            <input class="btn" type="submit" value="Search Customer">
-            <input class="btn" type="submit" value="New Customer">
+            <!-- pop up window form when search -->
+            <input class="btn" type="submit" value="ค้นหาลูกค้า">
+            <input class="btn" type="submit" value="เพิ่มลูกค้าใหม่">
             <br><br>
             <!-- display only -->
             <label for="customerID">รหัสลูกค้า</label>
@@ -45,7 +46,7 @@
         </div>
         <div class="primaryInfo">
             <label for="receiveDate">วันที่-เวลา รับเครื่อง</label>
-            <input type="datetime" id="receiveDate" name="customerID">
+            <input type="datetime" id="receiveDate" name="receiveDate">
             <br><br>
             <label for="staffID">รหัสพนักงาน</label>
             <input type="number" id="staffID" name="staffID">
@@ -67,10 +68,10 @@
             <!-- will be checking from SN sell out -->
             <p>ซื้อสินค้าจาก</p>
             <input type="radio" id="productFromStore" name="productFromStore">
-            <label for="productFromSeutrong">ซื้อจากซื่อตรง</label>
+            <label for="productFromStore">ซื้อจากซื่อตรง</label>
             <br>
             <input type="radio" id="productFromStore" name="productFromStore">
-            <label for="productFromOthers">ซื้อจากอื่น ๆ</label>
+            <label for="productFromStore">ซื้อจากอื่น ๆ</label>
             <br><br>
 
             <label for="productFlaw">สภาพเครื่อง/ตำหนิ</label>
@@ -82,10 +83,14 @@
             <br>
             <input type="radio" id="productAcc" name="productAcc">
             <label for="productAcc">มี</label>
-            <input type="number" id="productAcc" name="productAcc">
-            <!-- <input type="text" id="productAcc" name="productAcc">
+            <br><br>
+            <span>จำนวน</span>
+            <input type="number" id="productAccQty" name="productAccQty">
+            <span>ชิ้น</span>
+            <br><br>
+            <!-- generate from input number -->
             <input type="text" id="productAcc" name="productAcc">
-            <input type="text" id="productAcc" name="productAcc"> -->
+
             <br><br>
         </div>
 
@@ -99,15 +104,16 @@
             <input type="radio" id="productDeliver" name="productDeliver">
             <label for="productDeliver">รับจากบ้านของลูกค้า</label>
             <br><br>
-
+            <!-- enable if have to pick up -->
             <label for="appointmentDate">วันที่-เวลา การนัดหมาย</label>
             <input type="datetime" id="appointmentDate" name="appointmentDate">
             <br><br>
+            <p>พนักงานรับ-จัดส่งเครื่อง</p>
             <label for="staffID">รหัสพนักงาน</label>
             <input type="number" id="staffID" name="staffID">
             <br><br>
             <!-- display only -->
-            <label for="staffName">ชื่อพนักงาน รับเครื่องจากบ้านของลูกค้า</label>
+            <label for="staffName">ชื่อพนักงาน</label>
             <input type="text" id="staffName" name="staffName">
             <br><br>
         </div>
