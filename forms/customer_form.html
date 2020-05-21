@@ -34,9 +34,21 @@
         <input type="text" id="TaxIDNumber" name="TaxIDNumber">
         <br><br>
 
-        <label for="customerAddress">ที่อยู่</label>
-        <input type="text" id="customerAddress" name="customerAddress">
+        <p>ที่อยู่</p>
+        <textarea id="customerAddress" name="customerAddress" placeholder="บ้านเลขที่ หมู่บ้าน ถนน"></textarea>
+        <br>
+        <input id="input_zipcode" placeholder="รหัสไปรษณีย์" />
+        <select id="input_province" onchange="showAmphoes()">
+            <option value="">กรุณาเลือกจังหวัด</option>
+        </select>
+        <select id="input_amphoe" onchange="showDistricts()">
+            <option value="">กรุณาเลือกอำเภอ</option>
+        </select>
+        <select id="input_district" onchange="showZipcode()">
+            <option value="">กรุณาเลือกตำบล</option>
+        </select>
         <br><br>
+
         <label for="customerTel">หมายเลขโทรศัพท์</label>
         <input type="text" id="customerTel" name="customerTel">
         <br><br>
