@@ -11,5 +11,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron ."
+  },
+  "dependencies": {
+    "mysql": "^2.18.1"
   }
 }

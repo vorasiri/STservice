@@ -8,13 +8,16 @@
 <body>
   <div class="login">
     <img src="images/LOGO.jpg">
-    <input type="text" placeholder="Username" id="username">
-    <input type="password" placeholder="Password" id="password">
-    <input type="submit" value="Sign In">
+    <form id="loginForm">
+      <input type="text" placeholder="Username" id="username">
+      <input type="password" placeholder="Password" id="password">
+      <input type="submit" value="Sign In">
+    </form>
+    <div id="responseText"></div>
   </div>
 
-  <script type="module">
-    import './index.js';
+  <script>
+    require('./login.js');
   </script>
 </body>
 
