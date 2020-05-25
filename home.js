@@ -36,9 +36,11 @@ Array.from(allNavButton).forEach(navButton => {
 });
 
 const { ipcRenderer, remote } = require( "electron" );
-
 // Read MyGlobalVariable.
-document.getElementById('staffName').innerText = remote.getGlobal( "user" ); // => "Hi There!"
+let user = remote.getGlobal( "user" )
+const con = remote.getGlobal( "con" );
+
+document.getElementById('staffName').innerText = user; // => "Hi There!"
 
 function contains(target, pattern) {
   var value = 0;

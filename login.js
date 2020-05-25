@@ -1,17 +1,5 @@
-var mysql = require('mysql');
 const { ipcRenderer, remote } = require( "electron" );
-
-var con = mysql.createConnection({
-    host: "seutrongluckydraw.ddns.net",
-    user: "remote",
-    password: "seutrongRemote_1",
-    database: "seutrong_service"
-});
-
-con.connect(function (err) {
-    if (err) throw err;
-    console.log("Connected!");
-});
+const con = remote.getGlobal( "con" );
 
 document.getElementById('loginForm').addEventListener('submit', function (event) {
     event.preventDefault();
