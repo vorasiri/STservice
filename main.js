@@ -45,3 +45,9 @@ app.on('activate', () => {
     createWindow();
   }
 });
+
+const { ipcMain } = require( "electron" );
+
+ipcMain.on( "loginUser", ( event, user ) => {
+  global.user = user;
+} );

@@ -1,4 +1,5 @@
 var mysql = require('mysql');
+const { ipcRenderer, remote } = require( "electron" );
 
 var con = mysql.createConnection({
     host: "seutrongluckydraw.ddns.net",
@@ -23,6 +24,9 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
             if (err) throw err;
     
             if (result.length > 0) {
+                // Set MyGlobalVariable.
+                ipcRenderer.send( "loginUser", `${result[0].staff_id}` );
+                
                 location.replace("./home.html")
             } else {
                 responseText.innerHTML = 'Incorrect Username and/or Password!'
