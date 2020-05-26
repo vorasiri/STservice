@@ -1,3 +1,4 @@
+// drop down of mainMenu
 var dropdown = document.getElementsByClassName("dropdown-btn");
 var i;
 
@@ -13,7 +14,7 @@ for (i = 0; i < dropdown.length; i++) {
   });
 }
 
-// button for load external html to mainpage
+// mainMenu navigation
 var fs = require('fs');
 
 const allNavButton = document.getElementsByClassName('navButton');
@@ -35,12 +36,20 @@ Array.from(allNavButton).forEach(navButton => {
   })
 });
 
-const { ipcRenderer, remote } = require( "electron" );
 // Read MyGlobalVariable.
+const { ipcRenderer, remote } = require( "electron" );
 let user = remote.getGlobal( "user" )
 const con = remote.getGlobal( "con" );
 
-document.getElementById('staffName').innerText = user; // => "Hi There!"
+// staffName
+document.getElementById('staffName').innerText = user;
+
+// logout
+document.getElementById('logoutButton').addEventListener('click', function(event){
+  event.preventDefault();
+  ipcRenderer.send( "loginUser", '' );
+  location.replace("./login.html")
+})
 
 function contains(target, pattern) {
   var value = 0;
