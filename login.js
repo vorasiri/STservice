@@ -8,12 +8,12 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
     let responseText = document.getElementById('responseText')
     console.log(`${username}, ${password}`)
     if (username != '' && password != ''){
-        con.query(`SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`, function (err, result, fields) {
+        con.query(`SELECT users.*, staff_name FROM users JOIN staff ON users.staff_id = staff.staff_id WHERE username = '${username}' AND password = '${password}'`, function (err, result, fields) {
             if (err) throw err;
     
             if (result.length > 0) {
                 // Set MyGlobalVariable.
-                ipcRenderer.send( "loginUser", `${result[0].staff_id}` );
+                ipcRenderer.send( "loginUser", `${result[0].staff_name}` );
                 
                 location.replace("./home.html")
             } else {
