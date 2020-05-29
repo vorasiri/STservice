@@ -13,15 +13,33 @@
     font-family: CSPraKas
 }
 
+body {
+    padding: 0.5%;
+}
+
 label, span {
     font-size: 12pt;
+    align-content: center;
 }
 
 p {
-    font-size: 13pt;
+    font-size: 14pt;
+    font-weight: bold;
 }
 
 /* The Modal (background) */
+
+input[type=submit] {
+    width: auto;
+    height: auto;
+    background-color: #FF9800;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12pt;
+}
 
 .modal {
     display: none;
@@ -72,11 +90,53 @@ p {
 }
 
 .row {
-    padding: 10px;
-    display: inline-flex;
+    padding: 5px;
+    display: flex;
 }
 
 .column {
-    padding-left: 10px;
-    width: 50%;
+    padding-right: 1%;
+    flex: content;
+}
+
+table {
+    width: 100%;
+}
+
+.purchaseInfo {
+    height: 250px;
+    border-radius: 5px;
+    background-color: #cacfd2;
+    padding: 5px 20px;
+}
+
+.appoinmentInfo {
+    height: 250px;
+    border-radius: 5px;
+    background-color: #cacfd2;
+    padding: 5px 20px;
+}
+
+.customerInfo {
+    width: 66%;
+    height: 95%;
+    border-radius: 5px;
+    background-color: #cacfd2;
+    padding: 5px 20px;
+}
+
+.productInfo {
+    width: 66%;
+    height: 95%;
+    border-radius: 5px;
+    background-color: #cacfd2;
+    padding: 5px 20px;
+}
+
+.installationInfo {
+    width: 66%;
+    height: 95%;
+    border-radius: 5px;
+    background-color: #cacfd2;
+    padding: 5px 20px;
 }

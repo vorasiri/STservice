@@ -45,17 +45,6 @@ body {
     background-color: #E0E0E0;
 }
 
-input[type=submit] {
-    width: 10%;
-    background-color: #FF9800;
-    color: white;
-    padding: 1%;
-    margin: 2%;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
 /* Fixed leftsidenav, full height */
 
 .leftsidenav {
