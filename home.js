@@ -5,6 +5,9 @@ const { ipcRenderer, remote } = require("electron");
 let user = remote.getGlobal("user")
 const con = remote.getGlobal("con");
 
+// Read json
+const thaiTranslate = require("./thai_translate.json")
+
 // drop down of mainMenu
 var dropdown = document.getElementsByClassName("dropdown-btn");
 var i;
@@ -76,7 +79,7 @@ function loadDefault(result, field) {
   var tagTH = ''
   for (var value of field) {
     if (value !== undefined) {
-      tagTH += `<th>${value.name}</th>`
+      tagTH += `<th>${thaiTranslate[0][value.name]}</th>`
     }
   }
   table.append(`<tr>${tagTH}</tr>`);
