@@ -65,31 +65,31 @@ function contains(target, pattern) {
 }
 
 function clearTable(startRow = 0) {
-  if (startRow == 1) {
-    $('#infoTable').find('tr:gt(0)').remove();
-  }
-  else {
-    $('#infoTable').find('tr').remove();
+  var table = document.getElementById('infoTable');
+  while (table.rows.length > startRow) {
+    table.deleteRow(startRow);
   }
 }
 
 function loadDefault(result, field) {
+  var table = $('#infoTable')
   var tagTH = ''
   for (var value of field) {
     if (value !== undefined) {
       tagTH += `<th>${value.name}</th>`
     }
   }
-  $('#infoTable > tbody:last-child').append(`<tr>${tagTH}</tr>`);
+  table.append(`<tr>${tagTH}</tr>`);
   for (var row of result) {
     if (row !== undefined) {
       var tagTD = ''
-      for (var value of row.entries()) {
-        if (value !== undefined) {
-          tagTD += `<td>${value}</td>`
+      console.log(row)
+      for (var propName in row) {
+        if (row.hasOwnProperty(propName)) {
+          tagTD += `<td>${row[propName]}</td>`
         }
       }
-      $('#infoTable > tbody:last-child').append(`<tr>${tagTD}</tr>`);
+      table.append(`<tr>${tagTD}</tr>`);
     }
   }
 }
