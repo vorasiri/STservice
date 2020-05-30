@@ -1,3 +1,10 @@
+window.$ = window.jQuery = require('jquery');
+
+// Read MyGlobalVariable.
+const { ipcRenderer, remote } = require("electron");
+let user = remote.getGlobal("user")
+const con = remote.getGlobal("con");
+
 // drop down of mainMenu
 var dropdown = document.getElementsByClassName("dropdown-btn");
 var i;
@@ -16,6 +23,7 @@ for (i = 0; i < dropdown.length; i++) {
 
 // mainMenu navigation
 var fs = require('fs');
+var pageHeader;
 
 const allNavButton = document.getElementsByClassName('navButton');
 Array.from(allNavButton).forEach(navButton => {
@@ -29,25 +37,22 @@ Array.from(allNavButton).forEach(navButton => {
       else {
         document.getElementById('pageHeader').innerHTML = e.target.innerText;
       }
+      pageHeader = e.target.innerText
       document.getElementById('addButton').addEventListener('click', function () {
-        callHtmlFile(headerToForm(e.target.innerText))
+        callHtmlFile(headerToForm(pageHeader))
       });
+      mysqlFetching(pageHeader)
     })
   })
 });
-
-// Read MyGlobalVariable.
-const { ipcRenderer, remote } = require( "electron" );
-let user = remote.getGlobal( "user" )
-const con = remote.getGlobal( "con" );
 
 // staffName
 document.getElementById('staffName').innerText = user;
 
 // logout
-document.getElementById('logoutButton').addEventListener('click', function(event){
+document.getElementById('logoutButton').addEventListener('click', function (event) {
   event.preventDefault();
-  ipcRenderer.send( "loginUser", '' );
+  ipcRenderer.send("loginUser", '');
   location.replace("./login.html")
 })
 
@@ -59,6 +64,46 @@ function contains(target, pattern) {
   return (value === 1)
 }
 
+function clearTable(startRow = 0) {
+  if (startRow == 1) {
+    $('#infoTable').find('tr:gt(0)').remove();
+  }
+  else {
+    $('#infoTable').find('tr').remove();
+  }
+}
+
+function loadDefault(result, field) {
+  var tagTH = ''
+  for (var value of field) {
+    if (value !== undefined) {
+      tagTH += `<th>${value.name}</th>`
+    }
+  }
+  $('#infoTable > tbody:last-child').append(`<tr>${tagTH}</tr>`);
+  for (var row of result) {
+    if (row !== undefined) {
+      var tagTD = ''
+      for (var value of row.entries()) {
+        if (value !== undefined) {
+          tagTD += `<td>${value}</td>`
+        }
+      }
+      $('#infoTable > tbody:last-child').append(`<tr>${tagTD}</tr>`);
+    }
+  }
+}
+
+// infoPage mysql fetching
+function mysqlFetching(pageHeader) {
+  clearTable()
+  con.query(`SELECT * FROM ${headerToTable(pageHeader)}`, function (err, result, field) {
+    if (err) throw err;
+    console.log(`fetching table: ${headerToTable(pageHeader)}`)
+    loadDefault(result, field)
+  })
+}
+
 // call html file to id 'mainContent'
 function callHtmlFile(filename) {
   console.log(filename)
@@ -67,7 +112,6 @@ function callHtmlFile(filename) {
   })
 };
 
-// put the right forms.html to current page add button
 function headerToForm(pageHeader) {
   console.log(pageHeader)
   var form;
@@ -105,4 +149,42 @@ function headerToForm(pageHeader) {
     // form = '.html';
   }
   return form;
+};
+
+function headerToTable(pageHeader) {
+  var table;
+  if (pageHeader.includes('ข้อมูลบริการซ่อม')) {
+    table = 'info_repairing';
+  }
+  else if (pageHeader.includes('ข้อมูลการคืนสินค้า')) {
+    table = 'info_returning';
+  }
+  else if (pageHeader.includes('ข้อมูลการจัดส่งสินค้า')) {
+    table = 'info_delivery';
+  }
+  else if (pageHeader.includes('จานดาวเทียม')) {
+    table = 'info_installation_sat';
+  }
+  else if (pageHeader.includes('แอร์')) {
+    table = 'info_installation_ac';
+  }
+  else if (pageHeader.includes('เครื่องทำน้ำอุ่น')) {
+    table = 'info_installation_wh';
+  }
+  else if (pageHeader.includes('รายชื่อยี่ห้อ')) {
+    table = 'brands';
+  }
+  else if (pageHeader.includes('รายชื่อลูกค้า')) {
+    table = 'customers';
+  }
+  else if (pageHeader.includes('รายชื่อพนักงาน')) {
+    table = 'staff';
+  }
+  else if (pageHeader.includes('รายชื่อศูนย์บริการ')) {
+    table = 'service_suppliers';
+  }
+  else if (pageHeader.includes('รายการอะไหล่')) {
+    table = 'spare_parts';
+  }
+  return table;
 };
