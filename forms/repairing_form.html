@@ -6,127 +6,288 @@
 </head>
 
 <body>
+    <h1 id="pageHeader">ข้อมูลบริการซ่อม</h1>
     <form action="#">
-        <div class="customerInfo">
-            <!-- pop up window form when search -->
-            <input class="btn" type="submit" value="ค้นหาลูกค้า">
-            <input class="btn" type="submit" value="เพิ่มลูกค้าใหม่">
-            <br><br>
-            <!-- display only -->
-            <label for="customerID">รหัสลูกค้า</label>
-            <input type="number" id="customerID" name="customerID">
-            <br><br>
-            <label for="customerName">ชื่อ-นามสกุล ลูกค้า</label>
-            <input type="text" id="customerName" name="customerName">
-            <br><br>
-            <label for="customerAddress">ที่อยู่</label>
-            <input type="text" id="customerAddress" name="customerAddress">
-            <br><br>
-            <label for="customerTel">หมายเลขโทรศัพท์</label>
-            <input type="text" id="customerTel" name="customerTel">
-            <br><br>
+        <div class="row">
+            <div class="column">
+                <div class="purchaseInfo">
+                    <p>ข้อมูลการซื้อ</p>
+                    <table>
+                        <tr>
+                            <span>การรับประกันสินค้า</span>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input type="radio" id="productWarranty" name="productWarranty">
+                                <label for="productWarranty">ในระยะเวลาการรับประกันสินค้า</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size: 11pt;">วันที่หมดอายุการรับประกัน : </td>
+                            <td>
+                                <input type="datetime" id="warrantyDate" name="warrantyDate">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input type="radio" id="productWarranty" name="productWarranty">
+                                <label for="productWarranty">หมดอายุการรับประกันสินค้า</label>
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <span>ซื้อสินค้าจาก</span>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="radio" id="productFromStore" name="productFromStore">
+                                <label for="productFromStore">ซื้อจากซื่อตรง</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="radio" id="productFromStore" name="productFromStore">
+                                <label for="productFromStore">ซื้อจากอื่น ๆ</label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="column">
+                <div class="deliveryInfo">
+                    <!-- linking to delivery -->
+                    <p>การรับ-จัดส่งเครื่อง</p>
+                    <tr>
+                        <td>
+                            <input type="radio" id="productDeliver" name="productDeliver">
+                            <label for="productDeliver">ลูกค้านำมา</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="radio" id="productDeliver" name="productDeliver">
+                            <label for="productDeliver">รับจากบ้านของลูกค้า</label>
+                        </td>
+                    </tr>
+                    <table>
+                        <tr>
+                            <td>เลขที่งานซ่อม</td>
+                            <td>
+                                <input type="number" id="deliveryJobID" name="deliveryJobID"> <!-- auto generate -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>วันที่-เวลา รับเครื่อง</td>
+                            <td>
+                                <input type="datetime" id="appointmentDate" name="appointmentDate">
+                            </td>
+                        </tr>
+                        <!-- enable if need pick up -->
+                        <tr>
+                            <td>วันที่-เวลา การนัดหมาย</td>
+                            <td>
+                                <input type="datetime" id="appointmentDate" name="appointmentDate">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>พนักงานรับเครื่อง</span>
+                            </td>
+                            <td>
+                                <input class="add-btn" type="submit" value="เพิ่ม">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>รหัสพนักงาน</td>
+                            <td>
+                                <input type="number" id="staffID" name="staffID">
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- display only -->
+                            <td>ชื่อพนักงาน</td>
+                            <td>
+                                <input type="text" id="staffName" name="staffName">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
-
-        <div class="productInfo">
-            <label for="productName">สินค้า</label>
-            <input type="text" id="productName" name="productName">
-            <br><br>
-            <label for="productBrand">ยี่ห้อ</label>
-            <select id="productBrand" name="productBrand">
-                <option value="Brand">Product Brand</option>
-                <!-- data from brand table -->
-              </select> 
-            <br><br>
-            <label for="productModel">รุ่น</label>
-            <input type="text" id="productModel" name="productModel">
-            <br><br>
-            <label for="productSN">หมายเลขเครื่อง</label>
-            <input type="text" id="productSN" name="productSN">
-            <br><br>
+        <div class="row">
+            <div class="customerInfo">
+                <p>ข้อมูลลูกค้า</p>
+                <!-- display only -->
+                <table>
+                    <tr>
+                        <td>
+                            รหัสลูกค้า
+                        </td>
+                        <td>
+                            <input type="number" id="customerID" name="customerID">
+                        </td>
+                        <td>
+                            <!-- pop up modal form when search -->
+                            <input class="btn" type="submit" value="ค้นหาลูกค้า">
+                            <!-- The Modal -->
+                            <div id="searchModal" class="modal">
+                                <div class="modal-content">
+                                    <!-- searching by id, name, phone number  -->
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                รหัสลูกค้า
+                                            </td>
+                                            <td>
+                                                <input type="number" id="customerID" name="customerID">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                ชื่อ-นามสกุล ลูกค้า
+                                            </td>
+                                            <td>
+                                                <input type="text" id="customerName" name="customerName">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                หมายเลขโทรศัพท์
+                                            </td>
+                                            <td>
+                                                <input type="text" id="customerTel" name="customerTel">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <input class="btn" type="submit" value="ค้นหาลูกค้า">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <input class="btn" type="submit" value="เพิ่มลูกค้าใหม่">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            ชื่อ-นามสกุล ลูกค้า
+                        </td>
+                        <td>
+                            <input type="text" id="customerName" name="customerName">
+                        </td>
+                        <td>
+                            หมายเลขโทรศัพท์
+                        </td>
+                        <td>
+                            <input type="text" id="customerTel" name="customerTel">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            ที่อยู่
+                        </td>
+                        <td colspan="3">
+                            <textarea id="customerAddress" name="customerAddress"></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
-        <div class="primaryInfo">
-            <label for="receiveDate">วันที่-เวลา รับเครื่อง</label>
-            <input type="datetime" id="receiveDate" name="receiveDate">
-            <br><br>
-            <label for="staffID">รหัสพนักงาน</label>
-            <input type="number" id="staffID" name="staffID">
-            <br><br>
-            <!-- display only -->
-            <label for="staffName">ชื่อพนักงาน รับเครื่อง</label>
-            <input type="text" id="staffName" name="staffName">
-            <br><br>
-
-            <!-- will be checking from SN sell out -->
-            <p>การรับประกันสินค้า</p>
-            <input type="radio" id="productWarranty" name="productWarranty">
-            <label for="productWarranty">ในระยะเวลาการรับประกันสินค้า</label>
-            <br>
-            <input type="radio" id="productWarranty" name="productWarranty">
-            <label for="productWarranty">หมดอายุการรับประกันสินค้า</label>
-            <br><br>
-
-            <!-- will be checking from SN sell out -->
-            <p>ซื้อสินค้าจาก</p>
-            <input type="radio" id="productFromStore" name="productFromStore">
-            <label for="productFromStore">ซื้อจากซื่อตรง</label>
-            <br>
-            <input type="radio" id="productFromStore" name="productFromStore">
-            <label for="productFromStore">ซื้อจากอื่น ๆ</label>
-            <br><br>
-
-            <label for="productFlaw">สภาพเครื่อง/ตำหนิ</label>
-            <input type="text" id="productFlaw" name="productFlaw">
-            <br><br>
-            <p>อุปกรณ์ที่นำมาด้วย</p>
-            <input type="radio" id="productAcc" name="productAcc">
-            <label for="productAcc">ไม่มี</label>
-            <br>
-            <input type="radio" id="productAcc" name="productAcc">
-            <label for="productAcc">มี</label>
-            <br><br>
-            <span>จำนวน</span>
-            <input type="number" id="productAccQty" name="productAccQty">
-            <span>ชิ้น</span>
-            <br><br>
-            <!-- generate from input number -->
-            <input type="text" id="productAcc" name="productAcc">
-
-            <br><br>
+        <div class="row">
+            <div class="productInfo">
+                <p>รายละเอียดสินค้า</p>
+                <table>
+                    <tr>
+                        <td>สินค้า</td>
+                        <td>
+                            <input type="text" id="productName" name="productName">
+                        </td>
+                        <td>ยี่ห้อ</td>
+                        <td>
+                            <select id="productBrand" class="dropdown-field" name="productBrand">
+                                <option value="Brand">Product Brand</option>
+                                <!-- data from brand table -->
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>รุ่น</td>
+                        <td>
+                            <input type="text" id="productModel" name="productModel">
+                        </td>
+                        <td>หมายเลขเครื่อง</td>
+                        <td>
+                            <input type="text" id="productSN" name="productSN">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>สี/สภาพเครื่อง/ตำหนิ</td>
+                        <td colspan="3">
+                            <textarea id="productFlaw" name="productFlaw"></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
-
-        <!-- enable if need pick up -->
-        <div class="deliveryInfo">
-            <!-- linking to delivery -->
-            <p>การรับ-จัดส่งเครื่อง</p>
-            <input type="radio" id="productDeliver" name="productDeliver">
-            <label for="productDeliver">ลูกค้านำมา</label>
-            <br>
-            <input type="radio" id="productDeliver" name="productDeliver">
-            <label for="productDeliver">รับจากบ้านของลูกค้า</label>
-            <br><br>
-            <!-- enable if have to pick up -->
-            <label for="appointmentDate">วันที่-เวลา การนัดหมาย</label>
-            <input type="datetime" id="appointmentDate" name="appointmentDate">
-            <br><br>
-            <p>พนักงานรับ-จัดส่งเครื่อง</p>
-            <label for="staffID">รหัสพนักงาน</label>
-            <input type="number" id="staffID" name="staffID">
-            <br><br>
-            <!-- display only -->
-            <label for="staffName">ชื่อพนักงาน</label>
-            <input type="text" id="staffName" name="staffName">
-            <br><br>
+        <div class="row">
+            <div class="repairingInfo">
+                <p>ข้อมูลการซ่อม</p>
+                <table>
+                    <tr>
+                        <td>คำอธิบายอาการ</td>
+                        <td>
+                            <textarea id="productFailure" name="productFailure"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>งบประมาณการซ่อมของลูกค้า</td>
+                        <td>
+                            <input type="number" id="repairingBudget" name="repairingBudget">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <span>รายละเอียดการชำระเงิน</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>จำนวนเงินวางมัดจำ/ค่าธรรมเนียมการเปิดเครื่อง</td>
+                        <td>
+                            <input type="number" id="totalPaid" name="totalPaid">
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
-
-        <div class="repairingInfo">
-            <label for="productFailure">คำอธิบายอาการ</label>
-            <input type="text" id="productFailure" name="productFailure">
-            <br><br>
-            <label for="repairingBudget">งบประมาณการซ่อมของลูกค้า</label>
-            <input type="number" id="repairingBudget" name="repairingBudget">
-            <br><br>
+        <div class="row">
+            <div class="accessoryInfo">
+                <p>อุปกรณ์ที่นำมาด้วย</p>
+                <input type="radio" id="productAcc" name="productAcc">
+                <label for="productAcc">ไม่มี</label>
+                <input type="radio" id="productAcc" name="productAcc">
+                <label for="productAcc">มี</label>
+                <table>
+                    <tr>
+                        <th>ชื่ออุปกรณ์</th>
+                        <th>จำนวน</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" class="table-field" id="productAcc" name="productAcc">
+                        </td>
+                        <td>
+                            <input type="number" class="table-field" id="productAccQty" name="productAccQty">
+                        </td>
+                    </tr>
+                </table>
+                <input class="add-btn" type="submit" value="เพิ่ม">
+                <div class="qty">
+                    <span>จำนวนอุปกรณ์</span>
+                    <input type="number" id="equipQty" name="equipQty">
+                    <span>ชิ้น</span>
+                </div>
+            </div>
         </div>
-
         <input class="btn" type="submit" value="Submit">
     </form>
 </body>

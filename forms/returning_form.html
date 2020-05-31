@@ -6,28 +6,60 @@
 </head>
 
 <body>
+    <h1 id="pageHeader">ข้อมูลการคืนสินค้า</h1>
     <form action="#">
-        <div class="productInfo">
-            <label for="productName">สินค้า</label>
-            <input type="text" id="productName" name="productName">
-            <br><br>
-            <label for="productBrand">ยี่ห้อ</label>
-            <select id="productBrand" name="productBrand">
-                <option value="Brand">Product Brand</option>
-                <!-- data from brand table -->
-              </select> 
-            <br><br>
-            <label for="productModel">รุ่น</label>
-            <input type="text" id="productModel" name="productModel">
-            <br><br>
-            <label for="productSN">หมายเลขเครื่อง</label>
-            <input type="text" id="productSN" name="productSN">
-            <br><br>
-            <label for="productFailure">คำอธิบายอาการ</label>
-            <input type="text" id="productFailure" name="productFailure">
-            <br><br>
+        <div class="row">
+            <div class="initialInfo">
+                <table>
+                    <tr>
+                        <td>วันที่การบันทึกส่งคืน</td>
+                        <td>
+                            <input type="datetime" id="recieveDate" name="recieveDate">
+                        </td>
+                        <td>เลขที่ส่งคืนบริษัท</td>
+                        <td>
+                            <input type="number" id="deliveryJobID" name="deliveryJobID"> <!-- auto generate -->
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
-        <input class="btn" type="submit" value="Submit">
+        <div class="row">
+            <div class="productInfo">
+                <table>
+                    <tr>
+                        <td>สินค้า</td>
+                        <td>
+                            <input type="text" id="productName" name="productName">
+                        </td>
+                        <td>ยี่ห้อ</td>
+                        <td>
+                            <select id="productBrand" class="dropdown-field" name="productBrand">
+                                <option value="Brand">Product Brand</option>
+                                <!-- data from brand table -->
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>รุ่น</td>
+                        <td>
+                            <input type="text" id="productModel" name="productModel">
+                        </td>
+                        <td>หมายเลขเครื่อง</td>
+                        <td>
+                            <input type="text" id="productSN" name="productSN">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>คำอธิบายอาการ</td>
+                        <td colspan="3">
+                            <textarea id="productFailure" name="productFailure"></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <input class="submit-btn" type="submit" value="บันทึกข้อมูล">
     </form>
 </body>
 

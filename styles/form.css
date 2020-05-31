@@ -45,6 +45,7 @@ input[type=submit] {
 
 .submit-btn {
     margin-left: 30%;
+    margin-top: 1%;
     padding: 2% 5%;
 }
 
@@ -136,6 +137,20 @@ table {
     padding: 5px 20px;
 }
 
+.deliveryInfo {
+    height: 280px;
+    border-radius: 5px;
+    background-color: #cacfd2;
+    padding: 5px 20px;
+}
+
+.initialInfo {
+    width: 67%;
+    border-radius: 5px;
+    background-color: #cacfd2;
+    padding: 5px 20px;
+}
+
 .customerInfo {
     width: 67%;
     border-radius: 5px;
@@ -157,6 +172,20 @@ table {
     padding: 5px 20px;
 }
 
+.accessoryInfo {
+    width: 67%;
+    border-radius: 5px;
+    background-color: #cacfd2;
+    padding: 5px 20px;
+}
+
+.repairingInfo {
+    width: 67%;
+    border-radius: 5px;
+    background-color: #cacfd2;
+    padding: 5px 20px;
+}
+
 .table-field {
     width: 100%;
     font-size: 12pt;
@@ -169,14 +198,17 @@ table {
     background-color: #FFFFFF;
     font-size: 12pt;
 }
+
 .table-field-sat {
     width: 150px;
     font-size: 12pt;
 }
+
 .dropdown-field-sat {
     width: 150px;
     font-size: 12pt;
 }
+
 .qty {
     margin-left: 300px;
 }
