@@ -14,12 +14,17 @@
 }
 
 body {
-    padding: 0.5%;
+    padding: 0.1%;
 }
 
-label, span {
+label {
     font-size: 12pt;
     align-content: center;
+}
+
+span {
+    font-size: 12pt;
+    font-weight: bold;
 }
 
 p {
@@ -30,15 +35,29 @@ p {
 /* The Modal (background) */
 
 input[type=submit] {
-    width: auto;
-    height: auto;
     background-color: #FF9800;
     color: white;
-    padding: 10px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 12pt;
+}
+
+.submit-btn {
+    margin-left: 30%;
+    padding: 2% 5%;
+}
+
+.add-btn {
+    width: 100px;
+    height: auto;
+    padding: 5px 0;
+}
+
+.btn {
+    width: 120px;
+    height: auto;
+    padding: 5px 0;
 }
 
 .modal {
@@ -95,7 +114,7 @@ input[type=submit] {
 }
 
 .column {
-    padding-right: 1%;
+    margin-right: 1%;
     flex: content;
 }
 
@@ -104,39 +123,64 @@ table {
 }
 
 .purchaseInfo {
-    height: 250px;
+    height: 280px;
     border-radius: 5px;
     background-color: #cacfd2;
     padding: 5px 20px;
 }
 
 .appoinmentInfo {
-    height: 250px;
+    height: 280px;
     border-radius: 5px;
     background-color: #cacfd2;
     padding: 5px 20px;
 }
 
 .customerInfo {
-    width: 66%;
-    height: 95%;
+    width: 67%;
     border-radius: 5px;
     background-color: #cacfd2;
     padding: 5px 20px;
 }
 
 .productInfo {
-    width: 66%;
-    height: 95%;
+    width: 67%;
     border-radius: 5px;
     background-color: #cacfd2;
     padding: 5px 20px;
 }
 
 .installationInfo {
-    width: 66%;
-    height: 95%;
+    width: 67%;
     border-radius: 5px;
     background-color: #cacfd2;
     padding: 5px 20px;
+}
+
+.table-field {
+    width: 100%;
+    font-size: 12pt;
+}
+
+.dropdown-field {
+    width: min-content;
+    height: 100%;
+    margin: auto;
+    background-color: #FFFFFF;
+    font-size: 12pt;
+}
+.table-field-sat {
+    width: 150px;
+    font-size: 12pt;
+}
+.dropdown-field-sat {
+    width: 150px;
+    font-size: 12pt;
+}
+.qty {
+    margin-left: 300px;
+}
+
+textarea {
+    width: 93%;
 }

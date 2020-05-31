@@ -37,6 +37,24 @@
                                     <input type="text" id="staffName" name="staffName">
                                 </td>
                             </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <span>รายละเอียดการชำระเงิน</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ยอดรวมการชำระเงิน</td>
+                                <td>
+                                    <input type="number" id="staffID" name="staffID">
+                                </td>
+                            </tr>
+                            <tr>
+                                <!-- display only -->
+                                <td>จำนวนเงินที่จ่าย/วางมัดจำ</td>
+                                <td>
+                                    <input type="number" id="staffName" name="staffName">
+                                </td>
+                            </tr>
                         </table>
                     </div>
                 </div>
@@ -57,17 +75,17 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2">
+                                <td>
                                     <span>พนักงานจัดส่ง</span>
+                                </td>
+                                <td>
+                                    <input class="add-btn" type="submit" value="เพิ่ม">
                                 </td>
                             </tr>
                             <tr>
                                 <td>รหัสพนักงาน</td>
                                 <td>
                                     <input type="number" id="staffID" name="staffID">
-                                </td>
-                                <td>
-                                    <input class="btn" type="submit" value="เพิ่ม">
                                 </td>
                             </tr>
                             <tr>
@@ -89,8 +107,14 @@
                     <table>
                         <tr>
                             <td>
+                                รหัสลูกค้า
+                            </td>
+                            <td>
+                                <input type="number" id="customerID" name="customerID">
+                            </td>
+                            <td>
                                 <!-- pop up modal form when search -->
-                                <input class="search-btn" type="submit" value="ค้นหาลูกค้า">
+                                <input class="btn" type="submit" value="ค้นหาลูกค้า">
                                 <!-- The Modal -->
                                 <div id="searchModal" class="modal">
                                     <div class="modal-content">
@@ -126,15 +150,7 @@
                                 </div>
                             </td>
                             <td>
-                                <input class="add-btn" type="submit" value="เพิ่มลูกค้าใหม่">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                รหัสลูกค้า
-                            </td>
-                            <td>
-                                <input type="number" id="customerID" name="customerID">
+                                <input class="btn" type="submit" value="เพิ่มลูกค้าใหม่">
                             </td>
                         </tr>
                         <tr>
@@ -174,26 +190,28 @@
                         </tr>
                         <tr>
                             <td>
-                                <input type="text" id="productName" name="productName">
+                                <input type="text" class="table-field" id="productName" name="productName">
                             </td>
                             <td>
-                                <select id="productBrand" name="productBrand">
+                                <select id="productBrand" class="dropdown-field" name="productBrand">
                                     <option value="Brand">Product Brand</option>
                                     <!-- data from brand table -->
                                 </select>
                             </td>
                             <td>
-                                <input type="text" id="productModel" name="productModel">
+                                <input type="text" class="table-field" id="productModel" name="productModel">
                             </td>
                             <td>
-                                <input type="text" id="productSN" name="productSN">
+                                <input type="text" class="table-field" id="productSN" name="productSN">
                             </td>
                         </tr>
                     </table>
-                    <input class="btn" type="submit" value="เพิ่ม">
-                    <span>จำนวนสินค้า</span>
-                    <input type="number" id="productQty" name="productQty">
-                    <span>ชิ้น</span>
+                    <input class="add-btn" type="submit" value="เพิ่ม">
+                    <div class="qty">
+                        <span>จำนวนสินค้า</span>
+                        <input type="number" id="productQty" name="productQty">
+                        <span>ชิ้น</span>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -211,23 +229,25 @@
                         </tr>
                         <tr>
                             <td>
-                                <input type="number" id="equipmentID" name="equipmentID">
+                                <input type="number" class="table-field" id="equipmentID" name="equipmentID">
                             </td>
                             <td>
-                                <input type="text" id="equipmentName" name="equipmentName">
+                                <input type="text" class="table-field" id="equipmentName" name="equipmentName">
                             </td>
                             <td>
-                                <input type="number" id="equipmentQty" name="equipmentQty">
+                                <input type="number" class="table-field" id="equipmentQty" name="equipmentQty">
                             </td>
                         </tr>
                     </table>
-                    <input class="btn" type="submit" value="เพิ่ม">
-                    <span>จำนวน</span>
-                    <input type="number" id="productQty" name="productQty">
-                    <span>ชิ้น</span>
+                    <input class="add-btn" type="submit" value="เพิ่ม">
+                    <div class="qty">
+                        <span>จำนวนอุปกรณ์</span>
+                        <input type="number" id="equipQty" name="equipQty">
+                        <span>ชิ้น</span>
+                    </div>
                 </div>
             </div>
-            <input class="btn" type="submit" value="Submit">
+            <input class="submit-btn" type="submit" value="บันทึกข้อมูล">
         </form>
     </div>
 </body>
