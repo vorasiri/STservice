@@ -1,0 +1,105 @@
+{
+    "brands": [
+        "brand_id",
+        "brand_name"
+    ],
+    "customers": [
+        "customer_id",
+        "customer_type",
+        "customer_name",
+        "customer_tel"
+    ],
+    "equipments": [
+        "equip_id",
+        "equip_name",
+        "equip_for",
+        "equip_price",
+        "equip_qty"
+    ],
+    "info_delivery": [
+        "delivery_job_id",
+        "delivery_purchase",
+        "delivery_appoint",
+        "delivery_staff",
+        "delivery_customer",
+        "delivery_qty",
+        "delivery_product",
+        "delivery_brand",
+        "delivery_product_model"
+    ],
+    "info_installation_ac": [
+        "installac_id",
+        "installac_purchase",
+        "installac_appoint",
+        "installac_staff",
+        "installac_customer",
+        "installac_product",
+        "installac_brand",
+        "installac_model_in"
+    ],
+    "info_installation_sat": [
+        "installsat_id",
+        "installsat_purchase",
+        "installsat_appoint",
+        "installsat_staff",
+        "installsat_customer",
+        "installsat_product",
+        "installsat_brand",
+        "installsat_qty_receiver"
+    ],
+    "info_installation_wh": [
+        "installwh_id",
+        "installwh_purchase",
+        "installwh_appoint",
+        "installwh_staff",
+        "instalwh_customer",
+        "installwh_product",
+        "installwh_brand",
+        "installwh_model"
+    ],
+    "info_repairing": [
+        "repairing_job_id",
+        "repairing_status",
+        "repairing_receive",
+        "repairing_customer",
+        "repairing_product",
+        "repairing_brand",
+        "repairing_model",
+        "repairing_failure"
+    ],
+    "info_returning": [
+        "returning_id",
+        "returning_product",
+        "returning_brand",
+        "returning_model",
+        "returning_failure",
+        "returning_compensate_method"
+    ],
+    "service_suppliers": [
+        "sv_supplier_id",
+        "sv_supplier_type",
+        "sv_supplier_name",
+        "sv_supplier_tel",
+        "sv_supplier_brand"
+    ],
+    "spare_parts": [
+        "sp_id",
+        "sp_name",
+        "sp_for",
+        "sp_price",
+        "sp_sv_supplier"
+    ],
+    "staff": [
+        "staff_id",
+        "staff_branch",
+        "staff_position",
+        "staff_name",
+        "staff_tel"
+    ],
+    "suppliers": [
+        "supplier_id",
+        "supplier_type",
+        "supplier_name",
+        "supplier_tel"
+    ]
+}
