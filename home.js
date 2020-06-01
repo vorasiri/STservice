@@ -7,6 +7,7 @@ const con = remote.getGlobal("con");
 
 // Read json
 const thaiTranslate = require("./thai_translate.json")
+const headerInfo = require("./headerInfo.json")
 
 // drop down of mainMenu
 var dropdown = document.getElementsByClassName("dropdown-btn");
@@ -40,9 +41,9 @@ Array.from(allNavButton).forEach(navButton => {
       else {
         document.getElementById('pageHeader').innerHTML = e.target.innerText;
       }
-      pageHeader = e.target.innerText
+      pageHeader = e.target.innerText.replace(/\s/g,'')
       document.getElementById('addButton').addEventListener('click', function () {
-        callHtmlFile(headerToForm(pageHeader))
+        callHtmlFile(headerInfo[pageHeader].form)
       });
       mysqlFetching(pageHeader)
     })
@@ -100,9 +101,9 @@ function loadDefault(result, field) {
 // infoPage mysql fetching
 function mysqlFetching(pageHeader) {
   clearTable()
-  con.query(`SELECT * FROM ${headerToTable(pageHeader)}`, function (err, result, field) {
+  con.query(`SELECT * FROM ${headerInfo[pageHeader].table}`, function (err, result, field) {
     if (err) throw err;
-    console.log(`fetching table: ${headerToTable(pageHeader)}`)
+    console.log(`fetching table: ${headerInfo[pageHeader].table}`)
     loadDefault(result, field)
   })
 }
@@ -113,93 +114,4 @@ function callHtmlFile(filename) {
   fs.readFile(filename.toString(), function (err, data) {
     document.getElementById('mainContent').innerHTML = data.toString();
   })
-};
-
-function headerToForm(pageHeader) {
-  console.log(pageHeader)
-  var form;
-  if (pageHeader.includes('ข้อมูลบริการซ่อม')) {
-    form = 'forms/repairing_form.html';
-  }
-  else if (pageHeader.includes('ข้อมูลการคืนสินค้า')) {
-    form = 'forms/returning_form.html';
-  }
-  else if (pageHeader.includes('ข้อมูลการจัดส่งสินค้า')) {
-    form = 'forms/delivery_form.html';
-  }
-  else if (pageHeader.includes('จานดาวเทียม')) {
-    form = 'forms/installation_sat_form.html';
-  }
-  else if (pageHeader.includes('แอร์')) {
-    form = 'forms/installation_ac_form.html';
-  }
-  else if (pageHeader.includes('เครื่องทำน้ำอุ่น')) {
-    form = 'forms/installation_wh_form.html';
-  }
-  else if (pageHeader.includes('รายชื่อยี่ห้อ')) {
-    form = 'forms/brand_form.html';
-  }
-  else if (pageHeader.includes('รายชื่อลูกค้า')) {
-    form = 'forms/customer_form.html';
-  }
-  else if (pageHeader.includes('รายชื่อพนักงาน')) {
-    form = 'forms/staff_form.html';
-  }
-  else if (pageHeader.includes('รายชื่อศูนย์บริการ')) {
-    form = 'forms/service_partner_form.html';
-  }
-  else if (pageHeader.includes('รายชื่อผู้จัดจำหน่าย')) {
-    form = 'forms/supplier_form.html';
-  }
-  else if (pageHeader.includes('รายการอะไหล่')) {
-    form = 'forms/sp_form.html';
-  }
-  else if (pageHeader.includes('รายการอุปกรณ์')) {
-    form = 'forms/equipment_form.html';
-  }
-  return form;
-};
-
-function headerToTable(pageHeader) {
-  var table;
-  if (pageHeader.includes('ข้อมูลบริการซ่อม')) {
-    table = 'info_repairing';
-  }
-  else if (pageHeader.includes('ข้อมูลการคืนสินค้า')) {
-    table = 'info_returning';
-  }
-  else if (pageHeader.includes('ข้อมูลการจัดส่งสินค้า')) {
-    table = 'info_delivery';
-  }
-  else if (pageHeader.includes('จานดาวเทียม')) {
-    table = 'info_installation_sat';
-  }
-  else if (pageHeader.includes('แอร์')) {
-    table = 'info_installation_ac';
-  }
-  else if (pageHeader.includes('เครื่องทำน้ำอุ่น')) {
-    table = 'info_installation_wh';
-  }
-  else if (pageHeader.includes('รายชื่อยี่ห้อ')) {
-    table = 'brands';
-  }
-  else if (pageHeader.includes('รายชื่อลูกค้า')) {
-    table = 'customers';
-  }
-  else if (pageHeader.includes('รายชื่อพนักงาน')) {
-    table = 'staff';
-  }
-  else if (pageHeader.includes('รายชื่อศูนย์บริการ')) {
-    table = 'service_partners';
-  }
-  else if (pageHeader.includes('รายชื่อผู้จัดจำหน่าย')) {
-    table = 'suppliers';
-  }
-  else if (pageHeader.includes('รายการอะไหล่')) {
-    table = 'spare_parts';
-  }
-  else if (pageHeader.includes('รายการอุปกรณ์')) {
-    table = 'equipments';
-  }
-  return table;
 };

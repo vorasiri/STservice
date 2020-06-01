@@ -1,0 +1,67 @@
+{
+    "ข้อมูลบริการซ่อม": {
+      "form": "forms/repairing_form.html",
+      "table": "info_repairing",
+      "query": ""
+    },
+    "ข้อมูลการคืนสินค้า": {
+      "form": "forms/returning_form.html",
+      "table": "info_returning",
+      "query": ""
+    },
+    "ข้อมูลการจัดส่งสินค้า": {
+      "form": "forms/delivery_form.html",
+      "table": "info_delivery",
+      "query": ""
+    },
+    "จานดาวเทียม": {
+      "form": "forms/installation_sat_form.html",
+      "table": "info_installation_sat",
+      "query": ""
+    },
+    "แอร์": {
+      "form": "forms/installation_ac_form.html",
+      "table": "info_installation_ac",
+      "query": ""
+    },
+    "เครื่องทำน้ำอุ่น": {
+      "form": "forms/installation_wh_form.html",
+      "table": "info_installation_wh",
+      "query": ""
+    },
+    "รายชื่อยี่ห้อ": {
+      "form": "forms/brand_form.html",
+      "table": "brands",
+      "query": ""
+    },
+    "รายชื่อลูกค้า": {
+      "form": "forms/customer_form.html",
+      "table": "customers",
+      "query": ""
+    },
+    "รายชื่อพนักงาน": {
+      "form": "forms/staff_form.html",
+      "table": "staff",
+      "query": ""
+    },
+    "รายชื่อศูนย์บริการ": {
+      "form": "forms/service_partner_form.html",
+      "table": "service_partners",
+      "query": ""
+    },
+    "รายชื่อผู้จัดจำหน่าย": {
+      "form": "forms/supplier_form.html",
+      "table": "suppliers",
+      "query": ""
+    },
+    "รายการอะไหล่": {
+      "form": "forms/sp_form.html",
+      "table": "spare_parts",
+      "query": ""
+    },
+    "รายการอุปกรณ์": {
+      "form": "forms/equipment_form.html",
+      "table": "equipments",
+      "query": ""
+    }
+  }
