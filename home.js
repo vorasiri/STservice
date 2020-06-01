@@ -49,8 +49,9 @@ Array.from(allNavButton).forEach(navButton => {
   })
 });
 
-// staffName
-document.getElementById('staffName').innerText = user;
+// staffName and position
+document.getElementById('staffName').innerText = user[0];
+document.getElementById('staffPosition').innerText = user[1];
 
 // logout
 document.getElementById('logoutButton').addEventListener('click', function (event) {
@@ -86,7 +87,6 @@ function loadDefault(result, field) {
   for (var row of result) {
     if (row !== undefined) {
       var tagTD = ''
-      console.log(row)
       for (var propName in row) {
         if (row.hasOwnProperty(propName)) {
           tagTD += `<td>${row[propName]}</td>`
