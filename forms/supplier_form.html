@@ -1,0 +1,108 @@
+<html>
+
+<head>
+    <title>Seutrong Service</title>
+    <link rel="stylesheet" href="styles/form.css">
+</head>
+
+<body>
+    <form action="#">
+        <div class="row">
+            <div class="detailInfo">
+                <table>
+                    <tr>
+                        <td>รหัสผู้จัดจำหน่าย</td>
+                        <td>
+                            <!-- auto generate -->
+                            <input type="number" id="supplierID" name="supplierID">
+                        </td>
+                        <td>
+                            <input type="radio" id="supplierType" name="supplierType">
+                            <label for="supplierType">บุคคลธรรมดา</label>
+                        </td>
+                        <td>
+                            <input type="radio" id="supplierType" name="supplierType">
+                            <label for="supplierType">นิติบุคคล</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <!-- enable for general person -->
+                        <td>ชื่อ</td>
+                        <td>
+                            <input type="text" id="supplierName" name="supplierName">
+                        </td>
+                        <td>นามสกุล</td>
+                        <td>
+                            <input type="text" id="supplierLastName" name="supplierLastName">
+                        </td>
+                    </tr>
+                    <tr>
+                        <!-- enable for niti -->
+                        <td>ชื่อบริษัท/สถานประกอบการ</td>
+                        <td>
+                            <input type="text" id="companyName" name="companyName">
+                        </td>
+                    </tr>
+                    <tr>
+                        <!-- enable for general person -->
+                        <td>เลขบัตรประจำตัวประชาชน</td>
+                        <td>
+                            <input type="text" id="IDCardNumber" name="IDCardNumber">
+                        </td>
+                        <!-- enable for niti -->
+                        <td>เลขประจำตัวผู้เสียภาษี</td>
+                        <td>
+                            <input type="text" id="TaxIDNumber" name="TaxIDNumber">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>หมายเลขโทรศัพท์มือถือ</td>
+                        <td>
+                            <input type="text" id="supplierTel" name="supplierTel">
+                        </td>
+                        <td>หมายเลขโทรศัพท์บ้าน</td>
+                        <td>
+                            <input type="text" id="supplierTel" name="supplierTel">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">ที่อยู่</td>
+                        <td colspan="4">
+                            <textarea id="supplierAddress" name="supplierAddress"
+                                placeholder="บ้านเลขที่ หมู่บ้าน ถนน"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <input id="input_zipcode" class="zipcode-field" placeholder="รหัสไปรษณีย์" />
+                                    </td>
+                                    <td>
+                                        <select class="dropdown-field" id="input_province" onchange="showAmphoes()">
+                                            <option value="">กรุณาเลือกจังหวัด</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="dropdown-field" id="input_amphoe" onchange="showDistricts()">
+                                            <option value="">กรุณาเลือกอำเภอ</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="dropdown-field" id="input_district" onchange="showZipcode()">
+                                            <option value="">กรุณาเลือกตำบล</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <input class="submit-btn" type="submit" value="บันทึกข้อมูล">
+    </form>
+</body>
+
+</html>
