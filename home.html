@@ -54,6 +54,16 @@
             </a>
             <a href="#" class="navButton">
                 <i class="fa fa-caret-right"></i>
+                รายชื่อผู้จัดจำหน่าย
+            </a>
+        </div>
+        <button class="dropdown-btn">
+            จัดการรายการสินค้า
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-container">
+            <a href="#" class="navButton">
+                <i class="fa fa-caret-right"></i>
                 รายการอะไหล่
             </a>
             <a href="#" class="navButton">
@@ -61,13 +71,28 @@
                 รายการอุปกรณ์
             </a>
         </div>
-        <div class="dropup">
-            <button class="dropbtn" id="staffName">
-                <i class="fa fa-fw fa-user"></i>
-                Staff Name
+        <div class="profile">
+            <button class="profile-btn" id="staffName">
+                <table>
+                    <tr>
+                        <td rowspan="3">
+                            <i class="fa fa-fw fa-user"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Staff Name
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Position
+                        </td>
+                    </tr>
+                </table>
             </button>
-            <div class="dropup-content">
-                <a href="#" id="logoutButton" >ออกจากระบบ</a>
+            <div class="profile-logout">
+                <a href="#" id="logoutButton">ออกจากระบบ</a>
             </div>
         </div>
     </div>

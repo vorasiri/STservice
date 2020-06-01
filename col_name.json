@@ -76,18 +76,18 @@
         "returning_compensate_method"
     ],
     "service_suppliers": [
-        "sv_supplier_id",
-        "sv_supplier_type",
-        "sv_supplier_name",
-        "sv_supplier_tel",
-        "sv_supplier_brand"
+        "sv_partner_id",
+        "sv_partner_type",
+        "sv_partner_name",
+        "sv_partner_tel",
+        "sv_partner_brand"
     ],
     "spare_parts": [
         "sp_id",
         "sp_name",
         "sp_for",
         "sp_price",
-        "sp_sv_supplier"
+        "sp_supplier"
     ],
     "staff": [
         "staff_id",
