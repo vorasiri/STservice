@@ -75,7 +75,7 @@
         "returning_failure",
         "returning_compensate_method"
     ],
-    "service_suppliers": [
+    "service_partners": [
         "sv_partner_id",
         "sv_partner_type",
         "sv_partner_name",

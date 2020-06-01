@@ -148,8 +148,14 @@ function headerToForm(pageHeader) {
   else if (pageHeader.includes('รายชื่อศูนย์บริการ')) {
     form = 'forms/service_partner_form.html';
   }
+  else if (pageHeader.includes('รายชื่อผู้จัดจำหน่าย')) {
+    form = 'forms/supplier_form.html';
+  }
   else if (pageHeader.includes('รายการอะไหล่')) {
-    // form = '.html';
+    form = 'forms/sp_form.html';
+  }
+  else if (pageHeader.includes('รายการอุปกรณ์')) {
+    form = 'forms/equipment_form.html';
   }
   return form;
 };
@@ -184,10 +190,16 @@ function headerToTable(pageHeader) {
     table = 'staff';
   }
   else if (pageHeader.includes('รายชื่อศูนย์บริการ')) {
-    table = 'service_suppliers';
+    table = 'service_partners';
+  }
+  else if (pageHeader.includes('รายชื่อผู้จัดจำหน่าย')) {
+    table = 'suppliers';
   }
   else if (pageHeader.includes('รายการอะไหล่')) {
     table = 'spare_parts';
+  }
+  else if (pageHeader.includes('รายการอุปกรณ์')) {
+    table = 'equipments';
   }
   return table;
 };
