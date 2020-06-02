@@ -7,7 +7,7 @@ const con = remote.getGlobal("con");
 
 // Read json
 const thaiTranslate = require("./thai_translate.json")
-const headerInfo = require("./headerInfo.json")
+const headerInfo = require("./header_info.json")
 
 // drop down of mainMenu
 var dropdown = document.getElementsByClassName("dropdown-btn");
