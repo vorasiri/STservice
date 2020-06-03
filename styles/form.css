@@ -178,7 +178,12 @@ table {
     background-color: #cacfd2;
     padding: 5px 20px;
 }
-
+.detailInfo {
+    width: 67%;
+    border-radius: 5px;
+    background-color: #cacfd2;
+    padding: 5px 20px;
+}
 .repairingInfo {
     width: 67%;
     border-radius: 5px;
@@ -209,10 +214,15 @@ table {
     font-size: 12pt;
 }
 
+.zipcode-field {
+    width: 100px;
+    font-size: 12pt;
+}
+
 .qty {
     margin-left: 300px;
 }
 
 textarea {
-    width: 93%;
+    width: 95%;
 }

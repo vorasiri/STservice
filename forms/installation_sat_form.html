@@ -100,7 +100,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="row">
                 <div class="customerInfo">
                     <p>ข้อมูลลูกค้า</p>
@@ -179,97 +178,95 @@
                     </table>
                 </div>
             </div>
-
-    </div>
-    <div class="row">
-        <div class="productInfo">
-            <p>รายละเอียดสินค้า</p>
-            <table>
-                <tr>
-                    <td>สินค้า</td>
-                    <td>
-                        <select class="dropdown-field-sat" id="productName" name="productName">
-                            <option value="Name1">Product Name1</option>
-                            <option value="Name1">Product Name2</option>
-                        </select>
-                    </td>
-                    <td>ยี่ห้อ</td>
-                    <td>
-                        <select id="productBrand" class="dropdown-field-sat" name="productBrand">
-                            <option value="Brand">Product Brand</option>
-                            <!-- data from brand table -->
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>รุ่น LNB</td>
-                    <td>
-                        <input type="text" class="table-field-sat" id="LNBModel" name="LNBModel">
-                    </td>
-                    <td>หมายเลขเครื่อง LNB</td>
-                    <td>
-                        <input type="text" class="table-field-sat" id="LNBSN" name="LNBSN">
-                    </td>
-                </tr>
-            </table>
-            <table>
-                <span>กล่องรับสัญญาณ</span>
-                <tr>
-                    <th>รุ่น</th>
-                    <th>หมายเลขเครื่อง</th>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" class="table-field" id="boxModel" name="boxModel">
-                    </td>
-                    <td>
-                        <input type="text" class="table-field" id="boxSN" name="boxSN">
-                    </td>
-                </tr>
-            </table>
-            <input class="add-btn" type="submit" value="เพิ่ม">
-            <div class="qty">
-                <span>จำนวนกล่องรับสัญญาณ</span>
-                <input type="number" id="productQty" name="productQty">
-                <span>กล่อง</span>
+            <div class="row">
+                <div class="productInfo">
+                    <p>รายละเอียดสินค้า</p>
+                    <table>
+                        <tr>
+                            <td>สินค้า</td>
+                            <td>
+                                <select class="dropdown-field-sat" id="productName" name="productName">
+                                    <option value="Name1">Product Name1</option>
+                                    <option value="Name1">Product Name2</option>
+                                </select>
+                            </td>
+                            <td>ยี่ห้อ</td>
+                            <td>
+                                <select id="productBrand" class="dropdown-field-sat" name="productBrand">
+                                    <option value="Brand">Product Brand</option>
+                                    <!-- data from brand table -->
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>รุ่น LNB</td>
+                            <td>
+                                <input type="text" class="table-field-sat" id="LNBModel" name="LNBModel">
+                            </td>
+                            <td>หมายเลขเครื่อง LNB</td>
+                            <td>
+                                <input type="text" class="table-field-sat" id="LNBSN" name="LNBSN">
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <span>กล่องรับสัญญาณ</span>
+                        <tr>
+                            <th>รุ่น</th>
+                            <th>หมายเลขเครื่อง</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" class="table-field" id="boxModel" name="boxModel">
+                            </td>
+                            <td>
+                                <input type="text" class="table-field" id="boxSN" name="boxSN">
+                            </td>
+                        </tr>
+                    </table>
+                    <input class="add-btn" type="submit" value="เพิ่ม">
+                    <div class="qty">
+                        <span>จำนวนกล่องรับสัญญาณ</span>
+                        <input type="number" id="productQty" name="productQty">
+                        <span>กล่อง</span>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="installationInfo">
-            <p>อุปกรณ์ที่ใช้ในการติดตั้ง เพิ่มเติม</p>
-            <input type="radio" id="productEquip" name="productEquip">
-            <label for="productEquip">ไม่มี</label>
-            <input type="radio" id="productEquip" name="productEquip">
-            <label for="productEquip">มี</label>
-            <table>
-                <tr>
-                    <th>รหัสอุปกรณ์</th>
-                    <th>ชื่ออุปกรณ์</th>
-                    <th>จำนวน</th>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="number" class="table-field" id="equipmentID" name="equipmentID">
-                    </td>
-                    <td>
-                        <input type="text" class="table-field" id="equipmentName" name="equipmentName">
-                    </td>
-                    <td>
-                        <input type="number" class="table-field" id="equipmentQty" name="equipmentQty">
-                    </td>
-                </tr>
-            </table>
-            <input class="add-btn" type="submit" value="เพิ่ม">
-            <div class="qty">
-                <span>จำนวนอุปกรณ์</span>
-                <input type="number" id="equipQty" name="equipQty">
-                <span>ชิ้น</span>
+            <div class="row">
+                <div class="installationInfo">
+                    <p>อุปกรณ์ที่ใช้ในการติดตั้ง เพิ่มเติม</p>
+                    <input type="radio" id="productEquip" name="productEquip">
+                    <label for="productEquip">ไม่มี</label>
+                    <input type="radio" id="productEquip" name="productEquip">
+                    <label for="productEquip">มี</label>
+                    <table>
+                        <tr>
+                            <th>รหัสอุปกรณ์</th>
+                            <th>ชื่ออุปกรณ์</th>
+                            <th>จำนวน</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="number" class="table-field" id="equipmentID" name="equipmentID">
+                            </td>
+                            <td>
+                                <input type="text" class="table-field" id="equipmentName" name="equipmentName">
+                            </td>
+                            <td>
+                                <input type="number" class="table-field" id="equipmentQty" name="equipmentQty">
+                            </td>
+                        </tr>
+                    </table>
+                    <input class="add-btn" type="submit" value="เพิ่ม">
+                    <div class="qty">
+                        <span>จำนวนอุปกรณ์</span>
+                        <input type="number" id="equipQty" name="equipQty">
+                        <span>ชิ้น</span>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <input class="submit-btn" type="submit" value="บันทึกข้อมูล">
-    </form>
+            <input class="submit-btn" type="submit" value="บันทึกข้อมูล">
+        </form>
     </div>
 </body>
 
