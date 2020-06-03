@@ -33,18 +33,19 @@ const allNavButton = document.getElementsByClassName('navButton');
 Array.from(allNavButton).forEach(navButton => {
   navButton.addEventListener('click', function (e) {
     fs.readFile('info_page.html', function (err, data) {
-      console.log(e.target.innerText)
+      pageHeader = e.target.innerText.replace(/\s/g, '')
+      console.log(pageHeader)
       document.getElementById('mainContent').innerHTML = data.toString();
       if (contains(e.target.innerHTML, ['แอร์', 'เครื่องทำน้ำอุ่น', 'จานดาวเทียม'])) {
         document.getElementById('pageHeader').innerHTML = 'ข้อมูลการติดตั้ง ' + e.target.innerText;
       }
       else if (contains(e.target.innerHTML, ['รายการอะไหล่', 'รายการอุปกรณ์'])) {
         document.getElementById('importButton').style.visibility = 'visible'
+        document.getElementById('pageHeader').innerHTML = e.target.innerText;
       }
       else {
         document.getElementById('pageHeader').innerHTML = e.target.innerText;
       }
-      pageHeader = e.target.innerText.replace(/\s/g, '')
       document.getElementById('addButton').addEventListener('click', function () {
         callHtmlFile(headerInfo[pageHeader].form)
       });

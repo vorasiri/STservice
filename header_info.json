@@ -57,13 +57,13 @@
     "รายการอะไหล่": {
       "form": "forms/sp_form.html",
       "table": "spare_parts",
-      "import": "forms/import_sp.html",
+      "import": "forms/import_form.html",
       "query": ""
     },
     "รายการอุปกรณ์": {
       "form": "forms/equipment_form.html",
-      "import": "forms/import_equipment.html",
       "table": "equipments",
+      "import": "forms/import_form.html",
       "query": ""
     }
   }
