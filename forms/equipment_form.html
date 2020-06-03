@@ -6,20 +6,31 @@
 </head>
 
 <body>
+    <h1 id="pageHeader">รายการอุปกรณ์</h1>
     <form action="#">
         <div class="detailInfo">
             <table>
                 <tr>
-                    <td>รหัสยี่ห้อ</td>
+                    <td>รหัสอุปกรณ์</td>
                     <td>
                         <!-- auto generate -->
-                        <input type="number" id="brandID" name="brandID">
+                        <input type="number" id="equipID" name="equipID">
                     </td>
                 </tr>
                 <tr>
-                    <td>ชื่อยี่ห้อ</td>
+                    <td>ชื่ออุปกรณ์</td>
                     <td>
-                        <input type="text" id="brandName" name="brandName">
+                        <input type="text" id="equipName" name="equipName">
+                    </td>
+                    <td>ราคาอุปกรณ์</td>
+                    <td>
+                        <input type="text" id="equipPrice" name="equipPrice">
+                    </td>
+                </tr>
+                <tr>
+                    <td>อุปกรณ์สำหรับ</td>
+                    <td colspan="3">
+                        <textarea id="equipFor" name="equipFor"></textarea>
                     </td>
                 </tr>
             </table>
