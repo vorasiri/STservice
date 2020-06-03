@@ -29,9 +29,16 @@
     height: 80%;
 }
 
+.import-button {
+    grid-area: 2 / 4 / 3 / 5;
+    /* margin-left: 50%; */
+    height: 80%;
+    visibility: hidden;
+}
+
 .add-button {
-    grid-area: 2 / 4 / 3 / 6;
-    margin-left: 50%;
+    grid-area: 2 / 5 / 3 / 6;
+    /* margin-left: 50%; */
     height: 80%;
 }
 
@@ -101,6 +108,18 @@ tr:hover {
 }
 
 .add-button button {
+    width: auto;
+    height: 100%;
+    background-color: #FF9800;
+    color: white;
+    padding: 0 5%;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12pt;
+}
+
+.import-button button {
     width: auto;
     height: 100%;
     background-color: #FF9800;
