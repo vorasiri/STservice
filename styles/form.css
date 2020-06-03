@@ -56,7 +56,7 @@ input[type=submit] {
 }
 
 .btn {
-    width: 120px;
+    width: 130px;
     height: auto;
     padding: 5px 0;
 }
@@ -123,6 +123,16 @@ table {
     width: 100%;
 }
 
+.import-table {
+    border-collapse: collapse;
+    font-size: 11pt;
+    border: 2px #bdbdbd solid;
+}
+
+.import-table th, .import-table td {
+    border: 2px #9e9e9e solid;
+}
+
 .purchaseInfo {
     height: 280px;
     border-radius: 5px;
@@ -178,13 +188,29 @@ table {
     background-color: #cacfd2;
     padding: 5px 20px;
 }
+
 .detailInfo {
     width: 67%;
     border-radius: 5px;
     background-color: #cacfd2;
     padding: 5px 20px;
 }
+
 .repairingInfo {
+    width: 67%;
+    border-radius: 5px;
+    background-color: #cacfd2;
+    padding: 5px 20px;
+}
+
+.importDetail {
+    width: 67%;
+    border-radius: 5px;
+    background-color: #cacfd2;
+    padding: 5px 20px;
+}
+
+.inventoryInfo {
     width: 67%;
     border-radius: 5px;
     background-color: #cacfd2;
@@ -223,6 +249,6 @@ table {
     margin-left: 300px;
 }
 
-textarea {
+.long-name, textarea {
     width: 95%;
 }
