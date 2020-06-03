@@ -14,7 +14,8 @@
         "equip_name",
         "equip_for",
         "equip_price",
-        "equip_qty"
+        "equip_qty",
+        "equip_supplier"
     ],
     "info_delivery": [
         "delivery_job_id",
@@ -87,6 +88,7 @@
         "sp_name",
         "sp_for",
         "sp_price",
+        "sp_qty",
         "sp_supplier"
     ],
     "staff": [

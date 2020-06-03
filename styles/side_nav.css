@@ -156,7 +156,7 @@ span {
 .profile-logout a {
     color: black;
     padding: 12px 16px;
-    font-size: 8pt;
+    font-size: 12pt;
     text-decoration: none;
     display: block;
     width: inherit;
@@ -170,13 +170,13 @@ span {
 
 /* Show the dropup menu on hover */
 
-.dropup:hover .profile-logout {
+.profile:hover .profile-logout {
     display: block;
 }
 
 /* Change the background color of the dropup button when the dropup content is shown */
 
-.dropup:hover .profile-btn {
+.profile:hover .profile-btn {
     background-color: #2196f3;
 }
 
