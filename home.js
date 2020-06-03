@@ -48,6 +48,9 @@ Array.from(allNavButton).forEach(navButton => {
       document.getElementById('addButton').addEventListener('click', function () {
         callHtmlFile(headerInfo[pageHeader].form)
       });
+      document.getElementById('importButton').addEventListener('click', function () {
+        callHtmlFile(headerInfo[pageHeader].import)
+      });
       mysqlFetching(pageHeader)
     })
   })
