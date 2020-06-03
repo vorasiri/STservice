@@ -25,7 +25,7 @@ for (i = 0; i < dropdown.length; i++) {
   });
 }
 
-// mainMenu navigation
+// mainMenu navigation & infoPage functionallity
 var fs = require('fs');
 var pageHeader;
 
@@ -38,10 +38,13 @@ Array.from(allNavButton).forEach(navButton => {
       if (contains(e.target.innerHTML, ['แอร์', 'เครื่องทำน้ำอุ่น', 'จานดาวเทียม'])) {
         document.getElementById('pageHeader').innerHTML = 'ข้อมูลการติดตั้ง ' + e.target.innerText;
       }
+      else if (contains(e.target.innerHTML, ['รายการอะไหล่', 'รายการอุปกรณ์'])) {
+        document.getElementById('importButton').style.visibility = 'visible'
+      }
       else {
         document.getElementById('pageHeader').innerHTML = e.target.innerText;
       }
-      pageHeader = e.target.innerText.replace(/\s/g,'')
+      pageHeader = e.target.innerText.replace(/\s/g, '')
       document.getElementById('addButton').addEventListener('click', function () {
         callHtmlFile(headerInfo[pageHeader].form)
       });
