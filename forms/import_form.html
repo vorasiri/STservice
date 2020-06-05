@@ -9,60 +9,90 @@
     <form action="#">
         <div class="row">
             <div class="importDetail">
-                <tr>
-                    <td>เลขที่เอกสาร</td>
-                    <td>
-                        <!-- auto generate -->
-                        <input type="number" id="importDocID" name="importDocID">
-                    </td>
-                </tr>
-                <tr>
-                    <td>วันที่เอกสาร</td>
-                    <td>
-                        <input type="datetime" id="importDocDate" name="importDocDate">
-                    </td>
-                </tr>
-                <tr>
-                    <td>ผู้จัดจำหน่าย</td>
-                    <td>
-                        <input type="text" id="importSupplier" name="importSupplier">
-                    </td>
-                </tr>
+                <table>
+                    <tr>
+                        <td>วันที่เอกสาร</td>
+                        <td>
+                            <input type="datetime" id="importDocDate" name="importDocDate">
+                        </td>
+                        <td>เลขที่เอกสาร</td>
+                        <td>
+                            <!-- auto generate -->
+                            <input type="number" id="importDocID" name="importDocID">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>รหัสผู้จัดจำหน่าย</td>
+                        <td>
+                            <input type="number" id="supplierID" name="supplierID">
+                        </td>
+                        <td>
+                            <!-- pop up modal form when search -->
+                            <input class="btn" type="submit" value="ค้นหาผู้จัดจำหน่าย">
+                            <!-- The Modal -->
+                            <div id="searchModal" class="modal">
+                                <div class="modal-content">
+                                    <!-- searching by id, name, phone number  -->
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                ชื่อผู้จัดจำหน่าย
+                                            </td>
+                                            <td>
+                                                <input type="text" id="supplierName" name="supplierName">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <input class="btn" type="submit" value="ค้นหาผู้จัดจำหน่าย">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <input class="btn" type="submit" value="เพิ่มผู้จัดจำหน่ายใหม่">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>ชื่อผู้จัดจำหน่าย</td>
+                        <td colspan="3">
+                            <input type="text" class="long-name" id="importSupplier" name="importSupplier">
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
         <div class="row">
             <div class="inventoryInfo">
-                <table>
+                <table class="import-table">
                     <tr>
-                        <th>รหัส</th>
-                        <th>ชื่อ</th>
-                        <th>สำหรับ</th>
-                        <th>จำนวน</th>
-                        <th>ราคาทุน</th>
-                        <th>รวมราคาทุน</th>
+                        <th class="import-table-">รหัส</th>
+                        <th class="import-table">ชื่อ</th>
+                        <th class="import-table">สำหรับ</th>
+                        <th class="import-table">จำนวน</th>
+                        <th class="import-table">ราคาทุน</th>
+                        <th class="import-table">รวมราคาทุน</th>
                     </tr>
                     <tr>
                         <td>
                             <!-- auto generate -->
-                            <input type="number" id="importID" name="importID">
+                            <input type="number" class="table-field" id="importID" name="importID">
                         </td>
                         <td>
                             <!-- diimportlay only -->
-                            <input type="text" id="importName" name="importName">
+                            <input type="text" class="table-field" id="importName" name="importName">
                         </td>
                         <td>
                             <!-- diimportlay only -->
-                            <input type="text" id="importFor" name="importFor">
+                            <input type="text" class="table-field" id="importFor" name="importFor">
                         </td>
                         <td>
-                            <input type="number" id="importQty" name="importQty">
+                            <input type="number" class="table-field" id="importQty" name="importQty">
                         </td>
                         <td>
-                            <input type="text" id="importCost" name="importCost">
+                            <input type="number" class="table-field" id="importCost" name="importCost">
                         </td>
                         <td>
                             <!-- cost*qty -->
-                            <input type="text" id="importCost" name="importTotalCost">
+                            <input type="number" class="table-field" id="importCost" name="importTotalCost">
                         </td>
                     </tr>
                 </table>
