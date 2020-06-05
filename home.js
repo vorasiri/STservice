@@ -84,7 +84,7 @@ function clearTable(startRow = 0) {
   }
 }
 
-function loadDefault(result, field) {
+function loadTable(result, field) {
   var table = $('#infoTable')
   var tagTH = ''
   for (var value of field) {
@@ -109,10 +109,17 @@ function loadDefault(result, field) {
 // infoPage mysql fetching
 function mysqlFetching(pageHeader) {
   clearTable()
-  con.query(`SELECT * FROM ${headerInfo[pageHeader].table}`, function (err, result, field) {
+  var query = ''
+  if (headerInfo[pageHeader].table.includes('info')) {
+    query = `${headerInfo[pageHeader].query}`
+  }
+  else {
+    query = `SELECT * FROM ${headerInfo[pageHeader].table}`
+  }
+  con.query(query, function (err, result, field) {
     if (err) throw err;
     console.log(`fetching table: ${headerInfo[pageHeader].table}`)
-    loadDefault(result, field)
+    loadTable(result, field)
   })
 }
 
