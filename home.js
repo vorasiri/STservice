@@ -9,6 +9,7 @@ const con = remote.getGlobal("con");
 // Read json
 const thaiTranslate = require("./thai_translate.json")
 const headerInfo = require("./header_info.json")
+const position = require("./position.json")
 
 // drop down of mainMenu
 var dropdown = document.getElementsByClassName("dropdown-btn");
@@ -60,7 +61,7 @@ Array.from(allNavButton).forEach(navButton => {
 
 // staffName and position
 document.getElementById('staffName').innerText = user[0];
-document.getElementById('staffPosition').innerText = user[1];
+document.getElementById('staffPosition').innerText = position[user[1]];
 
 // logout
 document.getElementById('logoutButton').addEventListener('click', function (event) {
@@ -98,7 +99,12 @@ function loadTable(result, field) {
       var tagTD = ''
       for (var propName in row) {
         if (row.hasOwnProperty(propName)) {
-          tagTD += `<td>${row[propName]}</td>`
+          if (propName == 'staff_position'){
+            tagTD += `<td>${position[row[propName]]}</td>`
+          }
+          else{
+            tagTD += `<td>${row[propName]}</td>`
+          }
         }
       }
       table.append(`<tr>${tagTD}</tr>`);
