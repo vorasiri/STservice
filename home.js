@@ -1,3 +1,4 @@
+console.log('hello from home.js')
 window.$ = window.jQuery = require('jquery');
 
 // Read MyGlobalVariable.
@@ -120,5 +121,17 @@ function callHtmlFile(filename) {
   console.log(filename)
   fs.readFile(filename.toString(), function (err, data) {
     document.getElementById('mainContent').innerHTML = data.toString();
+    if (document.getElementById('customerSearchButton')) {
+      document.getElementById('customerSearchButton').addEventListener('click', function (event) {
+        event.preventDefault()
+        showModal('searchModal')
+      })
+    }
   })
 };
+
+// modal function for modalID
+function showModal(modalID) {
+  console.log('Loading Modal..')
+  document.getElementById(modalID).style.display = 'block'
+}
