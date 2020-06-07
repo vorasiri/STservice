@@ -54,7 +54,23 @@ Array.from(allNavButton).forEach(navButton => {
       document.getElementById('importButton').addEventListener('click', function () {
         callHtmlFile(headerInfo[pageHeader].import)
       });
-      mysqlFetching(pageHeader)
+
+      mysqlFetching(pageHeader, function (err, result, field) {
+        if (err) {
+          // error handling code goes here
+          console.log("ERROR : ", err);
+        } else {
+          // code to execute on data retrieval
+          console.log("result from db is : ", result);
+          let infoTable = new Table('#infoTable', 30, result, field);
+  
+          infoTable.clearTable()
+          infoTable.loadField()
+          infoTable.loadTable()
+        }
+
+      });
+
     })
   })
 });
@@ -70,51 +86,8 @@ document.getElementById('logoutButton').addEventListener('click', function (even
   location.replace("./login.html")
 })
 
-function contains(target, pattern) {
-  var value = 0;
-  pattern.forEach(function (word) {
-    value = value + target.includes(word);
-  });
-  return (value === 1)
-}
-
-function clearTable(startRow = 0) {
-  var table = document.getElementById('infoTable');
-  while (table.rows.length > startRow) {
-    table.deleteRow(startRow);
-  }
-}
-
-function loadTable(result, field) {
-  var table = $('#infoTable')
-  var tagTH = ''
-  for (var value of field) {
-    if (value !== undefined) {
-      tagTH += `<th>${thaiTranslate[0][value.name]}</th>`
-    }
-  }
-  table.append(`<tr>${tagTH}</tr>`);
-  for (var row of result) {
-    if (row !== undefined) {
-      var tagTD = ''
-      for (var propName in row) {
-        if (row.hasOwnProperty(propName)) {
-          if (propName == 'staff_position'){
-            tagTD += `<td>${position[row[propName]]}</td>`
-          }
-          else{
-            tagTD += `<td>${row[propName]}</td>`
-          }
-        }
-      }
-      table.append(`<tr>${tagTD}</tr>`);
-    }
-  }
-}
-
-// infoPage mysql fetching
-function mysqlFetching(pageHeader) {
-  clearTable()
+// init Table class with fetched data from mysql
+function mysqlFetching(pageHeader, callback) {
   var query = ''
   if (headerInfo[pageHeader].table.includes('info')) {
     query = `${headerInfo[pageHeader].query}`
@@ -123,9 +96,11 @@ function mysqlFetching(pageHeader) {
     query = `SELECT * FROM ${headerInfo[pageHeader].table}`
   }
   con.query(query, function (err, result, field) {
-    if (err) throw err;
     console.log(`fetching table: ${headerInfo[pageHeader].table}`)
-    loadTable(result, field)
+    if (err)
+      callback(err, null, null);
+    else
+      callback(null, result, field);
   })
 }
 
@@ -143,8 +118,66 @@ function callHtmlFile(filename) {
   })
 };
 
+// Part form //
 // modal function for modalID
 function showModal(modalID) {
   console.log('Loading Modal..')
   document.getElementById(modalID).style.display = 'block'
+}
+
+// Others //
+
+function contains(target, pattern) {
+  var value = 0;
+  pattern.forEach(function (word) {
+    value = value + target.includes(word);
+  });
+  return (value === 1)
+}
+
+// table related
+class Table {
+  constructor(jQueryTableID, pageSize, fetchResult, fetchField) {
+    this.table = $(jQueryTableID)
+    this.result = fetchResult
+    this.field = fetchField
+    this.pageSize = pageSize
+    this.totalPage = Math.ceil(fetchResult[length] / pageSize)
+  }
+
+  clearTable(startRow = 0) {
+    while (this.table[0].rows.length > startRow) {
+      this.table[0].deleteRow(startRow);
+    }
+  }
+
+  loadField() {
+    var tagTH = ''
+    for (var value of this.field) {
+      if (value !== undefined) {
+        tagTH += `<th>${thaiTranslate[0][value.name]}</th>`
+      }
+    }
+    this.table.append(`<tr>${tagTH}</tr>`);
+  }
+
+  loadTable(page = 1) {
+    for (var row of this.result) {
+      if (row !== undefined) {
+        var tagTD = ''
+        for (var propName in row) {
+          if (row.hasOwnProperty(propName)) {
+            if (propName == 'staff_position') {
+              tagTD += `<td>${position[row[propName]]}</td>`
+            }
+            else {
+              tagTD += `<td>${row[propName]}</td>`
+            }
+          }
+        }
+        this.table.append(`<tr>${tagTD}</tr>`);
+      }
+    }
+  }
+
 }
