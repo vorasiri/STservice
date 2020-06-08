@@ -9,6 +9,46 @@
     <h1 id="pageHeader">ข้อมูลการติดตั้ง แอร์</h1>
     <form action="#">
         <div class="row">
+            <div class="installing-type">
+                <table>
+                    <tr>
+                        <td>
+                            <input type="radio" id="installType" name="installType" value="acSet">
+                            <label for="installType">ติดตั้งใหม่</label>
+                        </td>
+                        <td>
+                            <input type="radio" id="installType" name="installType" value="acFix">
+                            <label for="installType">แก้ไขและซ่อมแซม</label>
+                        </td>
+                        <td>
+                            <input type="radio" id="installType" name="installType" value="acClean">
+                            <label for="installType">ล้างแอร์</label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="ref-id">
+                <table>
+                    <tr>
+                        <td>
+                            <span>อ้างอิงงานติดตั้งเก่า</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>เลขที่ใบงานติดตั้ง</td>
+                        <td>
+                            <input type="text" id="refJobID" name="refJobID">
+                        </td>
+                        <td>
+                            <button class="showRef-btn" id="showRefButton">แสดงข้อมูล</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
             <div class="column">
                 <div class="purchaseInfo">
                     <p>ข้อมูลการซื้อ</p>
@@ -62,9 +102,9 @@
                     <p>การนัดหมาย</p>
                     <table>
                         <tr>
-                            <td>เลขที่ใบจัดส่ง</td>
+                            <td>เลขที่ใบงานติดตั้ง</td>
                             <td>
-                                <input type="number" id="deliveryJobID" name="deliveryJobID"> <!-- auto generate -->
+                                <input type="text" id="installJobID" name="installJobID"> <!-- auto generate -->
                             </td>
                         </tr>
                         <tr>
@@ -99,7 +139,6 @@
                 </div>
             </div>
         </div>
-
         <div class="row">
             <div class="customerInfo">
                 <p>ข้อมูลลูกค้า</p>
@@ -114,11 +153,12 @@
                         </td>
                         <td>
                             <!-- pop up modal form when search -->
-                            <input class="btn" type="submit" value="ค้นหาลูกค้า">
+                            <input class="btn" type="submit" value="ค้นหาลูกค้า" id="customerSearchButton">
                             <!-- The Modal -->
                             <div id="searchModal" class="modal">
                                 <div class="modal-content">
                                     <!-- searching by id, name, phone number  -->
+                                    <span class="close">&times;</span>
                                     <table>
                                         <tr>
                                             <td>
@@ -194,7 +234,9 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" class="table-field" id="productName" name="productName">
+                            <select class="dropdown-field-sat" id="productName" name="productName">
+                                <option value="acSet">แอร์</option>
+                            </select>
                         </td>
                         <td>
                             <select id="productBrand" class="dropdown-field" name="productBrand">
