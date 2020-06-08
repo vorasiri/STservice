@@ -6,6 +6,7 @@
 </head>
 
 <body>
+    <h1 id="pageHeader">รับสินค้า</h1>
     <form action="#">
         <div class="row">
             <div class="importDetail">
@@ -19,6 +20,17 @@
                         <td>
                             <!-- auto generate -->
                             <input type="number" id="importDocID" name="importDocID">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>วันที่เอกสารอ้างอิง</td>
+                        <td>
+                            <input type="datetime" id="refImportDocDate" name="importDocDate">
+                        </td>
+                        <td>เลขที่เอกสารอ้างอิง</td>
+                        <td>
+                            <!-- auto generate -->
+                            <input type="number" id="refImportDocID" name="importDocID">
                         </td>
                     </tr>
                     <tr>
@@ -95,7 +107,64 @@
                             <input type="number" class="table-field" id="importCost" name="importTotalCost">
                         </td>
                     </tr>
+                    <tr>
+                        <td>
+                            <!-- auto generate -->
+                            <input type="number" class="table-field" id="importID" name="importID">
+                        </td>
+                        <td>
+                            <!-- diimportlay only -->
+                            <input type="text" class="table-field" id="importName" name="importName">
+                        </td>
+                        <td>
+                            <!-- diimportlay only -->
+                            <input type="text" class="table-field" id="importFor" name="importFor">
+                        </td>
+                        <td>
+                            <input type="number" class="table-field" id="importQty" name="importQty">
+                        </td>
+                        <td>
+                            <input type="number" class="table-field" id="importCost" name="importCost">
+                        </td>
+                        <td>
+                            <!-- cost*qty -->
+                            <input type="number" class="table-field" id="importCost" name="importTotalCost">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- auto generate -->
+                            <input type="number" class="table-field" id="importID" name="importID">
+                        </td>
+                        <td>
+                            <!-- diimportlay only -->
+                            <input type="text" class="table-field" id="importName" name="importName">
+                        </td>
+                        <td>
+                            <!-- diimportlay only -->
+                            <input type="text" class="table-field" id="importFor" name="importFor">
+                        </td>
+                        <td>
+                            <input type="number" class="table-field" id="importQty" name="importQty">
+                        </td>
+                        <td>
+                            <input type="number" class="table-field" id="importCost" name="importCost">
+                        </td>
+                        <td>
+                            <!-- cost*qty -->
+                            <input type="number" class="table-field" id="importCost" name="importTotalCost">
+                        </td>
+                    </tr>
                 </table>
+                <input class="add-btn" type="submit" value="เพิ่ม">
+                <div class="grand-total">
+                    <span>จำนวนทั้งหมด </span>
+                    <span class="total-number" id="grandTotalQty" name="grandTotalQty">0</span>
+                    <span class="classifier">ชิ้น</span><br>
+                    <span>รวมราคาทั้งสิ้น </span>
+                    <span class="total-number" id="grandTotalCost" name="grandTotalCost">0.00</span>
+                    <span class="classifier">บาท</span>
+                </div>
             </div>
         </div>
         <input class="submit-btn" type="submit" value="บันทึกข้อมูล">

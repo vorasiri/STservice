@@ -10,6 +10,46 @@
     <div class="form-grid">
         <form action="#">
             <div class="row">
+                <div class="installing-type">
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="radio" id="partnerType" name="partnerType" value="satSet">
+                                <label for="partnerType">ติดตั้งใหม่</label>
+                            </td>
+                            <td>
+                                <input type="radio" id="partnerType" name="partnerType" value="satFix">
+                                <label for="partnerType">แก้ไขและซ่อมแซม</label>
+                            </td>
+                            <td>
+                                <input type="radio" id="partnerType" name="partnerType" value="satAddOn">
+                                <label for="partnerType">เพิ่มจุดรับสัญญาณ</label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="ref-id">
+                    <table>
+                        <tr>
+                            <td>
+                                <span>อ้างอิงงานติดตั้งเก่า</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>เลขที่ใบงานติดตั้ง</td>
+                            <td>
+                                <input type="text" id="refJobID" name="refJobID">
+                            </td>
+                            <td>
+                                <button class="showRef-btn" id="showRefButton">แสดงข้อมูล</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
                 <div class="column">
                     <div class="purchaseInfo">
                         <p>ข้อมูลการซื้อ</p>
@@ -63,9 +103,10 @@
                         <p>การนัดหมาย</p>
                         <table>
                             <tr>
-                                <td>เลขที่ใบจัดส่ง</td>
+                                <td>เลขที่ใบงานติดตั้ง</td>
                                 <td>
-                                    <input type="number" id="deliveryJobID" name="deliveryJobID"> <!-- auto generate -->
+                                    <input type="text" id="installJobID" name="installJobID">
+                                    <!-- auto generate -->
                                 </td>
                             </tr>
                             <tr>
@@ -114,11 +155,12 @@
                             </td>
                             <td>
                                 <!-- pop up modal form when search -->
-                                <input class="btn" type="submit" value="ค้นหาลูกค้า">
+                                <input class="btn" type="submit" value="ค้นหาลูกค้า" id="customerSearchButton">
                                 <!-- The Modal -->
                                 <div id="searchModal" class="modal">
                                     <div class="modal-content">
                                         <!-- searching by id, name, phone number  -->
+                                        <span class="close">&times;</span>
                                         <table>
                                             <tr>
                                                 <td>
@@ -186,8 +228,7 @@
                             <td>สินค้า</td>
                             <td>
                                 <select class="dropdown-field-sat" id="productName" name="productName">
-                                    <option value="Name1">Product Name1</option>
-                                    <option value="Name1">Product Name2</option>
+                                    <option value="satSet">ชุดจานดาวเทียม</option>
                                 </select>
                             </td>
                             <td>ยี่ห้อ</td>
