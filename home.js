@@ -63,10 +63,33 @@ Array.from(allNavButton).forEach(navButton => {
           // code to execute on data retrieval
           console.log("result from db is : ", result);
           let infoTable = new Table('#infoTable', 30, result, field);
-  
+
           infoTable.clearTable()
           infoTable.loadField()
           infoTable.loadTable()
+
+          // create pagination button
+          var currentPage = 1
+          let pagination = document.getElementById('pagination')
+          pagination.appendChild(aTag('&laquo;')).addEventListener('click', function () {
+            if (currentPage != 1)
+              currentPage--;
+          })
+          console.log(infoTable)
+          for (var i = 1; i <= infoTable.totalPage; i++) {
+            pagination.appendChild(aTag(`${i}`)).addEventListener('click', function () {
+              currentPage = parseInt(this.innerHTML);
+            })
+          }
+          pagination.appendChild(aTag('&raquo;')).addEventListener('click', function () {
+            if (currentPage != infoTable.totalPage)
+              currentPage++;
+          })
+          pagination.addEventListener('click', function () {
+            console.log(currentPage)
+            infoTable.clearTable(1)
+            infoTable.loadTable(currentPage)
+          })
         }
 
       });
@@ -135,6 +158,12 @@ function contains(target, pattern) {
   return (value === 1)
 }
 
+function aTag(innerText) {
+  var newElement = document.createElement('a')
+  newElement.innerHTML = `${innerText}`
+  return newElement
+}
+
 // table related
 class Table {
   constructor(jQueryTableID, pageSize, fetchResult, fetchField) {
@@ -142,7 +171,7 @@ class Table {
     this.result = fetchResult
     this.field = fetchField
     this.pageSize = pageSize
-    this.totalPage = Math.ceil(fetchResult[length] / pageSize)
+    this.totalPage = Math.ceil(fetchResult.length / pageSize)
   }
 
   clearTable(startRow = 0) {
@@ -162,7 +191,10 @@ class Table {
   }
 
   loadTable(page = 1) {
-    for (var row of this.result) {
+    let start = (page - 1) * this.pageSize
+    let end = start + this.pageSize
+    for (var i = start; i < end; i++) {
+      let row = this.result[i]
       if (row !== undefined) {
         var tagTD = ''
         for (var propName in row) {
