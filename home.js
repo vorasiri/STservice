@@ -13,9 +13,8 @@ const position = require("./position.json")
 
 // drop down of mainMenu
 var dropdown = document.getElementsByClassName("dropdown-btn");
-var i;
 
-for (i = 0; i < dropdown.length; i++) {
+for (var i = 0; i < dropdown.length; i++) {
   dropdown[i].addEventListener("click", function () {
     this.classList.toggle("active");
     var dropdownContent = this.nextElementSibling;
@@ -23,6 +22,12 @@ for (i = 0; i < dropdown.length; i++) {
       dropdownContent.style.display = "none";
     } else {
       dropdownContent.style.display = "block";
+    }
+    for (var i = 0; i < dropdown.length; i++) {
+      if (dropdown[i] != this) {
+        dropdown[i].classList.remove("active");
+        dropdown[i].nextElementSibling.style.display = "none"
+      }
     }
   });
 }
