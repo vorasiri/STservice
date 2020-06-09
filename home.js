@@ -86,10 +86,11 @@ Array.from(allNavButton).forEach(navButton => {
               currentPage++;
           })
           pagination.addEventListener('click', function () {
-            console.log(currentPage)
             infoTable.clearTable(1)
             infoTable.loadTable(currentPage)
+            highlightPageNumber(pagination, currentPage)
           })
+          highlightPageNumber(pagination, currentPage)
         }
 
       });
@@ -162,6 +163,16 @@ function aTag(innerText) {
   var newElement = document.createElement('a')
   newElement.innerHTML = `${innerText}`
   return newElement
+}
+
+function highlightPageNumber(pagination, pageNumber) {
+  for (let i = 0; i < pagination.children.length; i++) {
+    if (pagination.children[i].text == pageNumber) {
+      pagination.children[i].classList.add("active")
+    }
+    else
+      pagination.children[i].classList.remove("active")
+  }
 }
 
 // table related
