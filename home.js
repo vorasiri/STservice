@@ -4,6 +4,7 @@ window.$ = window.jQuery = require('jquery');
 // Read MyGlobalVariable.
 const { ipcRenderer, remote } = require("electron");
 let user = remote.getGlobal("user")
+ipcRenderer.send('createMysqlCon')
 const con = remote.getGlobal("con");
 
 // Read json
@@ -31,6 +32,30 @@ for (var i = 0; i < dropdown.length; i++) {
     }
   });
 }
+// deal with idle user
+(function () {
+
+  const idleDurationSecs = 30 * 60;    // X number of seconds
+  let idleTimeout; // variable to hold the timeout, do not modify
+
+  const resetIdleTimeout = function () {
+
+    // Clears the existing timeout
+    if (idleTimeout) clearTimeout(idleTimeout);
+
+    // Set a new idle timeout to load the redirectUrl after idleDurationSecs
+    idleTimeout = setTimeout(() => logout(), idleDurationSecs * 1000);
+  };
+
+  // Init on page load
+  resetIdleTimeout();
+
+  // Reset the idle timeout on any of the events listed below
+  ['click', 'touchstart', 'mousemove'].forEach(evt =>
+    document.addEventListener(evt, resetIdleTimeout, false)
+  );
+
+})();
 
 // mainMenu navigation & infoPage functionallity
 var fs = require('fs');
@@ -109,10 +134,14 @@ document.getElementById('staffName').innerText = user[0];
 document.getElementById('staffPosition').innerText = position[user[1]];
 
 // logout
-document.getElementById('logoutButton').addEventListener('click', function (event) {
-  event.preventDefault();
+function logout() {
   ipcRenderer.send("loginUser", '');
   location.replace("./login.html")
+}
+
+document.getElementById('logoutButton').addEventListener('click', function (event) {
+  event.preventDefault();
+  logout()
 })
 
 // init Table class with fetched data from mysql
@@ -126,8 +155,10 @@ function mysqlFetching(pageHeader, callback) {
   }
   con.query(query, function (err, result, field) {
     console.log(`fetching table: ${headerInfo[pageHeader].table}`)
-    if (err)
+    if (err) {
+      ipcRenderer.send('createMysqlCon')
       callback(err, null, null);
+    }
     else
       callback(null, result, field);
   })

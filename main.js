@@ -50,19 +50,21 @@ const { ipcMain } = require( "electron" );
 
 var mysql = require('mysql');
 
-var con = mysql.createConnection({
-  host: "seutrongluckydraw.ddns.net",
-  user: "remote",
-  password: "seutrongRemote_1",
-  database: "seutrong_service"
-});
-
-con.connect(function (err) {
-  if (err) throw err;
-  console.log("Connected!");
-});
-
-global.con = con;
+ipcMain.on("createMysqlCon", (event) => {
+  var con = mysql.createConnection({
+    host: "seutrongluckydraw.ddns.net",
+    user: "remote",
+    password: "seutrongRemote_1",
+    database: "seutrong_service"
+  });
+  
+  con.connect(function (err) {
+    if (err) throw err;
+    console.log("Connected!");
+  });
+  
+  global.con = con;
+})
 
 ipcMain.on( "loginUser", ( event, user ) => {
   global.user = user;
