@@ -1,5 +1,5 @@
 const { ipcRenderer, remote } = require("electron");
-const con = remote.getGlobal("con");
+var con = remote.getGlobal("con");
 
 document.getElementById('loginForm').addEventListener('submit', function (event) {
     event.preventDefault();

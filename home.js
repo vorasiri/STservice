@@ -5,7 +5,7 @@ window.$ = window.jQuery = require('jquery');
 const { ipcRenderer, remote } = require("electron");
 let user = remote.getGlobal("user")
 ipcRenderer.send('createMysqlCon')
-const con = remote.getGlobal("con");
+var con = remote.getGlobal("con");
 
 // Read json
 const thaiTranslate = require("./thai_translate.json")
