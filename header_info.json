@@ -2,12 +2,12 @@
     "ข้อมูลบริการซ่อม": {
       "form": "forms/repairing_form.html",
       "table": "info_repairing",
-      "query": ""
+      "query": "SELECT repairing_job_id, repairing_status, repairing_receive, customer_name, customer_tel, repairing_product, brand_name AS repairing_brand, repairing_model, repairing_failure FROM info_repairing i JOIN customers c ON i.repairing_customer = c.customer_id JOIN brands b ON i.repairing_brand = b.brand_id"
     },
     "ข้อมูลการคืนสินค้า": {
       "form": "forms/returning_form.html",
       "table": "info_returning",
-      "query": ""
+      "query": "SELECT returning_id, returning_product, brand_name AS returning_brand, returning_model, returning_failure, returning_compensate_method FROM info_returning i JOIN brands b ON i.returning_brand = b.brand_id"
     },
     "ข้อมูลการจัดส่งสินค้า": {
       "form": "forms/delivery_form.html",
@@ -17,17 +17,17 @@
     "จานดาวเทียม": {
       "form": "forms/installation_sat_form.html",
       "table": "info_installation_sat",
-      "query": ""
+      "query": "SELECT installsat_id, installsat_purchase, installsat_appoint, staff_name AS installsat_staff, customer_name, customer_tel, installsat_product, brand_name AS installsat_brand, installsat_qty_receiver FROM info_installation_sat i JOIN staff s ON i.installsat_staff = s.staff_id JOIN customers c ON i.installsat_customer = c.customer_id JOIN brands b ON i.installsat_brand = b.brand_id"
     },
     "แอร์": {
       "form": "forms/installation_ac_form.html",
       "table": "info_installation_ac",
-      "query": ""
+      "query": "SELECT installac_id, installac_purchase, installac_appoint, staff_name AS installac_staff, customer_name, customer_tel, installac_product, brand_name AS installac_brand, installac_model_in FROM info_installation_ac i JOIN staff s ON i.installac_staff = s.staff_id JOIN customers c ON i.installac_customer = c.customer_id JOIN brands b ON i.installac_brand = b.brand_id"
     },
     "เครื่องทำน้ำอุ่น": {
       "form": "forms/installation_wh_form.html",
       "table": "info_installation_wh",
-      "query": ""
+      "query": "SELECT installwh_id, installwh_purchase, installwh_appoint, staff_name AS installwh_staff, customer_name, customer_tel, installwh_product, brand_name AS installwh_brand, installwh_model FROM info_installation_wh i JOIN staff s ON i.installwh_staff = s.staff_id JOIN customers c ON i.installwh_customer = c.customer_id JOIN brands b ON i.installwh_brand = b.brand_id"
     },
     "รายชื่อยี่ห้อ": {
       "form": "forms/brand_form.html",
