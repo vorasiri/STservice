@@ -1,9 +1,9 @@
 const { ipcRenderer, remote } = require("electron");
-var con = remote.getGlobal("con");
 
 document.getElementById('loginForm').addEventListener('submit', function (event) {
     event.preventDefault();
     ipcRenderer.send('createMysqlCon')
+    var con = remote.getGlobal("con");
     let username = document.getElementById('username').value
     let password = document.getElementById('password').value
     let responseText = document.getElementById('responseText')
