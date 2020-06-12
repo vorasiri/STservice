@@ -47,7 +47,7 @@
     "รายชื่อศูนย์บริการ": {
       "form": "forms/service_partner_form.html",
       "table": "service_partners",
-      "query": ""
+      "query": "SELECT sv_partner_id, sv_partner_type, sv_partner_name, sv_partner_tel, brand_name AS sv_partner_brand FROM service_partners s JOIN brands b ON sv_partner_brand = b.brand_id"
     },
     "รายชื่อผู้จัดจำหน่าย": {
       "form": "forms/supplier_form.html",

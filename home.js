@@ -148,7 +148,7 @@ document.getElementById('logoutButton').addEventListener('click', function (even
 // init Table class with fetched data from mysql
 function mysqlFetching(pageHeader, callback) {
   var query = ''
-  if (headerInfo[pageHeader].table.includes('info')) {
+  if (contains(headerInfo[pageHeader].table, ['info', 'service_partners'])) {
     query = `${headerInfo[pageHeader].query}`
   }
   else {
