@@ -10,6 +10,7 @@ var con = remote.getGlobal("con");
 // Read json
 const thaiTranslate = require("./thai_translate.json")
 const headerInfo = require("./header_info.json")
+const colName = require("./col_name.json")
 const position = require("./position.json")
 
 // drop down of mainMenu
@@ -151,12 +152,20 @@ function mysqlFetching(pageHeader, callback) {
     query = `${headerInfo[pageHeader].query}`
   }
   else {
-    query = `SELECT * FROM ${headerInfo[pageHeader].table}`
+    let colNameArray = colName[headerInfo[pageHeader].table]
+    var colNameString = ''
+    for (var i = 0; i < colNameArray.length; i++) {
+      console.log(colNameArray[i])
+      colNameString += colNameArray[i]
+      if (i != colNameArray.length - 1)
+        colNameString += ','
+    }
+    query = `SELECT ${colNameString} FROM ${headerInfo[pageHeader].table}`
+    console.log(query)
   }
   con.query(query, function (err, result, field) {
     console.log(`fetching table: ${headerInfo[pageHeader].table}`)
     if (err) {
-      ipcRenderer.send('createMysqlCon')
       callback(err, null, null);
     }
     else
