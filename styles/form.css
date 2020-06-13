@@ -125,11 +125,13 @@ input[type=submit] {
 .row {
     padding: 5px;
     display: flex;
+    width: 100%;
 }
 
 .column {
+    min-width: fit-content;
+    width: 46%;
     margin-right: 1%;
-    flex: content;
 }
 
 table {
@@ -147,18 +149,20 @@ table {
     background-color: #eeeeee;
     border: 1px #000000 solid;
 }
+
 .grand-total {
     text-align: end;
 }
+
 .ref-id {
-    width: 45%;
+    width: 60%;
     border-radius: 5px;
     background-color: #cacfd2;
     padding: 5px 20px;
 }
 
 .installing-type {
-    width: 45%;
+    width: 60%;
     border-radius: 5px;
     background-color: #cacfd2;
     padding: 5px 20px;
@@ -186,63 +190,63 @@ table {
 }
 
 .initialInfo {
-    width: 67%;
+    width: 90%;
     border-radius: 5px;
     background-color: #cacfd2;
     padding: 5px 20px;
 }
 
 .customerInfo {
-    width: 67%;
+    width: 90%;
     border-radius: 5px;
     background-color: #cacfd2;
     padding: 5px 20px;
 }
 
 .productInfo {
-    width: 67%;
+    width: 90%;
     border-radius: 5px;
     background-color: #cacfd2;
     padding: 5px 20px;
 }
 
 .installationInfo {
-    width: 67%;
+    width: 90%;
     border-radius: 5px;
     background-color: #cacfd2;
     padding: 5px 20px;
 }
 
 .accessoryInfo {
-    width: 67%;
+    width: 90%;
     border-radius: 5px;
     background-color: #cacfd2;
     padding: 5px 20px;
 }
 
 .detailInfo {
-    width: 67%;
+    width: 90%;
     border-radius: 5px;
     background-color: #cacfd2;
     padding: 5px 20px;
 }
 
 .repairingInfo {
-    width: 67%;
+    width: 90%;
     border-radius: 5px;
     background-color: #cacfd2;
     padding: 5px 20px;
 }
 
 .importDetail {
-    width: 67%;
+    width: 90%;
     border-radius: 5px;
     background-color: #cacfd2;
     padding: 5px 20px;
 }
 
 .inventoryInfo {
-    width: 67%;
+    width: 90%;
     border-radius: 5px;
     background-color: #cacfd2;
     padding: 5px 20px;
@@ -254,7 +258,7 @@ table {
 }
 
 .dropdown-field {
-    width: min-content;
+    width: 90%;
     height: 100%;
     margin: auto;
     background-color: #FFFFFF;

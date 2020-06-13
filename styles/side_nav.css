@@ -86,6 +86,7 @@ body {
 
 .main {
     margin-left: 200px;
+    margin-right: 250px;
     /* Same as the width of the leftsidenav */
     font-size: 20px;
     /* Increased text to enable scrolling */
@@ -94,7 +95,7 @@ body {
 
 /* Add an active class to the active dropdown button */
 
-.active {
+.dropdown-btn:active {
     background-color: #FF9800;
     color: white;
 }

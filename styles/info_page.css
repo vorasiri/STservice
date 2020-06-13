@@ -16,7 +16,7 @@
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr) 250px;
+    grid-template-columns: repeat(5, 1fr);
     grid-template-rows: 2fr 1fr;
 }
 
@@ -44,7 +44,7 @@
 
 .info-table {
     padding-top: 1%;
-    width: 74%;
+    width: 97%;
 }
 
 .pagination {
@@ -84,15 +84,17 @@ th {
     background-color: #ACACAC;
     border: 1.5px #EEEEEE solid;
     font-weight: bold;
-    padding: 10px;
+    padding: 5px 0;
     color: white;
-    text-align: left;
+    text-align: center;
 }
 
 td {
     border: 1.5px #EEEEEE solid;
     padding: 7.5px;
     text-align: left;
+    width: min-content;
+    font-size: 13px;
 }
 
 tr:nth-child(even) {
