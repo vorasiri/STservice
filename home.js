@@ -304,6 +304,25 @@ class Table {
     }
   }
 
+  search(byCol, keyword) {
+    var table, tr, td, i, txtValue;
+    table = this.table[0]
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      if(byCol == 'any'){
+        
+      }
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.indexOf(keyword) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
 }
 
 /*
