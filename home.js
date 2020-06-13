@@ -122,6 +122,36 @@ Array.from(allNavButton).forEach(navButton => {
             highlightPageNumber(pagination, currentPage)
           })
           highlightPageNumber(pagination, currentPage)
+
+          // fill up options in dropdown
+          let colNameDropdown = document.getElementById('searchDropdown');
+          for (var i = 0; i < infoTable.field.length; i++) {
+            var opt = document.createElement('option');
+            opt.appendChild(document.createTextNode(`${thaiTranslate[0][infoTable.field[i].name]}`));
+            opt.value = `${infoTable.field[i].name}`;
+            colNameDropdown.appendChild(opt);
+          }
+
+          // event in search button
+          colNameDropdown.addEventListener('change', function () {
+            var keyword = document.getElementById('searchField').value
+            console.log(keyword)
+            if (keyword.length != 0) {  
+              infoTable.clearTable(1)
+              infoTable.loadTable(0, true)
+              infoTable.search(colNameDropdown.value, keyword)
+            }
+          })
+          document.getElementById('searchSubmit').addEventListener('click', function (event) {
+            event.preventDefault()
+            var keyword = document.getElementById('searchField').value
+            console.log(keyword)
+            if (keyword.length != 0) {
+              infoTable.clearTable(1)
+              infoTable.loadTable(0, true)
+              infoTable.search(colNameDropdown.value, keyword)
+            }
+          })
         }
 
       });
@@ -155,7 +185,6 @@ function mysqlFetching(pageHeader, callback) {
     let colNameArray = colName[headerInfo[pageHeader].table]
     var colNameString = ''
     for (var i = 0; i < colNameArray.length; i++) {
-      console.log(colNameArray[i])
       colNameString += colNameArray[i]
       if (i != colNameArray.length - 1)
         colNameString += ','
@@ -243,6 +272,15 @@ function contains(target, pattern) {
   return (value === 1)
 }
 
+function findWithAttr(array, attr, value) {
+  for (var i = 0; i < array.length; i += 1) {
+    if (array[i][attr] === value) {
+      return i;
+    }
+  }
+  return -1;
+}
+
 function aTag(innerText) {
   var newElement = document.createElement('a')
   newElement.innerHTML = `${innerText}`
@@ -285,9 +323,13 @@ class Table {
     this.table.append(`<tr>${tagTH}</tr>`);
   }
 
-  loadTable(page = 1) {
+  loadTable(page = 1, loadAll = false) {
     let start = (page - 1) * this.pageSize
     let end = start + this.pageSize
+    if (loadAll) {
+      start = 0
+      end = this.result.length
+    }
     for (var i = start; i < end; i++) {
       let row = this.result[i]
       if (row !== undefined) {
@@ -313,22 +355,39 @@ class Table {
     }
   }
 
-  search(byCol, keyword) {
+  search(spacifiColName, keyword) {
     var table, tr, td, i, txtValue;
     table = this.table[0]
     tr = table.getElementsByTagName("tr");
     for (i = 0; i < tr.length; i++) {
-      if(byCol == 'any'){
-
-      }
-      td = tr[i].getElementsByTagName("td")[0];
-      if (td) {
-        txtValue = td.textContent || td.innerText;
-        if (txtValue.indexOf(keyword) > -1) {
-          tr[i].style.display = "";
-        } else {
-          tr[i].style.display = "none";
+      if (spacifiColName == 'any') {
+        var j = 0
+        while (j < tr[i].getElementsByTagName("td").length) {
+          td = tr[i].getElementsByTagName("td")[j];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.indexOf(keyword) > -1) {
+              tr[i].style.display = "";
+              break
+            } else {
+              tr[i].style.display = "none";
+            }
+          }
+          j++
         }
+      }
+      else {
+        let colNameIndex = findWithAttr(this.field, 'name', spacifiColName)
+        td = tr[i].getElementsByTagName("td")[colNameIndex];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.indexOf(keyword) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+
       }
     }
   }
