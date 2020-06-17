@@ -78,7 +78,7 @@
                     Staff Name
                 </span>
                 <span> | </span>
-                <span id="staffPosition">
+                <span id="incompleteReason">
                     Position
                 </span>
             </button>
@@ -204,10 +204,175 @@
         <br><br><br>
     </div>
 
+    <!-- NOTIFICATION MODALS -->
+
+    <!-- for delivery/installation job -->
+    <div id="incompleteJobModal" class="notification-modal">
+        <div class="modal-content">
+            <!-- select postpone or cancel  -->
+            <span class="close">&times;</span>
+            <table>
+                <tr>
+                    <td>
+                        <input type="radio" id="incompleteReason" name="incompleteReason" value="postpone">
+                        <label for="incompleteReason">เลื่อนวัน-เวลานัดหมาย</label>
+                    </td>
+                </tr>
+                <tr>
+                    <div id="newAppoint" class="newappoint-field">
+                        <td>วันที่-เวลา การนัดหมายใหม่</td>
+                        <td>
+                            <input type="datetime" id="postponeDate" name="postponeDate">
+                        </td>
+                    </div>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" id="incompleteReason" name="incompleteReason" value="cancel">
+                        <label for="incompleteReason">ยกเลิกงาน</label>
+                    </td>
+                </tr>
+            </table>
+            <input class="btn" type="submit" value="ตกลง">
+        </div>
+    </div>
+    <div id="completeJobModal" class="notification-modal">
+        <div class="modal-content">
+            <!-- option to edit the primary data -->
+            <span class="close">&times;</span>
+            <table>
+                <tr>
+                    <td>ต้องการแก้ไขข้อมูลหรือไม่</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="yes-btn">ใช่</button>
+                        <!-- go to edit page -->
+                    </td>
+                    <td>
+                        <button class="no-btn">ไม่</button>
+                        <!-- go to data confirmation -->
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <!-- confirm page or modal ? -->
+
+    <!-- for returning -->
+    <div id="failToContactModal" class="notification-modal">
+        <div class="modal-content">
+            <!-- select reason why fail to contact  -->
+            <span class="close">&times;</span>
+            <table>
+                <tr>
+                    <td>เหตุผล</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" id="failReason" name="failReason">
+                        <label for="failReason">ไม่สามารถติดต่อได้</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" id="failReason" name="failReason">
+                        <label for="failReason">ไม่สามารถติดต่อได้ในวันหยุด</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" id="failReason" name="failReason">
+                        <label for="failReason">รอการยืนยันจากบริษัท</label>
+                    </td>
+                </tr>
+            </table>
+            <input class="btn" type="submit" value="ตกลง">
+        </div>
+    </div>
+    <div id="selectMethodModal" class="notification-modal">
+        <div class="modal-content">
+            <!-- select compensation method  -->
+            <span class="close">&times;</span>
+            <table>
+                <tr>
+                    <td>วิธีการชดเชย</td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" id="failReason" name="failReason" value="creditNote">
+                        <label for="failReason">ชดเชยด้วยใบลดหนี้</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" id="failReason" name="failReason" value="returnProduct">
+                        <label for="failReason">ชดเชยด้วยการคืนสินค้า</label>
+                    </td>
+                </tr>
+            </table>
+            <input class="btn" type="submit" value="ตกลง">
+        </div>
+    </div>
+    <div id="CNMethodModal" class="notification-modal">
+        <div class="modal-content">
+            <!-- select compensation method  -->
+            <span class="close">&times;</span>
+            <table>
+                <tr>
+                    <td>เลขที่เอกสารชดเชย</td>
+                    <td>
+                        <input type="text" id="compensateDocID" name="compensateDocID">
+                    </td>
+                </tr>
+                <tr>
+                    <td>วันที่เอกสารชดเชย</td>
+                    <td>
+                        <input type="datetime" id="compensateDocDate" name="compensateDocDate">
+                    </td>
+                </tr>
+                <tr>
+                    <td>จำนวนเงินที่ชดเชย</td>
+                    <td>
+                        <input type="number" id="compensateAmount" name="compensateAmount">
+                    </td>
+                </tr>
+            </table>
+            <input class="btn" type="submit" value="ตกลง">
+        </div>
+    </div>
+    <div id="productMethodModal" class="notification-modal">
+        <div class="modal-content">
+            <!-- select compensation method  -->
+            <span class="close">&times;</span>
+            <table>
+                <tr>
+                    <td>เลขที่เอกสารชดเชย</td>
+                    <td>
+                        <input type="text" id="compensateDocID" name="compensateDocID">
+                    </td>
+                </tr>
+                <tr>
+                    <td>วันที่เอกสารชดเชย</td>
+                    <td>
+                        <input type="datetime" id="compensateDocDate" name="compensateDocDate">
+                    </td>
+                </tr>
+                <tr>
+                    <td>หมายเลขเครื่องสินค้าที่ส่งคืน</td>
+                    <td>
+                        <input type="text" id="compensateSN" name="compensateSN">
+                    </td>
+                </tr>
+            </table>
+            <input class="btn" type="submit" value="ตกลง">
+        </div>
+    </div>
     <script>
         require('./home.js');
     </script>
 </body>
-<link rel="stylesheet" type="text/css" href="node_modules/jquery-datetimepicker/jquery.datetimepicker.css"/>
+<link rel="stylesheet" type="text/css" href="node_modules/jquery-datetimepicker/jquery.datetimepicker.css" />
 <script src="node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js"></script>
+
 </html>
