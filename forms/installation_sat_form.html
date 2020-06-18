@@ -227,13 +227,13 @@
                         <tr>
                             <td>สินค้า</td>
                             <td>
-                                <select class="dropdown-field-sat" id="productName" name="productName">
+                                <select class="dropdown-field-short" id="productName" name="productName">
                                     <option value="satSet">ชุดจานดาวเทียม</option>
                                 </select>
                             </td>
                             <td>ยี่ห้อ</td>
                             <td>
-                                <select id="productBrand" class="dropdown-field-sat" name="productBrand">
+                                <select id="productBrand" class="dropdown-field-short" name="productBrand">
                                     <option value="Brand">Product Brand</option>
                                     <!-- data from brand table -->
                                 </select>
@@ -242,15 +242,15 @@
                         <tr>
                             <td>รุ่น LNB</td>
                             <td>
-                                <input type="text" class="table-field-sat" id="LNBModel" name="LNBModel">
+                                <input type="text" class="table-field-short" id="LNBModel" name="LNBModel">
                             </td>
                             <td>หมายเลขเครื่อง LNB</td>
                             <td>
-                                <input type="text" class="table-field-sat" id="LNBSN" name="LNBSN">
+                                <input type="text" class="table-field-short" id="LNBSN" name="LNBSN">
                             </td>
                         </tr>
                     </table>
-                    <table>
+                    <table class="product-table">
                         <span>กล่องรับสัญญาณ</span>
                         <tr>
                             <th>รุ่น</th>
@@ -280,7 +280,7 @@
                     <label for="productEquip">ไม่มี</label>
                     <input type="radio" id="productEquip" name="productEquip">
                     <label for="productEquip">มี</label>
-                    <table>
+                    <table class="product-table">
                         <tr>
                             <th>รหัสอุปกรณ์</th>
                             <th>ชื่ออุปกรณ์</th>
@@ -291,7 +291,7 @@
                                 <input type="number" class="table-field" id="equipmentID" name="equipmentID">
                             </td>
                             <td>
-                                <input type="text" class="table-field" id="equipmentName" name="equipmentName">
+                                <input type="text" class="table-field-long" id="equipmentName" name="equipmentName">
                             </td>
                             <td>
                                 <input type="number" class="table-field" id="equipmentQty" name="equipmentQty">

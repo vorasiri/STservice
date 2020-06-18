@@ -136,18 +136,20 @@ input[type=submit] {
 
 table {
     width: 100%;
+    table-layout: auto;
 }
 
-.import-table {
+.import-table, .product-table {
     background-color: #FFFFFF;
     border-collapse: collapse;
     font-size: 11pt;
     border: 1px #000000 solid;
 }
 
-.import-table th, .import-table td {
+.import-table th, .import-table td, .product-table th, .product-table td {
     background-color: #eeeeee;
     border: 1px #000000 solid;
+    width: fit-content;
 }
 
 .grand-total {
@@ -269,21 +271,29 @@ table {
     font-size: 12pt;
 }
 
+.table-field-long {
+    width: 400px;
+    font-size: 12pt;
+}
+
 .dropdown-field {
-    width: 90%;
+    min-width: fit-content;
+    width: 100%;
     height: 100%;
     margin: auto;
     background-color: #FFFFFF;
     font-size: 12pt;
 }
 
-.table-field-sat {
+.table-field-short {
     width: 150px;
     font-size: 12pt;
 }
 
-.dropdown-field-sat {
+.dropdown-field-short {
     width: 150px;
+    margin: auto;
+    background-color: #FFFFFF;
     font-size: 12pt;
 }
 
