@@ -1,0 +1,374 @@
+<html>
+
+<head>
+    <title>Seutrong Service</title>
+    <link rel="stylesheet" href="styles/form.css">
+</head>
+
+<body>
+    <h1 id="pageHeader">ข้อมูลการติดตั้ง เครื่องทำน้ำอุ่น</h1>
+    <form action="#">
+        <div class="row">
+            <div class="installing-type">
+                <table>
+                    <tr>
+                        <td>
+                            <input type="radio" id="partnerType" name="partnerType" value="whSet">
+                            <label for="partnerType">ติดตั้งใหม่</label>
+                        </td>
+                        <td>
+                            <input type="radio" id="partnerType" name="partnerType" value="whFix">
+                            <label for="partnerType">แก้ไขและซ่อมแซม</label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="ref-id">
+                <table>
+                    <tr>
+                        <td>
+                            <span>อ้างอิงงานติดตั้งเก่า</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>เลขที่ใบงานติดตั้ง</td>
+                        <td>
+                            <input type="number" id="refJobID" name="refJobID">
+                        </td>
+                        <td>
+                            <button class="showRef-btn" id="showRefButton">แสดงข้อมูล</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <div class="purchaseInfo">
+                    <p>ข้อมูลการซื้อ</p>
+                    <table>
+                        <tr>
+                            <td>วันที่-เวลา ขาย</td>
+                            <td>
+                                <input type="datetime" id="purchaseDate" name="purchaseDate">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <span>พนักงานขาย</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>รหัสพนักงาน</td>
+                            <td>
+                                <input type="number" id="staffID" name="staffID">
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- display only -->
+                            <td>ชื่อพนักงาน</td>
+                            <td>
+                                <input type="text" id="staffName" name="staffName">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <span>รายละเอียดการชำระเงิน</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>ยอดรวมการชำระเงิน</td>
+                            <td>
+                                <input type="number" id="totalSpent" name="totalSpent">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>จำนวนเงินที่จ่าย/วางมัดจำ</td>
+                            <td>
+                                <input type="number" id="totalPaid" name="totalPaid">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="column">
+                <div class="appoinmentInfo">
+                    <p>การนัดหมาย</p>
+                    <table>
+                        <tr>
+                            <td>เลขที่ใบงานติดตั้ง</td>
+                            <td>
+                                <input type="text" id="installJobID" name="installJobID"> <!-- auto generate -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>วันที่-เวลา การนัดหมาย</td>
+                            <td>
+                                <input type="datetime" id="appointmentDate" name="appointmentDate">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>พนักงานติดตั้ง</span>
+                            </td>
+                            <td>
+                                <input class="add-btn" type="submit" value="เพิ่ม">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>รหัสพนักงาน</td>
+                            <td>
+                                <input type="number" id="staffID" name="staffID">
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- display only -->
+                            <td>ชื่อพนักงาน</td>
+                            <td>
+                                <input type="text" id="staffName" name="staffName">
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="customerInfo">
+                <p>ข้อมูลลูกค้า</p>
+                <!-- display only -->
+                <table>
+                    <tr>
+                        <td>
+                            รหัสลูกค้า
+                        </td>
+                        <td>
+                            <input type="number" id="customerID" name="customerID">
+                        </td>
+                        <td>
+                            <!-- pop up modal form when search -->
+                            <input class="btn" type="submit" value="ค้นหาลูกค้า" id="customerSearchButton">
+                            <!-- The Modal -->
+                            <div id="searchModal" class="modal">
+                                <div class="modal-content">
+                                    <!-- searching by id, name, phone number  -->
+                                    <span class="close">&times;</span>
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                รหัสลูกค้า
+                                            </td>
+                                            <td>
+                                                <input type="number" id="customerID" name="customerID">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                ชื่อ-นามสกุล ลูกค้า
+                                            </td>
+                                            <td>
+                                                <input type="text" id="customerName" name="customerName">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                หมายเลขโทรศัพท์
+                                            </td>
+                                            <td>
+                                                <input type="text" id="customerTel" name="customerTel">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <input class="btn" type="submit" value="ค้นหาลูกค้า">
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <input class="btn" type="submit" value="เพิ่มลูกค้าใหม่">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            ชื่อ-นามสกุล ลูกค้า
+                        </td>
+                        <td>
+                            <input type="text" id="customerName" name="customerName">
+                        </td>
+                        <td>
+                            หมายเลขโทรศัพท์
+                        </td>
+                        <td>
+                            <input type="text" id="customerTel" name="customerTel">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            ที่อยู่
+                        </td>
+                        <td colspan="3">
+                            <textarea id="customerAddress" name="customerAddress"></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        </div>
+        <div class="row">
+            <div class="productInfo">
+                <p>รายละเอียดสินค้า</p>
+                <table>
+                    <tr>
+                        <th>สินค้า</th>
+                        <th>ยี่ห้อ</th>
+                        <th>รุ่น</th>
+                        <th>หมายเลขเครื่อง</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select class="dropdown-field-sat" id="productName" name="productName">
+                                <option value="whSet">เครื่องทำน้ำอุ่น</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select id="productBrand" class="dropdown-field" name="productBrand">
+                                <option value="Brand">Product Brand</option>
+                                <!-- data from brand table -->
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" class="table-field" id="productModel" name="productModel">
+                        </td>
+                        <td>
+                            <input type="text" class="table-field" id="productSN" name="productSN">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="installationInfo">
+                <p>อุปกรณ์ที่ใช้ในการติดตั้ง เพิ่มเติม</p>
+                <input type="radio" id="productEquip" name="productEquip">
+                <label for="productEquip">ไม่มี</label>
+                <input type="radio" id="productEquip" name="productEquip">
+                <label for="productEquip">มี</label>
+                <table>
+                    <tr>
+                        <th>รหัสอุปกรณ์</th>
+                        <th>ชื่ออุปกรณ์</th>
+                        <th>จำนวน</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="number" class="table-field" id="equipmentID" name="equipmentID">
+                        </td>
+                        <td>
+                            <input type="text" class="table-field" id="equipmentName" name="equipmentName">
+                        </td>
+                        <td>
+                            <input type="number" class="table-field" id="equipmentQty" name="equipmentQty">
+                        </td>
+                    </tr>
+                </table>
+                <input class="add-btn" type="submit" value="เพิ่ม">
+                <div class="qty">
+                    <span>จำนวนอุปกรณ์</span>
+                    <input type="number" id="equipQty" name="equipQty">
+                    <span>ชิ้น</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <div class="additionInfo">
+                    <table>
+                        <tr>
+                            <p>รายละเอียดการติดตั้ง</p>
+                        </tr>
+                        <tr>
+                            <td>
+                                สถานที่ติดตั้ง
+                            </td>
+                            <td colspan="2">
+                                <!-- display only -->
+                                <textarea id="instLocation" name="instLocation"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>ค่าติดตั้ง</td>
+                            <td colspan="2">
+                                <!-- display only -->
+                                <span id="instFee" name="instFee" class="total-price">0</span>
+                            </td>
+                            <td>
+                                <span>บาท</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>ราคาอุปกรณ์ทั้งหมด</td>
+                            <td colspan="2">
+                                <!-- display only -->
+                                <span id="equipTotalPrice" name="equipTotalPrice" class="total-price">0</span>
+                            </td>
+                            <td>
+                                <span>บาท</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="column">
+                <table>
+                    <tr>
+                        <td>
+                            <h2>สรุปการชำระเงิน</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>ยอดรวมการชำระเงิน</h3>
+                        </td>
+                        <td>
+                            <!-- display only -->
+                            <h3 id="totalSpent" name="totalSpent">0</h3>
+                        </td>
+                        <td>
+                            <h3>บาท</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>จำนวนเงินที่จ่าย/วางมัดจำ</h3>
+                        </td>
+                        <td>
+                            <!-- display only -->
+                            <h3 id="totalPaid" name="totalPaid">0</h3>
+                        </td>
+                        <td>
+                            <h3>บาท</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>จำนวนเงินที่ชำระในการติดตั้ง</h3>
+                        </td>
+                        <td>
+                            <!-- display only -->
+                            <h3 id="instCashOn" name="instCashOn">0</h3>
+                        </td>
+                        <td>
+                            <h3>บาท</h3>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <input class="submit-btn" type="submit" value="บันทึกข้อมูล">
+    </form>
+</body>
+
+</html>

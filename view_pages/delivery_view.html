@@ -1,0 +1,313 @@
+<html>
+
+<head>
+    <title>Seutrong Service</title>
+    <link rel="stylesheet" href="styles/form.css">
+</head>
+
+<body>
+    <h1 id="pageHeader">ข้อมูลการจัดส่งสินค้า</h1>
+    <form action="#">
+        <div class="row">
+            <div class="column">
+                <div class="purchaseInfo">
+                    <p>ข้อมูลการซื้อ</p>
+                    <table>
+                        <tr>
+                            <td>วันที่-เวลา ขาย</td>
+                            <td>
+                                <input type="datetime" id="purchaseDate" name="purchaseDate">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <span>พนักงานขาย</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>รหัสพนักงาน</td>
+                            <td>
+                                <input type="number" id="staffID" name="staffID">
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- display only -->
+                            <td>ชื่อพนักงาน</td>
+                            <td>
+                                <input type="text" id="staffName" name="staffName">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <span>รายละเอียดการชำระเงิน</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>ยอดรวมการชำระเงิน</td>
+                            <td>
+                                <!-- edit here -->
+                                <input type="number" id="totalSpent" name="totalSpent">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>จำนวนเงินที่จ่าย/วางมัดจำ</td>
+                            <td>
+                                <!-- edit here -->
+                                <input type="number" id="totalPaid" name="totalPaid">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="column">
+                <div class="appoinmentInfo">
+                    <p>การนัดหมาย</p>
+                    <table>
+                        <tr>
+                            <!-- display only -->
+                            <td>เลขที่ใบจัดส่ง</td>
+                            <td>
+                                <input type="number" id="deliveryJobID" name="deliveryJobID"> <!-- auto generate -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- display only -->
+                            <td>วันที่-เวลา การนัดหมาย</td>
+                            <td>
+                                <input type="datetime" id="appointmentDate" name="appointmentDate">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span>พนักงานจัดส่ง</span>
+                            </td>
+                            <td>
+                                <input class="add-btn" type="submit" value="เพิ่ม">
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- display only -->
+                            <td>รหัสพนักงาน</td>
+                            <td>
+                                <input type="number" id="staffID" name="staffID">
+                            </td>
+                        </tr>
+                        <tr>
+                            <!-- display only -->
+                            <td>ชื่อพนักงาน</td>
+                            <td>
+                                <input type="text" id="staffName" name="staffName">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="customerInfo">
+                <p>ข้อมูลลูกค้า</p>
+                <table>
+                    <tr>
+                        <td>
+                            รหัสลูกค้า
+                        </td>
+                        <td>
+                            <!-- display only -->
+                            <input type="number" class="table-field" id="customerID" name="customerID">
+                        </td>
+                        <td>
+                            <!-- disable button -->
+                            <input class="btn" type="submit" value="ค้นหาลูกค้า" id="customerSearchButton">
+                        </td>
+                        <td>
+                            <!-- disable button -->
+                            <input class="btn" type="submit" value="เพิ่มลูกค้าใหม่">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            ชื่อ-นามสกุล ลูกค้า
+                        </td>
+                        <td>
+                            <!-- display only -->
+                            <input type="text" class="table-field" id="customerName" name="customerName">
+                        </td>
+                        <td>
+                            หมายเลขโทรศัพท์
+                        </td>
+                        <td>
+                            <!-- display only -->
+                            <input type="text" class="table-field" id="customerTel" name="customerTel">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            ที่อยู่
+                        </td>
+                        <td colspan="3">
+                            <!-- display only -->
+                            <textarea id="customerAddress" name="customerAddress"></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="productInfo">
+                <p>รายละเอียดสินค้า</p>
+                <table>
+                    <tr>
+                        <th>สินค้า</th>
+                        <th>ยี่ห้อ</th>
+                        <th>รุ่น</th>
+                        <th>หมายเลขเครื่อง</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" class="table-field" id="productName" name="productName">
+                        </td>
+                        <td>
+                            <select id="productBrand" class="dropdown-field" name="productBrand">
+                                <option value="Brand">Product Brand</option>
+                                <!-- data from brand table -->
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" class="table-field" id="productModel" name="productModel">
+                        </td>
+                        <td>
+                            <input type="text" class="table-field" id="productSN" name="productSN">
+                        </td>
+                    </tr>
+                </table>
+                <input class="add-btn" type="submit" value="เพิ่ม">
+                <div class="qty">
+                    <span>จำนวนสินค้า</span>
+                    <input type="number" id="productQty" name="productQty">
+                    <span>ชิ้น</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="deliveryallationInfo">
+                <p>อุปกรณ์ที่ใช้ในการจัดส่ง เพิ่มเติม</p>
+                <input type="radio" id="productEquip" name="productEquip">
+                <label for="productEquip">ไม่มี</label>
+                <input type="radio" id="productEquip" name="productEquip">
+                <label for="productEquip">มี</label>
+                <table>
+                    <tr>
+                        <th>รหัสอุปกรณ์</th>
+                        <th>ชื่ออุปกรณ์</th>
+                        <th>จำนวน</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="number" class="table-field" id="equipmentID" name="equipmentID">
+                        </td>
+                        <td>
+                            <input type="text" class="table-field" id="equipmentName" name="equipmentName">
+                        </td>
+                        <td>
+                            <input type="number" class="table-field" id="equipmentQty" name="equipmentQty">
+                        </td>
+                    </tr>
+                </table>
+                <input class="add-btn" type="submit" value="เพิ่ม">
+                <div class="qty">
+                    <span>จำนวนอุปกรณ์</span>
+                    <input type="number" id="equipQty" name="equipQty">
+                    <span>ชิ้น</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <div class="additionInfo">
+                    <table>
+                        <tr>
+                            <p>รายละเอียดการจัดส่ง</p>
+                        </tr>
+                        <tr>
+                            <td>
+                                สถานที่จัดส่ง
+                            </td>
+                            <td colspan="2">
+                                <!-- display only -->
+                                <textarea id="deliveryLocation" name="deliveryLocation"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>ค่าจัดส่ง</td>
+                            <td colspan="2">
+                                <!-- display only -->
+                                <span id="deliveryFee" name="deliveryFee" class="total-price">0</span>
+                            </td>
+                            <td>
+                                <span>บาท</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>ราคาอุปกรณ์ทั้งหมด</td>
+                            <td colspan="2">
+                                <!-- display only -->
+                                <span id="equipTotalPrice" name="equipTotalPrice" class="total-price">0</span>
+                            </td>
+                            <td>
+                                <span>บาท</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="column">
+                <table>
+                    <tr>
+                        <td>
+                            <h2>สรุปการชำระเงิน</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>ยอดรวมการชำระเงิน</h3>
+                        </td>
+                        <td>
+                            <!-- display only -->
+                            <h3 id="totalSpent" name="totalSpent">0</h3>
+                        </td>
+                        <td>
+                            <h3>บาท</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>จำนวนเงินที่จ่าย/วางมัดจำ</h3>
+                        </td>
+                        <td>
+                            <!-- display only -->
+                            <h3 id="totalPaid" name="totalPaid">0</h3>
+                        </td>
+                        <td>
+                            <h3>บาท</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>จำนวนเงินที่ชำระในการจัดส่ง</h3>
+                        </td>
+                        <td>
+                            <!-- display only -->
+                            <h3 id="deliveryCashOn" name="deliveryCashOn">0</h3>
+                        </td>
+                        <td>
+                            <h3>บาท</h3>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <input class="submit-btn" type="submit" value="บันทึกข้อมูล">
+    </form>
+</body>
+
+</html>

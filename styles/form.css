@@ -252,6 +252,18 @@ table {
     padding: 5px 20px;
 }
 
+.additionInfo {
+    border-radius: 5px;
+    background-color: #f0d6af;
+    padding: 5px 20px;
+}
+
+.summaryPayment {
+    border-radius: 5px;
+    /* background-color: #d2d6d8; */
+    padding: 5px 20px;
+}
+
 .table-field {
     width: 100%;
     font-size: 12pt;
@@ -284,6 +296,15 @@ table {
     margin-left: 300px;
 }
 
-.long-name, textarea {
+.total-price {
+    text-align: end;
+}
+
+.long-name {
     width: 95%;
+}
+
+textarea {
+    width: 95%;
+    height: 60px;
 }
