@@ -81,9 +81,11 @@ Array.from(allNavButton).forEach(navButton => {
       }
       document.getElementById('addButton').addEventListener('click', function () {
         callHtmlFile(headerInfo[pageHeader].form)
+        loadFunctionalElements()
       });
       document.getElementById('importButton').addEventListener('click', function () {
         callHtmlFile(headerInfo[pageHeader].import)
+        loadFunctionalElements()
       });
 
       mysqlFetching(pageHeader, function (err, result, field) {
@@ -99,6 +101,13 @@ Array.from(allNavButton).forEach(navButton => {
           infoTable.loadField()
           infoTable.loadTable()
 
+          // add row handler
+          for (var i = 1; i < infoTable.table[0].rows.length; i++) {
+            infoTable.table[0].rows[i].addEventListener('click', function() {
+              callHtmlFile(headerInfo[pageHeader].viewPage)
+            })
+          }
+        
           // create pagination button
           var currentPage = 1
           let pagination = document.getElementById('pagination')
@@ -175,7 +184,7 @@ document.getElementById('logoutButton').addEventListener('click', function (even
   logout()
 })
 
-// init Table class with fetched data from mysql
+//fetched data from mysql
 function mysqlFetching(pageHeader, callback) {
   var query = ''
   if (contains(headerInfo[pageHeader].table, ['info', 'service_partners'])) {
@@ -193,7 +202,20 @@ function mysqlFetching(pageHeader, callback) {
     console.log(query)
   }
   con.query(query, function (err, result, field) {
-    console.log(`fetching table: ${headerInfo[pageHeader].table}`)
+    console.log(`infoPage fetching table: ${headerInfo[pageHeader].table}`)
+    if (err) {
+      callback(err, null, null);
+    }
+    else
+      callback(null, result, field);
+  }) 
+}
+
+// load notification
+function mysqlGetNotification(targetTable, callback) {
+  let query = `${headerInfo[pageHeader].query}`
+  con.query(query, function (err, result, field) {
+    console.log(`notification fetching table: ${targetTable}`)
     if (err) {
       callback(err, null, null);
     }
@@ -207,7 +229,6 @@ function callHtmlFile(filename) {
   console.log(filename)
   fs.readFile(filename.toString(), function (err, data) {
     document.getElementById('mainContent').innerHTML = data.toString();
-    loadFunctionalElements()
   })
 };
 
