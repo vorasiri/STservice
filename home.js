@@ -12,6 +12,7 @@ const thaiTranslate = require("./thai_translate.json")
 const headerInfo = require("./header_info.json")
 const colName = require("./col_name.json")
 const position = require("./position.json")
+const notification = require("./notification_status.json")
 
 // drop down of mainMenu
 var dropdown = document.getElementsByClassName("dropdown-btn");
@@ -211,16 +212,39 @@ function mysqlFetching(pageHeader, callback) {
   }) 
 }
 
-// load notification
-function mysqlGetNotification(targetTable, callback) {
-  let query = `${headerInfo[pageHeader].query}`
+// notification 
+function refreshNotificationBar() {
+  let notificationBar = $('#notificationBar')
+  // clear the bar
+  notificationBar.empty()
+
+  // add
+  for (var i = 0; i < notification.initTable.length; i++) {
+    mysqlFetchingNotification(notification.initTable[i], i, function(err, result, field, i) {
+
+      if (result.length > 0) {
+        let installingTask = [notification.header[1], notification.header[2], notification.header[3]]
+        if (installingTask.includes(notification.header[i]) && !(includeInAttr(notificationBar[0].children, 'innerText', 'งานติดตั้ง'))) {
+          notificationBar.append('<h3>งานติดตั้ง</h3>');
+        }
+        notificationBar.append(`${notification.header[i]}`);
+        notificationBar.append('<div>hello</div>');    
+        console.log(result)
+      }
+    })
+  }
+}
+refreshNotificationBar()
+
+function mysqlFetchingNotification(targetTable, i, callback) {
+  let query = `${notification[targetTable].query}`
   con.query(query, function (err, result, field) {
     console.log(`notification fetching table: ${targetTable}`)
     if (err) {
-      callback(err, null, null);
+      callback(err, null, null, null);
     }
     else
-      callback(null, result, field);
+      callback(null, result, field, i);
   })
 }
 
@@ -300,6 +324,15 @@ function findWithAttr(array, attr, value) {
     }
   }
   return -1;
+}
+
+function includeInAttr(array, attr, value) {
+  for (var i = 0; i < array.length; i += 1) {
+    if (array[i][attr] === value) {
+      return true;
+    }
+  }
+  return false;
 }
 
 function aTag(innerText) {

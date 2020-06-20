@@ -1,0 +1,75 @@
+{
+    "initTable": ["info_delivery", "info_installation_ac", "info_installation_sat", "info_installation_wh", "info_repairing", "info_returning"],
+    "header": ["<h3>งานจัดส่ง</h3>","<h4>แอร์</h4>","<h4>จานดาวเทียม</h4>","<h4>เครื่องทำน้ำอุ่น</h4>","<h3>งานบริการซ่อม</h3>","<h3>การคืนสินค้า</h3>"],
+    "info_delivery": {
+      "query": "SELECT delivery_job_id, delivery_appoint, customer_name, customer_tel, delivery_product, brand_name AS delivery_brand, delivery_product_model, staff_name AS delivery_staff, delivery_location FROM info_delivery i JOIN staff s ON i.delivery_staff = s.staff_id JOIN customers c ON i.delivery_customer = c.customer_id JOIN brands b ON i.delivery_brand = b.brand_id WHERE delivery_location IS null"
+    },
+    "info_installation_ac": {
+      "query": "SELECT installac_id, installac_appoint, customer_name, customer_tel, installac_product, brand_name AS installac_brand, installac_model_in, staff_name AS installac_staff, installac_location FROM info_installation_ac i JOIN staff s ON i.installac_staff = s.staff_id JOIN customers c ON i.installac_customer = c.customer_id JOIN brands b ON i.installac_brand = b.brand_id WHERE installac_location IS null"
+    },
+    "info_installation_sat": {
+      "query": "SELECT installsat_id, installsat_appoint, customer_name, customer_tel, installsat_product, brand_name AS installsat_brand, installsat_model_lnb, staff_name AS installsat_staff, installsat_location FROM info_installation_sat i JOIN staff s ON i.installsat_staff = s.staff_id JOIN customers c ON i.installsat_customer = c.customer_id JOIN brands b ON i.installsat_brand = b.brand_id WHERE installsat_location IS null"
+    },
+    "info_installation_wh": {
+      "query": "SELECT installwh_id, installwh_appoint, customer_name, customer_tel, installwh_product, brand_name AS installwh_brand, installwh_model, staff_name AS installwh_staff, installwh_location FROM info_installation_wh i JOIN staff s ON i.installwh_staff = s.staff_id JOIN customers c ON i.installwh_customer = c.customer_id JOIN brands b ON i.installwh_brand = b.brand_id WHERE installwh_location IS null"
+    },
+    "info_repairing": {
+      "query": "",
+      "read": {
+        "A0": {
+          "text": "",
+          "next": "A1",
+          "prev": "A0"
+        }
+      }
+    },
+    "info_returning": {
+      "query": "",
+      "read": {
+        "A0": {
+          "text": "รอแจ้งบริษัท",
+          "next": "B0",
+          "prev": "A1"
+        },
+        "A1": {
+          "text": "แจ้งไม่สำเร็จ",
+          "next": "B0",
+          "prev": "A1"
+        },
+        "B0": {
+          "text": "รอส่งคืน",
+          "next": "A1",
+          "prev": "B0"
+        },
+        "B1": {
+          "text": "ส่งคืนแล้ว",
+          "next": "C0",
+          "prev": "B1"
+        },
+        "C0": {
+          "text": "กำลังติดตาม",
+          "next": "C0",
+          "prev": "C1"
+        },
+        "C1": {
+          "text": "รอบริษัทดำเนินการ",
+          "next": "C0",
+          "prev": "C1"
+        },
+        "D1": {
+          "text": "รอเอกสารชดเชย",
+          "next": "E",
+          "prev": "D1"
+        },
+        "D2": {
+          "text": "รอเอกสารชดเชย",
+          "next": "E",
+          "prev": "D2"
+        },
+        "E": {
+          "text": "ชดเชยเรียบร้อย"
+        }
+      }
+    }
+  }
+  
