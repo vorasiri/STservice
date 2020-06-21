@@ -132,7 +132,7 @@ function mysqlFetching(pageHeader, callback) {
     }
     else
       callback(null, result, field);
-  }) 
+  })
 }
 
 // notification 
@@ -143,7 +143,7 @@ function refreshNotificationBar() {
 
   // add
   for (var i = 0; i < notification.initTable.length; i++) {
-    mysqlFetchingNotification(notification.initTable[i], i, function(err, result, field, i) {
+    mysqlFetchingNotification(notification.initTable[i], i, function (err, result, field, i) {
 
       if (result.length > 0) {
         let installingTask = [notification.header[1], notification.header[2], notification.header[3]]
@@ -169,7 +169,7 @@ function refreshNotificationBar() {
               <button class="checkbtn">&#10003;</button>
               <button class="crossbtn">&#10005;</button>
           </div>
-          </div>`);    
+          </div>`);
         }
         console.log(result)
       }
@@ -197,14 +197,14 @@ function callHtmlFile(filename, mode = 0, pageHeader = '') {
     document.getElementById('mainContent').innerHTML = data.toString();
     if (mode == 1)
       loadFunctionalElements()
-    else if(mode == 2)
+    else if (mode == 2)
       loadExInfoPage(pageHeader)
   })
 };
 
 // import thing
 function loadExInfoPage(pageHeader) {
-  if(pageHeader == 'รายการอะไหล่')
+  if (pageHeader == 'รายการอะไหล่')
     document.getElementById('pageHeader').innerHTML = 'import...thing SP IDK'
   else
     document.getElementById('pageHeader').innerHTML = 'import...thing EQ IDK'
@@ -222,7 +222,7 @@ function showModal(modalID) {
   document.getElementById(modalID).style.display = 'block'
 }
 
-function loadFunctionalElements(){
+function loadFunctionalElements() {
   if (document.getElementById('customerSearchButton')) {
     console.log('try load up modal')
     document.getElementById('customerSearchButton').addEventListener('click', function (event) {
@@ -263,7 +263,7 @@ function loadFunctionalElements(){
   }
 
   // if that button exist
-    //addEvent to that button
+  //addEvent to that button
 
 }
 
@@ -328,11 +328,11 @@ function makeCompleteTable(pageHeader) {
 
       // add row handler
       for (var i = 1; i < infoTable.table[0].rows.length; i++) {
-        infoTable.table[0].rows[i].addEventListener('click', function() {
+        infoTable.table[0].rows[i].addEventListener('click', function () {
           callHtmlFile(headerInfo[pageHeader].viewPage)
         })
       }
-    
+
       // create pagination button
       var currentPage = 1
       let pagination = document.getElementById('pagination')
@@ -370,7 +370,7 @@ function makeCompleteTable(pageHeader) {
       colNameDropdown.addEventListener('change', function () {
         var keyword = document.getElementById('searchField').value
         console.log(keyword)
-        if (keyword.length != 0) {  
+        if (keyword.length != 0) {
           infoTable.clearTable(1)
           infoTable.loadTable(0, true)
           infoTable.search(colNameDropdown.value, keyword)
@@ -481,6 +481,19 @@ class Table {
           }
         }
 
+      }
+    }
+    var alter = 1
+    for (i = 0; i < tr.length; i++) {
+      if (tr[i].style.display != 'none') {
+        if (alter == 0) {
+          tr[i].style.backgroundColor = '#FFFFFF';
+          alter += 1
+        }
+        else {
+          tr[i].style.backgroundColor = '#EEEEEE';
+          alter -= 1
+        }
       }
     }
   }
