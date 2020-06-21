@@ -375,6 +375,10 @@ function makeCompleteTable(pageHeader) {
           infoTable.loadTable(0, true)
           infoTable.search(colNameDropdown.value, keyword)
         }
+        else {
+          infoTable.clearTable(1)
+          infoTable.loadTable()
+        }
       })
       document.getElementById('searchSubmit').addEventListener('click', function (event) {
         event.preventDefault()
