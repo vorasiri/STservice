@@ -32,8 +32,6 @@ p {
     font-weight: bold;
 }
 
-/* The Modal (background) */
-
 input[type=submit] {
     background-color: #FF9800;
     color: white;
@@ -56,6 +54,24 @@ input[type=submit] {
 }
 
 .btn {
+    background-color: #FF9800;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12pt;
+    width: 130px;
+    height: auto;
+    padding: 5px 0;
+}
+
+button:disabled {
+    background-color: #bdbdbd;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12pt;
     width: 130px;
     height: auto;
     padding: 5px 0;
@@ -303,7 +319,7 @@ table {
 }
 
 .qty {
-    margin-left: 300px;
+    margin-left: 500px;
 }
 
 .total-price {
@@ -317,4 +333,14 @@ table {
 textarea {
     width: 95%;
     height: 60px;
+}
+
+input:read-only {
+    pointer-events: none;
+    background-color: #EEEEEE;
+}
+
+textarea:read-only {
+    pointer-events: none;
+    background-color: #EEEEEE;
 }

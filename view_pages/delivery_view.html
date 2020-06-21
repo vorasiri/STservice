@@ -16,7 +16,7 @@
                         <tr>
                             <td>วันที่-เวลา ขาย</td>
                             <td>
-                                <input type="datetime" id="purchaseDate" name="purchaseDate">
+                                <input type="datetime" id="purchaseDate" name="purchaseDate" readonly>
                             </td>
                         </tr>
                         <tr>
@@ -27,6 +27,7 @@
                         <tr>
                             <td>รหัสพนักงาน</td>
                             <td>
+                                <!-- input the pk to search -->
                                 <input type="number" id="staffID" name="staffID">
                             </td>
                         </tr>
@@ -34,7 +35,7 @@
                             <!-- display only -->
                             <td>ชื่อพนักงาน</td>
                             <td>
-                                <input type="text" id="staffName" name="staffName">
+                                <input type="text" id="staffName" name="staffName" readonly>
                             </td>
                         </tr>
                         <tr>
@@ -45,14 +46,12 @@
                         <tr>
                             <td>ยอดรวมการชำระเงิน</td>
                             <td>
-                                <!-- edit here -->
                                 <input type="number" id="totalSpent" name="totalSpent">
                             </td>
                         </tr>
                         <tr>
                             <td>จำนวนเงินที่จ่าย/วางมัดจำ</td>
                             <td>
-                                <!-- edit here -->
                                 <input type="number" id="totalPaid" name="totalPaid">
                             </td>
                         </tr>
@@ -64,17 +63,15 @@
                     <p>การนัดหมาย</p>
                     <table>
                         <tr>
-                            <!-- display only -->
                             <td>เลขที่ใบจัดส่ง</td>
                             <td>
-                                <input type="number" id="deliveryJobID" name="deliveryJobID"> <!-- auto generate -->
+                                <input type="number" id="deliveryJobID" name="deliveryJobID" readonly> <!-- auto generate -->
                             </td>
                         </tr>
                         <tr>
-                            <!-- display only -->
                             <td>วันที่-เวลา การนัดหมาย</td>
                             <td>
-                                <input type="datetime" id="appointmentDate" name="appointmentDate">
+                                <input type="datetime" id="appointmentDate" name="appointmentDate" readonly>
                             </td>
                         </tr>
                         <tr>
@@ -86,7 +83,6 @@
                             </td>
                         </tr>
                         <tr>
-                            <!-- display only -->
                             <td>รหัสพนักงาน</td>
                             <td>
                                 <input type="number" id="staffID" name="staffID">
@@ -96,7 +92,7 @@
                             <!-- display only -->
                             <td>ชื่อพนักงาน</td>
                             <td>
-                                <input type="text" id="staffName" name="staffName">
+                                <input type="text" id="staffName" name="staffName" readonly>
                             </td>
                         </tr>
                     </table>
@@ -106,22 +102,20 @@
         <div class="row">
             <div class="customerInfo">
                 <p>ข้อมูลลูกค้า</p>
+                <!-- display only -->
                 <table>
                     <tr>
                         <td>
                             รหัสลูกค้า
                         </td>
                         <td>
-                            <!-- display only -->
-                            <input type="number" class="table-field" id="customerID" name="customerID">
+                            <input type="number" class="table-field" id="customerID" name="customerID" readonly>
                         </td>
                         <td>
-                            <!-- disable button -->
-                            <input class="btn" type="submit" value="ค้นหาลูกค้า" id="customerSearchButton">
+                            <button class="btn" type="submit" id="customerSearchButton" disabled>ค้นหาลูกค้า</button>
                         </td>
                         <td>
-                            <!-- disable button -->
-                            <input class="btn" type="submit" value="เพิ่มลูกค้าใหม่">
+                            <button class="btn" type="submit" id="customerAddButton" disabled>เพิ่มลูกค้าใหม่</button>
                         </td>
                     </tr>
                     <tr>
@@ -129,15 +123,13 @@
                             ชื่อ-นามสกุล ลูกค้า
                         </td>
                         <td>
-                            <!-- display only -->
-                            <input type="text" class="table-field" id="customerName" name="customerName">
+                            <input type="text" class="table-field" id="customerName" name="customerName" readonly>
                         </td>
                         <td>
                             หมายเลขโทรศัพท์
                         </td>
                         <td>
-                            <!-- display only -->
-                            <input type="text" class="table-field" id="customerTel" name="customerTel">
+                            <input type="text" class="table-field" id="customerTel" name="customerTel" readonly>
                         </td>
                     </tr>
                     <tr>
@@ -145,8 +137,7 @@
                             ที่อยู่
                         </td>
                         <td colspan="3">
-                            <!-- display only -->
-                            <textarea id="customerAddress" name="customerAddress"></textarea>
+                            <textarea id="customerAddress" name="customerAddress" readonly></textarea>
                         </td>
                     </tr>
                 </table>
@@ -155,7 +146,7 @@
         <div class="row">
             <div class="productInfo">
                 <p>รายละเอียดสินค้า</p>
-                <table>
+                <table class="product-table">
                     <tr>
                         <th>สินค้า</th>
                         <th>ยี่ห้อ</th>
@@ -183,19 +174,19 @@
                 <input class="add-btn" type="submit" value="เพิ่ม">
                 <div class="qty">
                     <span>จำนวนสินค้า</span>
-                    <input type="number" id="productQty" name="productQty">
+                    <span id="productQty" name="productQty">0</span>
                     <span>ชิ้น</span>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="deliveryallationInfo">
-                <p>อุปกรณ์ที่ใช้ในการจัดส่ง เพิ่มเติม</p>
+            <div class="installationInfo">
+                <p>อุปกรณ์ที่ใช้ในการติดตั้ง เพิ่มเติม</p>
                 <input type="radio" id="productEquip" name="productEquip">
                 <label for="productEquip">ไม่มี</label>
                 <input type="radio" id="productEquip" name="productEquip">
                 <label for="productEquip">มี</label>
-                <table>
+                <table class="product-table">
                     <tr>
                         <th>รหัสอุปกรณ์</th>
                         <th>ชื่ออุปกรณ์</th>
@@ -206,7 +197,7 @@
                             <input type="number" class="table-field" id="equipmentID" name="equipmentID">
                         </td>
                         <td>
-                            <input type="text" class="table-field" id="equipmentName" name="equipmentName">
+                            <input type="text" class="table-field-long" id="equipmentName" name="equipmentName" readonly>
                         </td>
                         <td>
                             <input type="number" class="table-field" id="equipmentQty" name="equipmentQty">
@@ -216,7 +207,7 @@
                 <input class="add-btn" type="submit" value="เพิ่ม">
                 <div class="qty">
                     <span>จำนวนอุปกรณ์</span>
-                    <input type="number" id="equipQty" name="equipQty">
+                    <span id="equipQty" name="equipQty">0</span>
                     <span>ชิ้น</span>
                 </div>
             </div>
@@ -234,13 +225,12 @@
                             </td>
                             <td colspan="2">
                                 <!-- display only -->
-                                <textarea id="deliveryLocation" name="deliveryLocation"></textarea>
+                                <textarea id="deliveryLocation" name="deliveryLocation" readonly></textarea>
                             </td>
                         </tr>
                         <tr>
                             <td>ค่าจัดส่ง</td>
                             <td colspan="2">
-                                <!-- display only -->
                                 <span id="deliveryFee" name="deliveryFee" class="total-price">0</span>
                             </td>
                             <td>
@@ -250,7 +240,6 @@
                         <tr>
                             <td>ราคาอุปกรณ์ทั้งหมด</td>
                             <td colspan="2">
-                                <!-- display only -->
                                 <span id="equipTotalPrice" name="equipTotalPrice" class="total-price">0</span>
                             </td>
                             <td>
@@ -272,7 +261,6 @@
                             <h3>ยอดรวมการชำระเงิน</h3>
                         </td>
                         <td>
-                            <!-- display only -->
                             <h3 id="totalSpent" name="totalSpent">0</h3>
                         </td>
                         <td>
@@ -284,7 +272,6 @@
                             <h3>จำนวนเงินที่จ่าย/วางมัดจำ</h3>
                         </td>
                         <td>
-                            <!-- display only -->
                             <h3 id="totalPaid" name="totalPaid">0</h3>
                         </td>
                         <td>
@@ -296,7 +283,6 @@
                             <h3>จำนวนเงินที่ชำระในการจัดส่ง</h3>
                         </td>
                         <td>
-                            <!-- display only -->
                             <h3 id="deliveryCashOn" name="deliveryCashOn">0</h3>
                         </td>
                         <td>
