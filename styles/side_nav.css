@@ -95,7 +95,7 @@ body {
 
 /* Add an active class to the active dropdown button */
 
-.dropdown-btn:active {
+.dropdown-btn.active {
     background-color: #FF9800;
     color: white;
 }
