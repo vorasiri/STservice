@@ -1,11 +1,13 @@
 {
     "ข้อมูลบริการซ่อม": {
       "form": "forms/repairing_form.html",
+      "viewPage": "view_pages/repairing_view.html",
       "table": "info_repairing",
       "query": "SELECT repairing_job_id, repairing_status, repairing_receive, customer_name, customer_tel, repairing_product, brand_name AS repairing_brand, repairing_model, repairing_failure FROM info_repairing i JOIN customers c ON i.repairing_customer = c.customer_id JOIN brands b ON i.repairing_brand = b.brand_id"
     },
     "ข้อมูลการคืนสินค้า": {
       "form": "forms/returning_form.html",
+      "viewPage": "view_pages/returning_view.html",
       "table": "info_returning",
       "query": "SELECT returning_id, returning_product, brand_name AS returning_brand, returning_model, returning_failure, returning_compensate_method FROM info_returning i JOIN brands b ON i.returning_brand = b.brand_id"
     },
@@ -61,13 +63,23 @@
     "รายการอะไหล่": {
       "form": "forms/sp_form.html",
       "table": "spare_parts",
-      "import": "forms/import_form.html",
       "query": ""
     },
     "รายการอุปกรณ์": {
       "form": "forms/equipment_form.html",
       "table": "equipments",
-      "import": "forms/import_form.html",
+      "query": ""
+    },
+    "importThingSP": {
+      "form": "forms/equipment_form.html",
+      "viewPage": "view_pages/import_view.html",
+      "table": "invoice_sp",
+      "query": ""
+    },
+    "importThingEQ": {
+      "form": "forms/equipment_form.html",
+      "viewPage": "view_pages/import_view.html",
+      "table": "invoice_equip",
       "query": ""
     }
   }

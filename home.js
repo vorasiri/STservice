@@ -81,90 +81,13 @@ Array.from(allNavButton).forEach(navButton => {
         document.getElementById('pageHeader').innerHTML = e.target.innerText;
       }
       document.getElementById('addButton').addEventListener('click', function () {
-        callHtmlFile(headerInfo[pageHeader].form)
-        loadFunctionalElements()
+        callHtmlFile(headerInfo[pageHeader].form, 1)
       });
       document.getElementById('importButton').addEventListener('click', function () {
-        callHtmlFile(headerInfo[pageHeader].import)
-        loadFunctionalElements()
+        callHtmlFile('info_page.html', 2, pageHeader)
       });
 
-      mysqlFetching(pageHeader, function (err, result, field) {
-        if (err) {
-          // error handling code goes here
-          console.log("ERROR : ", err);
-        } else {
-          // code to execute on data retrieval
-          console.log("result from db is : ", result);
-          let infoTable = new Table('#infoTable', 30, result, field);
-
-          infoTable.clearTable()
-          infoTable.loadField()
-          infoTable.loadTable()
-
-          // add row handler
-          for (var i = 1; i < infoTable.table[0].rows.length; i++) {
-            infoTable.table[0].rows[i].addEventListener('click', function() {
-              callHtmlFile(headerInfo[pageHeader].viewPage)
-            })
-          }
-        
-          // create pagination button
-          var currentPage = 1
-          let pagination = document.getElementById('pagination')
-          pagination.appendChild(aTag('&laquo;')).addEventListener('click', function () {
-            if (currentPage != 1)
-              currentPage--;
-          })
-          console.log(infoTable)
-          for (var i = 1; i <= infoTable.totalPage; i++) {
-            pagination.appendChild(aTag(`${i}`)).addEventListener('click', function () {
-              currentPage = parseInt(this.innerHTML);
-            })
-          }
-          pagination.appendChild(aTag('&raquo;')).addEventListener('click', function () {
-            if (currentPage != infoTable.totalPage)
-              currentPage++;
-          })
-          pagination.addEventListener('click', function () {
-            infoTable.clearTable(1)
-            infoTable.loadTable(currentPage)
-            highlightPageNumber(pagination, currentPage)
-          })
-          highlightPageNumber(pagination, currentPage)
-
-          // fill up options in dropdown
-          let colNameDropdown = document.getElementById('searchDropdown');
-          for (var i = 0; i < infoTable.field.length; i++) {
-            var opt = document.createElement('option');
-            opt.appendChild(document.createTextNode(`${thaiTranslate[0][infoTable.field[i].name]}`));
-            opt.value = `${infoTable.field[i].name}`;
-            colNameDropdown.appendChild(opt);
-          }
-
-          // event in search button
-          colNameDropdown.addEventListener('change', function () {
-            var keyword = document.getElementById('searchField').value
-            console.log(keyword)
-            if (keyword.length != 0) {  
-              infoTable.clearTable(1)
-              infoTable.loadTable(0, true)
-              infoTable.search(colNameDropdown.value, keyword)
-            }
-          })
-          document.getElementById('searchSubmit').addEventListener('click', function (event) {
-            event.preventDefault()
-            var keyword = document.getElementById('searchField').value
-            console.log(keyword)
-            if (keyword.length != 0) {
-              infoTable.clearTable(1)
-              infoTable.loadTable(0, true)
-              infoTable.search(colNameDropdown.value, keyword)
-            }
-          })
-        }
-
-      });
+      makeCompleteTable(pageHeader)
 
     })
   })
@@ -249,12 +172,29 @@ function mysqlFetchingNotification(targetTable, i, callback) {
 }
 
 // call html file to id 'mainContent'
-function callHtmlFile(filename) {
+function callHtmlFile(filename, mode = 0, pageHeader = '') {
   console.log(filename)
   fs.readFile(filename.toString(), function (err, data) {
     document.getElementById('mainContent').innerHTML = data.toString();
+    if (mode == 1)
+      loadFunctionalElements()
+    else if(mode == 2)
+      loadExInfoPage(pageHeader)
   })
 };
+
+// import thing
+function loadExInfoPage(pageHeader) {
+  if(pageHeader == 'รายการอะไหล่')
+    document.getElementById('pageHeader').innerHTML = 'import...thing SP IDK'
+  else
+    document.getElementById('pageHeader').innerHTML = 'import...thing EQ IDK'
+  document.getElementById('addButton').addEventListener('click', function () {
+    callHtmlFile(headerInfo['importThingSP'].form) // <- location of import form.html
+    //pls make it dynamic, read json for more info
+  });
+  makeCompleteTable('importThingSP') // <- to json/ need query
+}
 
 // Part form //
 // modal function for modalID
@@ -265,6 +205,7 @@ function showModal(modalID) {
 
 function loadFunctionalElements(){
   if (document.getElementById('customerSearchButton')) {
+    console.log('try load up modal')
     document.getElementById('customerSearchButton').addEventListener('click', function (event) {
       event.preventDefault()
       showModal('searchModal')
@@ -352,6 +293,85 @@ function highlightPageNumber(pagination, pageNumber) {
 }
 
 // table related
+function makeCompleteTable(pageHeader) {
+  mysqlFetching(pageHeader, function (err, result, field) {
+    if (err) {
+      // error handling code goes here
+      console.log("ERROR : ", err);
+    } else {
+      // code to execute on data retrieval
+      console.log("result from db is : ", result);
+      let infoTable = new Table('#infoTable', 30, result, field);
+
+      infoTable.clearTable()
+      infoTable.loadField()
+      infoTable.loadTable()
+
+      // add row handler
+      for (var i = 1; i < infoTable.table[0].rows.length; i++) {
+        infoTable.table[0].rows[i].addEventListener('click', function() {
+          callHtmlFile(headerInfo[pageHeader].viewPage)
+        })
+      }
+    
+      // create pagination button
+      var currentPage = 1
+      let pagination = document.getElementById('pagination')
+      pagination.appendChild(aTag('&laquo;')).addEventListener('click', function () {
+        if (currentPage != 1)
+          currentPage--;
+      })
+      console.log(infoTable)
+      for (var i = 1; i <= infoTable.totalPage; i++) {
+        pagination.appendChild(aTag(`${i}`)).addEventListener('click', function () {
+          currentPage = parseInt(this.innerHTML);
+        })
+      }
+      pagination.appendChild(aTag('&raquo;')).addEventListener('click', function () {
+        if (currentPage != infoTable.totalPage)
+          currentPage++;
+      })
+      pagination.addEventListener('click', function () {
+        infoTable.clearTable(1)
+        infoTable.loadTable(currentPage)
+        highlightPageNumber(pagination, currentPage)
+      })
+      highlightPageNumber(pagination, currentPage)
+
+      // fill up options in dropdown
+      let colNameDropdown = document.getElementById('searchDropdown');
+      for (var i = 0; i < infoTable.field.length; i++) {
+        var opt = document.createElement('option');
+        opt.appendChild(document.createTextNode(`${thaiTranslate[0][infoTable.field[i].name]}`));
+        opt.value = `${infoTable.field[i].name}`;
+        colNameDropdown.appendChild(opt);
+      }
+
+      // event in search button
+      colNameDropdown.addEventListener('change', function () {
+        var keyword = document.getElementById('searchField').value
+        console.log(keyword)
+        if (keyword.length != 0) {  
+          infoTable.clearTable(1)
+          infoTable.loadTable(0, true)
+          infoTable.search(colNameDropdown.value, keyword)
+        }
+      })
+      document.getElementById('searchSubmit').addEventListener('click', function (event) {
+        event.preventDefault()
+        var keyword = document.getElementById('searchField').value
+        console.log(keyword)
+        if (keyword.length != 0) {
+          infoTable.clearTable(1)
+          infoTable.loadTable(0, true)
+          infoTable.search(colNameDropdown.value, keyword)
+        }
+      })
+    }
+
+  });
+}
+
 class Table {
   constructor(jQueryTableID, pageSize, fetchResult, fetchField) {
     this.table = $(jQueryTableID)
