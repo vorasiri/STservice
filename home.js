@@ -205,9 +205,9 @@ function callHtmlFile(filename, mode = 0, pageHeader = '') {
 // import thing
 function loadExInfoPage(pageHeader) {
   if (pageHeader == 'รายการอะไหล่')
-    document.getElementById('pageHeader').innerHTML = 'import...thing SP IDK'
+    document.getElementById('pageHeader').innerHTML = 'รับสินค้า อะไหล่'
   else
-    document.getElementById('pageHeader').innerHTML = 'import...thing EQ IDK'
+    document.getElementById('pageHeader').innerHTML = 'รับสินค้า อุปกรณ์'
   document.getElementById('addButton').addEventListener('click', function () {
     callHtmlFile(headerInfo['importThingSP'].form) // <- location of import form.html
     //pls make it dynamic, read json for more info
