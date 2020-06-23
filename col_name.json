@@ -103,5 +103,17 @@
         "supplier_type",
         "supplier_name",
         "supplier_tel"
+    ],
+    "invoice_sp": [
+        "invsp_id",
+        "invsp_date",
+        "invsp_supplier",
+        "invsp_total_cost"
+    ],
+    "invoice_equip": [
+        "invequip_id",
+        "invequip_date",
+        "invequip_supplier",
+        "invequip_total_cost"
     ]
 }

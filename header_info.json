@@ -70,14 +70,14 @@
       "table": "equipments",
       "query": ""
     },
-    "importThingSP": {
-      "form": "forms/equipment_form.html",
+    "รับสินค้า อะไหล่": {
+      "form": "forms/import_form.html",
       "viewPage": "view_pages/import_view.html",
       "table": "invoice_sp",
       "query": ""
     },
-    "importThingEQ": {
-      "form": "forms/equipment_form.html",
+    "รับสินค้า อุปกรณ์": {
+      "form": "forms/import_form.html",
       "viewPage": "view_pages/import_view.html",
       "table": "invoice_equip",
       "query": ""

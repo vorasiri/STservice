@@ -108,33 +108,6 @@ document.getElementById('logoutButton').addEventListener('click', function (even
   logout()
 })
 
-//fetched data from mysql
-function mysqlFetching(pageHeader, callback) {
-  var query = ''
-  if (contains(headerInfo[pageHeader].table, ['info', 'service_partners'])) {
-    query = `${headerInfo[pageHeader].query}`
-  }
-  else {
-    let colNameArray = colName[headerInfo[pageHeader].table]
-    var colNameString = ''
-    for (var i = 0; i < colNameArray.length; i++) {
-      colNameString += colNameArray[i]
-      if (i != colNameArray.length - 1)
-        colNameString += ','
-    }
-    query = `SELECT ${colNameString} FROM ${headerInfo[pageHeader].table}`
-    console.log(query)
-  }
-  con.query(query, function (err, result, field) {
-    console.log(`infoPage fetching table: ${headerInfo[pageHeader].table}`)
-    if (err) {
-      callback(err, null, null);
-    }
-    else
-      callback(null, result, field);
-  })
-}
-
 // notification 
 function refreshNotificationBar() {
   let notificationBar = $('#notificationBar')
@@ -262,6 +235,8 @@ function callHtmlFile(filename, mode = 0, pageHeader = '') {
       loadFunctionalElements()
     else if (mode == 2)
       loadExInfoPage(pageHeader)
+    else if (mode == 3)
+    document.getElementById('pageHeader').innerHTML = pageHeader
   })
 };
 
@@ -272,10 +247,9 @@ function loadExInfoPage(pageHeader) {
   else
     document.getElementById('pageHeader').innerHTML = 'รับสินค้า อุปกรณ์'
   document.getElementById('addButton').addEventListener('click', function () {
-    callHtmlFile(headerInfo['importThingSP'].form) // <- location of import form.html
-    //pls make it dynamic, read json for more info
+    callHtmlFile(headerInfo[`${document.getElementById('pageHeader').innerHTML}`].form, 3, `${document.getElementById('pageHeader').innerHTML}`)
   });
-  makeCompleteTable('importThingSP') // <- to json/ need query
+  makeCompleteTable(`${document.getElementById('pageHeader').innerHTML}`)
 }
 
 // Part form //
@@ -456,6 +430,33 @@ function makeCompleteTable(pageHeader) {
     }
 
   });
+}
+
+//fetched data from mysql
+function mysqlFetching(pageHeader, callback) {
+  var query = ''
+  if (contains(headerInfo[pageHeader].table, ['info', 'service_partners'])) {
+    query = `${headerInfo[pageHeader].query}`
+  }
+  else {
+    let colNameArray = colName[headerInfo[pageHeader].table]
+    var colNameString = ''
+    for (var i = 0; i < colNameArray.length; i++) {
+      colNameString += colNameArray[i]
+      if (i != colNameArray.length - 1)
+        colNameString += ','
+    }
+    query = `SELECT ${colNameString} FROM ${headerInfo[pageHeader].table}`
+    console.log(query)
+  }
+  con.query(query, function (err, result, field) {
+    console.log(`infoPage fetching table: ${headerInfo[pageHeader].table}`)
+    if (err) {
+      callback(err, null, null);
+    }
+    else
+      callback(null, result, field);
+  })
 }
 
 class Table {
