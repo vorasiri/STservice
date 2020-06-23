@@ -151,25 +151,88 @@ function refreshNotificationBar() {
           notificationBar.append('<h3>งานติดตั้ง</h3>');
         }
         notificationBar.append(`${notification.header[i]}`);
-        for (var i = 0; i < result.length; i++) {
-          let resultValue = Object.values(result[i])
-          notificationBar.append(`<div class="card">
-          <div class="jobID">
-              <b>${resultValue[0]}</b>
-          </div>
-          <div class="jobDetail">
-              วันที่-เวลา ${resultValue[1].format("dd/mm/yyyy HH:MM")}<br>
-              ชื่อ-นามสกุล ${resultValue[2]}<br>
-              หมายเลขโทรศัพท์ ${resultValue[3]}<br>
-              ${resultValue[4]}/${resultValue[5]}/<br>${resultValue[6]} <br>
-              พนักงานติดตั้ง ${resultValue[7]}
-          </div>
-          <div class="groupbtn">
-              <button class="editbtn">แก้ไข</button>
-              <button class="checkbtn">&#10003;</button>
-              <button class="crossbtn">&#10005;</button>
-          </div>
-          </div>`);
+        for (var j = 0; j < result.length; j++) {
+          let resultValue = Object.values(result[j])
+          if (i == 0) { // deli
+            notificationBar.append(`<div class="card">
+            <div class="jobID">
+                <b>${resultValue[0]}</b>
+            </div>
+            <div class="jobDetail">
+                วันที่-เวลา ${resultValue[1].format("dd/mm/yyyy HH:MM")}<br>
+                ชื่อ-นามสกุล ${resultValue[2]}<br>
+                หมายเลขโทรศัพท์ ${resultValue[3]}<br>
+                ${resultValue[4]}/${resultValue[5]}/<br>${resultValue[6]} <br>
+                พนักงานติดตั้ง ${resultValue[7]}
+            </div>
+            <div class="groupbtn">
+                <button class="editbtn">แก้ไข</button>
+                <button class="checkbtn">&#10003;</button>
+                <button class="crossbtn">&#10005;</button>
+            </div>
+            </div>`);
+          }
+          else if (i < 4) { // installing
+            notificationBar.append(`<div class="card">
+            <div class="jobID">
+                <b>${resultValue[0]}</b>
+            </div>
+            <div class="jobDetail">
+                นัดหมาย:${resultValue[1].format("dd/mm/yyyy HH:MM")}<br>
+                ${resultValue[2]}<br>
+                ${resultValue[3]}<br>
+                ${resultValue[4]}/${resultValue[5]}<br>
+                พนักงานติดตั้ง:${resultValue[6]}
+            </div>
+            <div class="groupbtn">
+                <button class="editbtn">แก้ไข</button>
+                <button class="checkbtn">&#10003;</button>
+                <button class="crossbtn">&#10005;</button>
+            </div>
+            </div>`);
+          }
+          else if (i == 4) { // repair
+            notificationBar.append(`<div class="card">
+            <div class="jobID">
+                <b>${resultValue[0]}</b>
+            </div>
+            <div class="jobDetail">
+                วันที่-เวลา ${resultValue[1].format("dd/mm/yyyy HH:MM")}<br>
+                ชื่อ-นามสกุล ${resultValue[2]}<br>
+                หมายเลขโทรศัพท์ ${resultValue[3]}<br>
+                ${resultValue[4]}/${resultValue[5]}/<br>${resultValue[6]} <br>
+                พนักงานติดตั้ง ${resultValue[7]}
+            </div>
+            <div class="groupbtn">
+                <button class="editbtn">แก้ไข</button>
+                <button class="checkbtn">&#10003;</button>
+                <button class="crossbtn">&#10005;</button>
+            </div>
+            </div>`);
+          }
+          else if (i == 5) { // return
+            notificationBar.append(`<div class="card">
+            <div class="jobID">
+                <b>${resultValue[0]}</b>
+            </div>
+            <div class="jobDetail">
+                วันที่-เวลา ${resultValue[1].format("dd/mm/yyyy HH:MM")}<br>
+                ชื่อ-นามสกุล ${resultValue[2]}<br>
+                หมายเลขโทรศัพท์ ${resultValue[3]}<br>
+                ${resultValue[4]}/${resultValue[5]}/<br>${resultValue[6]} <br>
+                พนักงานติดตั้ง ${resultValue[7]}
+            </div>
+            <div class="groupbtn">
+                <button class="editbtn">แก้ไข</button>
+                <button class="checkbtn">&#10003;</button>
+                <button class="crossbtn">&#10005;</button>
+            </div>
+            </div>`);
+          }
+
+          if (result.length > 1 && j != result.length - 1) {
+            notificationBar.append(`<br><br>`)
+          }
         }
         console.log(result)
       }
