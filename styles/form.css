@@ -53,6 +53,20 @@ input[type=submit] {
     padding: 5px 0;
 }
 
+.delete-btn {
+    float: right;
+    margin-right: 6%;
+    background-color: #F10000;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12pt;
+    width: 130px;
+    height: auto;
+    padding: 5px 0;
+}
+
 .btn {
     background-color: #FF9800;
     color: white;
@@ -276,6 +290,19 @@ table {
     padding: 5px 20px;
 }
 
+.compensation-method {
+    width: 60%;
+    border-radius: 5px;
+    background-color: #f0d6af;
+    padding: 5px 20px;
+}
+
+.compensateCN, .compensateProduct {
+    border-radius: 5px;
+    background-color: #f0d6af;
+    padding: 5px 20px;
+}
+
 .summaryPayment {
     border-radius: 5px;
     /* background-color: #d2d6d8; */
@@ -342,5 +369,9 @@ input:read-only {
 
 textarea:read-only {
     pointer-events: none;
+    background-color: #EEEEEE;
+}
+
+.select:disabled {
     background-color: #EEEEEE;
 }

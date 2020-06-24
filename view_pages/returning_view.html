@@ -7,6 +7,7 @@
 
 <body>
     <h1 id="pageHeader">ข้อมูลการคืนสินค้า</h1>
+    <button class="delete-btn" id="deleteButton">ลบข้อมูล</button>
     <form action="#">
         <div class="row">
             <div class="initialInfo">
@@ -14,11 +15,12 @@
                     <tr>
                         <td>วันที่การบันทึกส่งคืน</td>
                         <td>
-                            <input type="datetime" id="recieveDate" name="recieveDate">
+                            <input type="datetime" id="recieveDate" name="recieveDate" readonly>
                         </td>
                         <td>เลขที่ส่งคืนบริษัท</td>
                         <td>
-                            <input type="number" id="deliveryJobID" name="deliveryJobID"> <!-- auto generate -->
+                            <input type="number" id="deliveryJobID" name="deliveryJobID" readonly>
+                            <!-- auto generate -->
                         </td>
                     </tr>
                 </table>
@@ -30,11 +32,11 @@
                     <tr>
                         <td>สินค้า</td>
                         <td>
-                            <input type="text" id="productName" name="productName">
+                            <input type="text" id="productName" name="productName" readonly>
                         </td>
                         <td>ยี่ห้อ</td>
                         <td>
-                            <select id="productBrand" class="dropdown-field" name="productBrand">
+                            <select id="productBrand" class="dropdown-field-short" name="productBrand" disabled>
                                 <option value="Brand">Product Brand</option>
                                 <!-- data from brand table -->
                             </select>
@@ -43,20 +45,89 @@
                     <tr>
                         <td>รุ่น</td>
                         <td>
-                            <input type="text" id="productModel" name="productModel">
+                            <input type="text" id="productModel" name="productModel" readonly>
                         </td>
                         <td>หมายเลขเครื่อง</td>
                         <td>
-                            <input type="text" id="productSN" name="productSN">
+                            <input type="text" id="productSN" name="productSN" readonly>
                         </td>
                     </tr>
                     <tr>
                         <td>คำอธิบายอาการ</td>
                         <td colspan="3">
-                            <textarea id="productFailure" name="productFailure"></textarea>
+                            <textarea id="productFailure" name="productFailure" readonly></textarea>
                         </td>
                     </tr>
                 </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="compensation-method">
+                <table>
+                    <tr>
+                        <td>
+                            <span>วิธีการชดเชย</span>
+                        </td>
+                        <td>
+                            <input type="radio" id="compensateMethod" name="compensateMethod" value="1" readonly>
+                            <label for="compensateMethod">โดยเอกสารใบลดหนี้</label>
+                        </td>
+                        <td>
+                            <input type="radio" id="compensateMethod" name="compensateMethod" value="2" readonly>
+                            <label for="compensateMethod">โดยสินค้าชดเชย</label>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <div class="compensateCN">
+                    <table>
+                        <tr>
+                            <td>วันที่เอกสารการชดเชย</td>
+                            <td>
+                                <input type="date" id="compensateDate" name="compensateDate" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>เอกสารการชดเชย</td>
+                            <td>
+                                <input type="text" id="compensateID" name="compensateID" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>จำนวนเงินชดเชย</td>
+                            <td>
+                                <input type="number" id="compensateAmount" name="compensateAmount" readonly>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="column">
+                <div class="compensateProduct">
+                    <table>
+                        <tr>
+                            <td>วันที่เอกสารการชดเชย</td>
+                            <td>
+                                <input type="date" id="compensateDate" name="compensateDate" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>เอกสารการชดเชย</td>
+                            <td>
+                                <input type="text" id="compensateID" name="compensateID" readonly>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>หมายเลขเครื่อง</td>
+                            <td>
+                                <input type="text" id="compensateSN" name="compensateSN" readonly>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
         <input class="submit-btn" type="submit" value="บันทึกข้อมูล">
