@@ -25,7 +25,7 @@
                         <tr>
                             <td style="font-size: 11pt;">วันที่หมดอายุการรับประกัน: </td>
                             <td>
-                                <input type="datetime" id="warrantyDate" name="warrantyDate">
+                                <input type="date" id="warrantyDate" name="warrantyDate">
                             </td>
                         </tr>
                         <tr>
@@ -134,32 +134,13 @@
                             <div id="searchModal" class="modal">
                                 <div class="modal-content">
                                     <!-- searching by id, name, phone number  -->
-                                    <table>
-                                        <tr>
-                                            <td>
-                                                รหัสลูกค้า
-                                            </td>
-                                            <td>
-                                                <input type="number" id="customerID" name="customerID">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                ชื่อ-นามสกุล ลูกค้า
-                                            </td>
-                                            <td>
-                                                <input type="text" id="customerName" name="customerName">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                หมายเลขโทรศัพท์
-                                            </td>
-                                            <td>
-                                                <input type="text" id="customerTel" name="customerTel">
-                                            </td>
-                                        </tr>
-                                    </table>
+                                    <span class="close">&times;</span>
+                                    <select id="searchDropdown" name="searchDropdown">
+                                        <option value="customerID">รหัสลูกค้า</option>
+                                        <option value="customerName">ชื่อ-นามสกุล ลูกค้า</option>
+                                        <option value="customerTel">หมายเลขโทรศัพท์</option>
+                                    </select>
+                                    <input type="search" id="searchField" name="searchField">
                                     <input class="btn" type="submit" value="ค้นหาลูกค้า">
                                 </div>
                             </div>
