@@ -145,17 +145,36 @@ function refreshNotificationBar() {
             </div>
             </div>`);
           }
-          else if (i < 4) { // installing
+          else if (i == 1 || i ==3) { // installing AC and WH
             notificationBar.append(`<div class="card">
             <div class="jobID">
-                <b>${resultValue[0]}</b>
+                <b>${resultValue[0]} ${notification.installingType[resultValue[1]]}</b>
             </div>
             <div class="jobDetail">
-                นัดหมาย:${resultValue[1].format("dd/mm/yyyy HH:MM")}<br>
-                ${resultValue[2]}<br>
+                นัดหมาย:${resultValue[2].format("dd/mm/yyyy HH:MM")}<br>
                 ${resultValue[3]}<br>
-                ${resultValue[4]}/${resultValue[5]}<br>
-                พนักงานติดตั้ง:${resultValue[6]}
+                ${resultValue[4]}<br>
+                ${resultValue[5]}/${resultValue[6]}<br>
+                พนักงานติดตั้ง:${resultValue[7]}
+            </div>
+            <div class="groupbtn">
+                <button class="editbtn">แก้ไข</button>
+                <button class="checkbtn">&#10003;</button>
+                <button class="crossbtn">&#10005;</button>
+            </div>
+            </div>`);
+          }
+          else if (i == 2) { // installing SAT
+            notificationBar.append(`<div class="card">
+            <div class="jobID">
+                <b>${resultValue[0]} ${notification.installingType[resultValue[1]]}</b>
+            </div>
+            <div class="jobDetail">
+                นัดหมาย:${resultValue[2].format("dd/mm/yyyy HH:MM")}<br>
+                ${resultValue[3]}<br>
+                ${resultValue[4]}<br>
+                ${resultValue[5]}/${resultValue[6]}/${resultValue[7]} = ${resultValue[8]}<br>
+                พนักงานติดตั้ง:${resultValue[9]}
             </div>
             <div class="groupbtn">
                 <button class="editbtn">แก้ไข</button>
