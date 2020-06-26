@@ -109,14 +109,18 @@ document.getElementById('logoutButton').addEventListener('click', function (even
 })
 
 // notification 
-function refreshNotificationBar() {
+refreshNotificationBar()
+async function refreshNotificationBar() {
   let notificationBar = $('#notificationBar')
   // clear the bar
   notificationBar.empty()
 
   // add
-  for (var i = 0; i < notification.initTable.length; i++) {
-    mysqlFetchingNotification(notification.initTable[i], i, function (err, result, field, i) {
+  for (var l = 0; l < notification.initTable.length; l++) {
+    try {
+      let promise = await mysqlFetchingNotification(notification.initTable[l], l)
+      let result = promise[0]
+      let i = promise[2]
 
       if (result.length > 0) {
         let installingTask = [notification.header[1], notification.header[2], notification.header[3]]
@@ -132,11 +136,11 @@ function refreshNotificationBar() {
                 <b>${resultValue[0]}</b>
             </div>
             <div class="jobDetail">
-                วันที่-เวลา ${resultValue[1].format("dd/mm/yyyy HH:MM")}<br>
-                ชื่อ-นามสกุล ${resultValue[2]}<br>
-                หมายเลขโทรศัพท์ ${resultValue[3]}<br>
+                นัดหมาย:${resultValue[1].format("dd/mm/yyyy HH:MM")}<br>
+                ${resultValue[2]}<br>
+                ${resultValue[3]}<br>
                 ${resultValue[4]}/${resultValue[5]}/<br>${resultValue[6]} <br>
-                พนักงานติดตั้ง ${resultValue[7]}
+                พนักงานติดตั้ง:${resultValue[7]}
             </div>
             <div class="groupbtn">
                 <button class="editbtn">แก้ไข</button>
@@ -145,7 +149,7 @@ function refreshNotificationBar() {
             </div>
             </div>`);
           }
-          else if (i == 1 || i ==3) { // installing AC and WH
+          else if (i == 1 || i == 3) { // installing AC and WH
             notificationBar.append(`<div class="card">
             <div class="jobID">
                 <b>${resultValue[0]} ${notification.installingType[resultValue[1]]}</b>
@@ -228,20 +232,26 @@ function refreshNotificationBar() {
         }
         console.log(result)
       }
-    })
-  }
-}
-refreshNotificationBar()
-
-function mysqlFetchingNotification(targetTable, i, callback) {
-  let query = `${notification[targetTable].query}`
-  con.query(query, function (err, result, field) {
-    console.log(`notification fetching table: ${targetTable}`)
-    if (err) {
-      callback(err, null, null, null);
     }
-    else
-      callback(null, result, field, i);
+    catch (err) {
+      console.log(err)
+    }
+
+  }
+  notificationBar.append(`<br><br><br>`)
+}
+
+function mysqlFetchingNotification(targetTable, i) {
+  return new Promise((resolve, reject) => {
+    let query = `${notification[targetTable].query}`
+    con.query(query, function (err, result, field) {
+      console.log(`notification fetching table: ${targetTable}`)
+      if (err) {
+        reject(err);
+      }
+      else
+        resolve([result, field, i]);
+    })
   })
 }
 
@@ -255,7 +265,7 @@ function callHtmlFile(filename, mode = 0, pageHeader = '') {
     else if (mode == 2)
       loadExInfoPage(pageHeader)
     else if (mode == 3)
-    document.getElementById('pageHeader').innerHTML = pageHeader
+      document.getElementById('pageHeader').innerHTML = pageHeader
   })
 };
 
