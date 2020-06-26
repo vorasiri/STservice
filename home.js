@@ -139,7 +139,7 @@ async function refreshNotificationBar() {
                 นัดหมาย:${resultValue[1].format("dd/mm/yyyy HH:MM")}<br>
                 ${resultValue[2]}<br>
                 ${resultValue[3]}<br>
-                ${resultValue[4]}/${resultValue[5]}/<br>${resultValue[6]} <br>
+                ${deliveryProductRead(resultValue[4], resultValue[5], resultValue[6])}
                 พนักงานติดตั้ง:${resultValue[7]}
             </div>
             <div class="groupbtn">
@@ -253,6 +253,20 @@ function mysqlFetchingNotification(targetTable, i) {
         resolve([result, field, i]);
     })
   })
+}
+
+function deliveryProductRead(product, brand, model) {
+  let spliter = ','
+  let productArray = product.split(spliter)
+  let brandArray = brand.split(spliter)
+  let modelArray = model.split(spliter)
+  
+  var notiString = ''
+  for (i = 0; i < productArray.length; i++) {
+    notiString += `${productArray[i]}/${brandArray[i]}/${modelArray[i]}<br>`
+  }
+
+  return notiString
 }
 
 // call html file to id 'mainContent'
