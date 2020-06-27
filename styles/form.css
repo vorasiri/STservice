@@ -214,8 +214,15 @@ table {
     padding: 5px 20px;
 }
 
-.deliveryInfo {
+.recieveingInfo {
     height: 280px;
+    border-radius: 5px;
+    background-color: #cacfd2;
+    padding: 5px 20px;
+}
+
+.deliveryInfo {
+    width: 90%;
     border-radius: 5px;
     background-color: #cacfd2;
     padding: 5px 20px;
@@ -246,6 +253,13 @@ table {
     width: 90%;
     border-radius: 5px;
     background-color: #cacfd2;
+    padding: 5px 20px;
+}
+
+.sparePartInfo {
+    width: 90%;
+    border-radius: 5px;
+    background-color: #f0d6af;
     padding: 5px 20px;
 }
 
@@ -285,6 +299,13 @@ table {
 }
 
 .additionInfo {
+    border-radius: 5px;
+    background-color: #f0d6af;
+    padding: 5px 20px;
+}
+
+.technician, .servicePartner {
+    width: 90%;
     border-radius: 5px;
     background-color: #f0d6af;
     padding: 5px 20px;

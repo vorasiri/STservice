@@ -55,26 +55,14 @@
                 </div>
             </div>
             <div class="column">
-                <div class="deliveryInfo">
-                    <!-- linking to delivery -->
-                    <p>การรับ-จัดส่งเครื่อง</p>
-                    <tr>
-                        <td>
-                            <input type="radio" id="productDeliver" name="productDeliver">
-                            <label for="productDeliver">ลูกค้านำมา</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="radio" id="productDeliver" name="productDeliver">
-                            <label for="productDeliver">รับจากบ้านของลูกค้า</label>
-                        </td>
-                    </tr>
+                <div class="recieveingInfo">
+                    <p>การลงข้อมูลรับเครื่องซ่อม</p>
                     <table>
                         <tr>
                             <td>เลขที่งานซ่อม</td>
                             <td>
-                                <input type="number" id="deliveryJobID" name="deliveryJobID" readonly> <!-- auto generate -->
+                                <input type="number" id="deliveryJobID" name="deliveryJobID" readonly>
+                                <!-- auto generate -->
                             </td>
                         </tr>
                         <tr>
@@ -83,19 +71,9 @@
                                 <input type="datetime" id="jobReceiveDate" name="jobReceiveDate">
                             </td>
                         </tr>
-                        <!-- enable if need pick up -->
-                        <tr>
-                            <td>วันที่-เวลา การนัดหมาย</td>
-                            <td>
-                                <input type="datetime" id="appointmentDate" name="appointmentDate">
-                            </td>
-                        </tr>
                         <tr>
                             <td>
-                                <span>พนักงานรับเครื่อง</span>
-                            </td>
-                            <td>
-                                <input class="add-btn" type="submit" value="เพิ่ม">
+                                <span>พนักงานลงข้อมูล</span>
                             </td>
                         </tr>
                         <tr>
@@ -113,6 +91,68 @@
                         </tr>
                     </table>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="deliveryInfo">
+                <!-- linking to delivery -->
+                <p>การรับ-จัดส่งเครื่อง</p>
+                <table>
+                    <tr>
+                        <td>
+                            <input type="radio" id="productDeliver" name="productDeliver" value="noDelivery">
+                            <label for="productDeliver">ลูกค้านำมา</label>
+                        </td>
+                        <td>
+                            <input type="radio" id="productDeliver" name="productDeliver" value="onlyPickUp">
+                            <label for="productDeliver">รับจากบ้านของลูกค้า</label>
+                        </td>
+                        <td>
+                            <input type="radio" id="productDeliver" name="productDeliver" value="pickUpAndDelivery">
+                            <label for="productDeliver">รับ-จัดส่งเครื่อง</label>
+                        </td>
+                    </tr>
+                    <!-- enable if need pick up -->
+                    <tr>
+                        <td>วันที่-เวลา การนัดหมาย</td>
+                        <td>
+                            <input type="datetime" id="appointmentDate" name="appointmentDate">
+                        </td>
+                        <td>วันที่-เวลา การนัดหมาย</td>
+                        <td>
+                            <input type="datetime" id="appointmentDate" name="appointmentDate">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <span>พนักงานรับเครื่อง</span>
+                        </td>
+                        <td colspan="2">
+                            <span>พนักงานจัดส่งเครื่อง</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>รหัสพนักงาน</td>
+                        <td>
+                            <input type="number" id="staffID" name="staffID">
+                        </td>
+                        <td>รหัสพนักงาน</td>
+                        <td>
+                            <input type="number" id="staffID" name="staffID">
+                        </td>
+                    </tr>
+                    <tr>
+                        <!-- display only -->
+                        <td>ชื่อพนักงาน</td>
+                        <td>
+                            <input type="text" id="staffName" name="staffName" readonly>
+                        </td>
+                        <td>ชื่อพนักงาน</td>
+                        <td>
+                            <input type="text" id="staffName" name="staffName" readonly>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
         <div class="row">
@@ -264,7 +304,7 @@
                 <input class="add-btn" type="submit" value="เพิ่ม">
                 <div class="qty">
                     <span>จำนวนอุปกรณ์</span>
-                    <input type="number" id="equipQty" name="equipQty">
+                    <span id="equipQty" name="equipQty">0</span>
                     <span>ชิ้น</span>
                 </div>
             </div>
