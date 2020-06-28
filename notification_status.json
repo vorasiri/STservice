@@ -30,45 +30,53 @@
       }
     },
     "info_returning": {
-      "query": "",
+      "query": "SELECT returning_id, returning_status, returning_product, brand_name AS returning_brand, returning_model, returning_failure, returning_date FROM info_returning i JOIN brands b ON i.returning_brand = b.brand_id WHERE returning_status != 'E'",
       "read": {
         "A0": {
           "text": "รอแจ้งบริษัท",
+          "task": "แจ้งบริษัทให้มารับ",
           "next": "B0",
           "prev": "A1"
         },
         "A1": {
           "text": "แจ้งไม่สำเร็จ",
+          "task": "แจ้งบริษัทให้มารับ",
           "next": "B0",
           "prev": "A1"
         },
         "B0": {
           "text": "รอส่งคืน",
+          "task": "ส่งคืนสินค้าให้บริษัท",
           "next": "A1",
           "prev": "B0"
         },
         "B1": {
           "text": "ส่งคืนแล้ว",
+          "task": "ส่งคืนสินค้าให้บริษัท",
           "next": "C0",
           "prev": "B1"
         },
         "C0": {
           "text": "กำลังติดตาม",
+          "task": "ติดตามการชดเชย",
           "next": "C0",
           "prev": "C1"
         },
         "C1": {
           "text": "รอบริษัทดำเนินการ",
+          "task": "ติดตามการชดเชย",
           "next": "C0",
           "prev": "C1"
         },
         "D1": {
           "text": "รอเอกสารชดเชย",
+          "task": "ลงรายละเอียดการชดเชย",
           "next": "E",
           "prev": "D1"
         },
         "D2": {
-          "text": "รอเอกสารชดเชย",
+          "text": "รอสินค้าชดเชย",
+          "task": "ลงรายละเอียดการชดเชย",
           "next": "E",
           "prev": "D2"
         },

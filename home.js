@@ -212,11 +212,10 @@ async function refreshNotificationBar() {
                 <b>${resultValue[0]}</b>
             </div>
             <div class="jobDetail">
-                วันที่-เวลา ${resultValue[1].format("dd/mm/yyyy HH:MM")}<br>
-                ชื่อ-นามสกุล ${resultValue[2]}<br>
-                หมายเลขโทรศัพท์ ${resultValue[3]}<br>
-                ${resultValue[4]}/${resultValue[5]}/<br>${resultValue[6]} <br>
-                พนักงานติดตั้ง ${resultValue[7]}
+                สถานะ:${notification[notification.initTable[i]].read[resultValue[1]].text}<br>
+                สิ่งที่ต้องทำ:${notification[notification.initTable[i]].read[resultValue[1]].task}<br>
+                ${resultValue[2]}/${resultValue[3]}/${resultValue[4]}<br>
+                อาการ:${resultValue[5]}
             </div>
             <div class="groupbtn">
                 <button class="editbtn">แก้ไข</button>
