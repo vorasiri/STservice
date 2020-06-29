@@ -238,12 +238,20 @@ async function refreshNotificationBar(updateStatus = false) {
             </div>
             </div>`);
           }
+          // get target row of that table
+          let jobID = notificationBar.children().last()[0].innerText.split('<br>')[0][0]
+          let currentTable = notification.initTable[i]
+          console.log(currentTable, jobID)
+          
+          // add event handler
+          notificationBar.children().last()[0].getElementsByClassName('editbtn')[0].addEventListener('click',() => {
+            
+          })
 
           if (result.length > 1 && j != result.length - 1) {
             notificationBar.append(`<br><br>`)
           }
         }
-        console.log(result)
       }
     }
     catch (err) {
