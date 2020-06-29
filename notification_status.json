@@ -1,5 +1,6 @@
 {
     "initTable": ["info_delivery", "info_installation_ac", "info_installation_sat", "info_installation_wh", "info_repairing", "info_returning"],
+    "updateTable": ["info_repairing", "info_returning"],
     "header": ["<h3>งานจัดส่ง</h3>","<h4>แอร์</h4>","<h4>จานดาวเทียม</h4>","<h4>เครื่องทำน้ำอุ่น</h4>","<h3>งานบริการซ่อม</h3>","<h3>การคืนสินค้า</h3>"],
     "installingType":{
       "0": "ติดตั้งใหม่",
@@ -21,6 +22,7 @@
     },
     "info_repairing": {
       "query": "",
+      "update": [""],
       "read": {
         "A0": {
           "text": "",
@@ -30,7 +32,10 @@
       }
     },
     "info_returning": {
-      "query": "SELECT returning_id, returning_status, returning_product, brand_name AS returning_brand, returning_model, returning_failure, returning_date FROM info_returning i JOIN brands b ON i.returning_brand = b.brand_id WHERE returning_status != 'E'",
+      "query": "SELECT returning_id, returning_status, returning_product, brand_name AS returning_brand, returning_model, returning_failure, returning_date FROM info_returning i JOIN brands b ON i.returning_brand = b.brand_id WHERE returning_status NOT IN ('E', 'A1', 'B1', 'C1')",
+      "update": ["UPDATE info_returning SET returning_status = 'A0' WHERE returning_status = 'A1' AND returning_date = CURDATE()",
+      "UPDATE info_returning SET returning_status = 'C0' WHERE returning_status = 'C1' AND returning_date = CURDATE()"
+      ],
       "read": {
         "A0": {
           "text": "รอแจ้งบริษัท",
@@ -41,7 +46,7 @@
         "A1": {
           "text": "แจ้งไม่สำเร็จ",
           "task": "แจ้งบริษัทให้มารับ",
-          "next": "B0",
+          "next": "B0",           
           "prev": "A1"
         },
         "B0": {

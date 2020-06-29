@@ -109,8 +109,22 @@ document.getElementById('logoutButton').addEventListener('click', function (even
 })
 
 // notification 
-refreshNotificationBar()
-async function refreshNotificationBar() {
+refreshNotificationBar(true)
+async function refreshNotificationBar(updateStatus = false) {
+  // update rows when condition meet
+  if (updateStatus) {
+    for (var l = 0; l < notification.updateTable.length; l++) {
+      for (var j = 0; j < notification[notification.updateTable[l]].update.length; j++) {
+        try {
+          await mysqlUpdatingNotification(notification[notification.updateTable[l]].update[j])
+        }
+        catch (err) {
+          console.log(err)
+        }
+      }
+    }
+  }
+
   let notificationBar = $('#notificationBar')
   // clear the bar
   notificationBar.empty()
@@ -254,12 +268,24 @@ function mysqlFetchingNotification(targetTable, i) {
   })
 }
 
+function mysqlUpdatingNotification(queryText) {
+  return new Promise((resolve, reject) => {
+    con.query(queryText, function (err) {
+      if (err) {
+        reject(err);
+      }
+      else
+        resolve();
+    })
+  })
+}
+
 function deliveryProductRead(product, brand, model) {
   let spliter = ','
   let productArray = product.split(spliter)
   let brandArray = brand.split(spliter)
   let modelArray = model.split(spliter)
-  
+
   var notiString = ''
   for (i = 0; i < productArray.length; i++) {
     notiString += `${productArray[i]}/${brandArray[i]}/${modelArray[i]}<br>`
