@@ -8,11 +8,11 @@ ipcRenderer.send('createMysqlCon')
 var con = remote.getGlobal("con");
 
 // Read json
-const thaiTranslate = require("./thai_translate.json")
-const headerInfo = require("./header_info.json")
-const colName = require("./col_name.json")
-const position = require("./position.json")
-const notification = require("./notification_status.json")
+const thaiTranslate = require("./json_information/thai_translate.json")
+const headerInfo = require("./json_information/header_info.json")
+const colName = require("./json_information/col_name.json")
+const position = require("./json_information/position.json")
+const notification = require("./json_information/notification_status.json")
 
 // drop down of mainMenu
 var dropdown = document.getElementsByClassName("dropdown-btn");
@@ -315,6 +315,18 @@ function callHtmlFile(filename, mode = 0, pageHeader = '') {
       document.getElementById('pageHeader').innerHTML = pageHeader
   })
 };
+
+function mysqlFetchingRow(table,id) {
+  return new Promise((resolve, reject) => {
+    con.query(`SELECT * FROM ${table} WHERE `, function (err) {
+      if (err) {
+        reject(err);
+      }
+      else
+        resolve(result, field);
+    })
+  })
+}
 
 // import thing
 function loadExInfoPage(pageHeader) {
