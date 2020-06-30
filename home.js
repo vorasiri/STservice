@@ -430,10 +430,32 @@ function loadFunctionalElements() {
       });
     });
   }
-
-  // if that button exist
-  //addEvent to that button
-
+var form = 'customer'; // need to refactor!
+  if (document.getElementById(form + 'Type1') && document.getElementById(form + 'Type2')) {
+    document.getElementById(form + 'Type1').addEventListener('click', function () {
+      if (document.getElementById(form + 'Type1').checked) {
+        document.getElementById('companyName').readOnly = true;
+        document.getElementById('TaxIDNumber').readOnly = true;
+        document.getElementById(form + 'Name').readOnly = false;
+        document.getElementById(form + 'LastName').readOnly = false;
+        document.getElementById('IDCardNumber').readOnly = false;
+      }
+    })
+    document.getElementById(form + 'Type2').addEventListener('click', function () {
+      if (document.getElementById(form + 'Type2').checked) {
+        document.getElementById('companyName').readOnly = false;
+        document.getElementById('TaxIDNumber').readOnly = false;
+        document.getElementById(form + 'Name').readOnly = true;
+        document.getElementById(form + 'LastName').readOnly = true;
+        document.getElementById('IDCardNumber').readOnly = true;
+      }
+    })
+    document.getElementById('companyName').readOnly = true;
+    document.getElementById('TaxIDNumber').readOnly = true;
+    document.getElementById(form + 'Name').readOnly = true;
+    document.getElementById(form + 'LastName').readOnly = true;
+    document.getElementById('IDCardNumber').readOnly = true;
+  }
 }
 
 // Others //
