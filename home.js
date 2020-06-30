@@ -430,6 +430,7 @@ function loadFunctionalElements() {
       });
     });
   }
+
 var form = 'customer'; // need to refactor!
   if (document.getElementById(form + 'Type1') && document.getElementById(form + 'Type2')) {
     document.getElementById(form + 'Type1').addEventListener('click', function () {
@@ -455,6 +456,23 @@ var form = 'customer'; // need to refactor!
     document.getElementById(form + 'Name').readOnly = true;
     document.getElementById(form + 'LastName').readOnly = true;
     document.getElementById('IDCardNumber').readOnly = true;
+  }
+
+  if (document.getElementById('productNoEquip') && document.getElementById('productWithEquip')) {
+    document.getElementById('productNoEquip').addEventListener('click', function () {
+      if (document.getElementById('productNoEquip').checked) {
+        document.getElementById('equipmentID').readOnly = true;
+        document.getElementById('equipmentQty').readOnly = true;
+        document.getElementById('addBtn').disabled = true;
+      }
+    })
+    document.getElementById('productWithEquip').addEventListener('click', function () {
+      if (document.getElementById('productWithEquip').checked) {
+        document.getElementById('equipmentID').readOnly = false;
+        document.getElementById('equipmentQty').readOnly = false;
+        document.getElementById('addBtn').disabled = false;
+      }
+    })
   }
 }
 

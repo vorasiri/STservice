@@ -253,9 +253,9 @@
         <div class="row">
             <div class="installationInfo">
                 <p>อุปกรณ์ที่ใช้ในการติดตั้ง เพิ่มเติม</p>
-                <input type="radio" id="productEquip" name="productEquip">
+                <input type="radio" id="productNoEquip" name="productEquip" value="0">
                 <label for="productEquip">ไม่มี</label>
-                <input type="radio" id="productEquip" name="productEquip">
+                <input type="radio" id="productWithEquip" name="productEquip" value="1">
                 <label for="productEquip">มี</label>
                 <table class="product-table">
                     <tr>
@@ -275,7 +275,7 @@
                         </td>
                     </tr>
                 </table>
-                <input class="add-btn" type="submit" value="เพิ่ม">
+                <button id="addBtn" class="add-btn">เพิ่ม</button>
                 <div class="qty">
                     <span>จำนวนอุปกรณ์</span>
                     <span id="equipQty" name="equipQty">0</span>

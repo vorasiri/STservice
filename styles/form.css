@@ -48,6 +48,12 @@ input[type=submit] {
 }
 
 .add-btn {
+    background-color: #FF9800;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12pt;
     width: 100px;
     height: auto;
     padding: 5px 0;
@@ -86,7 +92,6 @@ button:disabled {
     border-radius: 4px;
     cursor: pointer;
     font-size: 12pt;
-    width: 130px;
     height: auto;
     padding: 5px 0;
 }
