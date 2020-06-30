@@ -340,7 +340,7 @@ async function callfilledForm(pageHeader, id) {
           var subject = 'partner'
           if (tableField[tableName][item.name] == 'customerName')
             subject = 'customer'
-          if (document.forms[subject + 'form']['Type1'].checked) {
+          if (document.forms['form'][subject + 'Type1'].checked) {
             let fullName = result[index].split(' ')
             document.getElementById(subject + 'Name').value = fullName[0]
             document.getElementById(subject + 'LastName').value = fullName[1]
