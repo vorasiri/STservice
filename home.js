@@ -11,6 +11,7 @@ var con = remote.getGlobal("con");
 const thaiTranslate = require("./json_information/thai_translate.json")
 const headerInfo = require("./json_information/header_info.json")
 const colName = require("./json_information/col_name.json")
+const tableField = require("./json_information/table_field.json")
 const position = require("./json_information/position.json")
 const notification = require("./json_information/notification_status.json")
 
@@ -241,11 +242,11 @@ async function refreshNotificationBar(updateStatus = false) {
           // get target row of that table
           let jobID = notificationBar.children().last()[0].innerText.split('<br>')[0][0]
           let currentTable = notification.initTable[i]
-          console.log(currentTable, jobID)
-          
+          // console.log(currentTable, jobID)
+
           // add event handler
-          notificationBar.children().last()[0].getElementsByClassName('editbtn')[0].addEventListener('click',() => {
-            
+          notificationBar.children().last()[0].getElementsByClassName('editbtn')[0].addEventListener('click', () => {
+
           })
 
           if (result.length > 1 && j != result.length - 1) {
@@ -316,14 +317,57 @@ function callHtmlFile(filename, mode = 0, pageHeader = '') {
   })
 };
 
-function mysqlFetchingRow(table,id) {
+async function callfilledForm(pageHeader, id) {
+  let tableName = headerInfo[pageHeader].table
+  var filename = ''
+  if (headerInfo[pageHeader].viewPage === undefined)
+    filename = headerInfo[pageHeader].form
+  else
+    filename = headerInfo[pageHeader].viewPage
+  try {
+    let promise = await mysqlFetchingRow(tableName, id)
+    let result = Object.values(promise[0][0])
+    let field = Object.values(promise[1])
+    console.log([result[0], result[1]])
+
+    fs.readFile(filename.toString(), function (err, data) {
+      document.getElementById('mainContent').innerHTML = data.toString();
+      field.forEach((item, index) => {
+        if (tableField[tableName][item.name].radio !== undefined) {
+          document.forms['form'][tableField[tableName][item.name].id + result[index]].checked = true;
+        }
+        else if (['customerName', 'partnerName'].includes(tableField[tableName][item.name])) {
+          var subject = 'partner'
+          if (tableField[tableName][item.name] == 'customerName')
+            subject = 'customer'
+          if (document.forms[subject + 'form']['Type1'].checked) {
+            let fullName = result[index].split(' ')
+            document.getElementById(subject + 'Name').value = fullName[0]
+            document.getElementById(subject + 'LastName').value = fullName[1]
+          }
+          else {
+            document.getElementById('companyName').value = result[index]
+          }
+        }
+        else {
+          document.getElementById(tableField[tableName][item.name]).value = result[index]
+        }
+      })
+    })
+  }
+  catch (err) {
+    console.log(err)
+  }
+}
+
+function mysqlFetchingRow(table, id) {
   return new Promise((resolve, reject) => {
-    con.query(`SELECT * FROM ${table} WHERE `, function (err) {
+    con.query(`SELECT * FROM ${table} WHERE ${tableField[table].pk} = ${id}`, function (err, result, field) {
       if (err) {
         reject(err);
       }
       else
-        resolve(result, field);
+        resolve([result, field]);
     })
   })
 }
@@ -453,8 +497,9 @@ function makeCompleteTable(pageHeader) {
 
       // add row handler
       for (var i = 1; i < infoTable.table[0].rows.length; i++) {
+        let id = infoTable.table[0].rows[i].getElementsByTagName('td')[0].innerText
         infoTable.table[0].rows[i].addEventListener('click', function () {
-          callHtmlFile(headerInfo[pageHeader].viewPage)
+          callfilledForm(pageHeader, id)
         })
       }
 
