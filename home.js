@@ -332,7 +332,7 @@ async function callfilledForm(pageHeader, id) {
     let promise = await mysqlFetchingRow(tableName, id)
     let result = Object.values(promise[0][0])
     let field = Object.values(promise[1])
-    console.log([result[0], result[1]])
+    console.log([result[2], result[1]])
 
     fs.readFile(filename.toString(), function (err, data) {
       document.getElementById('mainContent').innerHTML = data.toString();
@@ -364,18 +364,6 @@ async function callfilledForm(pageHeader, id) {
   }
 }
 
-function mysqlFetchingRow(table, id) {
-  return new Promise((resolve, reject) => {
-    con.query(`SELECT * FROM ${table} WHERE ${tableField[table].pk} = ${id}`, function (err, result, field) {
-      if (err) {
-        reject(err);
-      }
-      else
-        resolve([result, field]);
-    })
-  })
-}
-
 // import thing
 function loadExInfoPage(pageHeader) {
   if (pageHeader == 'รายการอะไหล่')
@@ -403,7 +391,7 @@ function loadFunctionalElements() {
       showModal('searchModal')
     })
   }
-  
+
   // date time picker
   var idList = ['appointmentDate', 'purchaseDate', 'jobReceiveDate']
   idList.forEach(value => {
@@ -420,31 +408,21 @@ function loadFunctionalElements() {
     }
   })
 
-  var form = 'customer'; // need to refactor!
-  if (document.getElementById(form + 'Type1') && document.getElementById(form + 'Type2')) {
-    document.getElementById(form + 'Type1').addEventListener('click', function () {
-      if (document.getElementById(form + 'Type1').checked) {
-        document.getElementById('companyName').readOnly = true;
-        document.getElementById('TaxIDNumber').readOnly = true;
-        document.getElementById(form + 'Name').readOnly = false;
-        document.getElementById(form + 'LastName').readOnly = false;
-        document.getElementById('IDCardNumber').readOnly = false;
-      }
-    })
-    document.getElementById(form + 'Type2').addEventListener('click', function () {
-      if (document.getElementById(form + 'Type2').checked) {
-        document.getElementById('companyName').readOnly = false;
-        document.getElementById('TaxIDNumber').readOnly = false;
-        document.getElementById(form + 'Name').readOnly = true;
-        document.getElementById(form + 'LastName').readOnly = true;
-        document.getElementById('IDCardNumber').readOnly = true;
-      }
-    })
-    document.getElementById('companyName').readOnly = true;
-    document.getElementById('TaxIDNumber').readOnly = true;
-    document.getElementById(form + 'Name').readOnly = true;
-    document.getElementById(form + 'LastName').readOnly = true;
-    document.getElementById('IDCardNumber').readOnly = true;
+  for (i = 1;i < 4;i++) {
+    let staffID = document.getElementById(`staffID${i}`)
+    if (staffID) {
+      staffID.addEventListener('change', async (event) => {
+        try {
+          let result = await mysqlFetchingRow('staff', staffID.value)
+          console.log(result[0][0].staff_name)
+          console.log(event.target.id)
+          $(`#staffName${event.target.id.match(/\d/g)}`).val(`${result[0][0].staff_name}`)
+        }
+        catch (err) {
+          console.log(err)
+        }
+      })
+    }
   }
 
   if (document.getElementById('input_zipcode')) {
@@ -474,6 +452,33 @@ function loadFunctionalElements() {
     });
   }
 
+  var form = 'customer'; // need to refactor!
+  if (document.getElementById(form + 'Type1') && document.getElementById(form + 'Type2')) {
+    document.getElementById(form + 'Type1').addEventListener('click', function () {
+      if (document.getElementById(form + 'Type1').checked) {
+        document.getElementById('companyName').readOnly = true;
+        document.getElementById('TaxIDNumber').readOnly = true;
+        document.getElementById(form + 'Name').readOnly = false;
+        document.getElementById(form + 'LastName').readOnly = false;
+        document.getElementById('IDCardNumber').readOnly = false;
+      }
+    })
+    document.getElementById(form + 'Type2').addEventListener('click', function () {
+      if (document.getElementById(form + 'Type2').checked) {
+        document.getElementById('companyName').readOnly = false;
+        document.getElementById('TaxIDNumber').readOnly = false;
+        document.getElementById(form + 'Name').readOnly = true;
+        document.getElementById(form + 'LastName').readOnly = true;
+        document.getElementById('IDCardNumber').readOnly = true;
+      }
+    })
+    document.getElementById('companyName').readOnly = true;
+    document.getElementById('TaxIDNumber').readOnly = true;
+    document.getElementById(form + 'Name').readOnly = true;
+    document.getElementById(form + 'LastName').readOnly = true;
+    document.getElementById('IDCardNumber').readOnly = true;
+  }
+
   if (document.getElementById('productNoEquip') && document.getElementById('productWithEquip')) {
     document.getElementById('productNoEquip').addEventListener('click', function () {
       if (document.getElementById('productNoEquip').checked) {
@@ -491,6 +496,7 @@ function loadFunctionalElements() {
     })
   }
 }
+
 function loadDatePickerToID(id, includeTimePicker = false) {
   $.datetimepicker.setLocale('th');
   document.getElementById(id).type = 'text'
@@ -537,6 +543,18 @@ function loadDatePickerToID(id, includeTimePicker = false) {
 }
 
 // Others //
+
+function mysqlFetchingRow(table, id) {
+  return new Promise((resolve, reject) => {
+    con.query(`SELECT * FROM ${table} WHERE ${tableField[table].pk} = ${id}`, function (err, result, field) {
+      if (err) {
+        reject(err);
+      }
+      else
+        resolve([result, field]);
+    })
+  })
+}
 
 function contains(target, pattern) {
   var value = 0;

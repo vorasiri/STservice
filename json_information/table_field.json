@@ -160,13 +160,14 @@
     "sp_supplier": ""
   },
   "staff": {
-    "staff_id": "",
+    "pk": "staff_id",
+    "staff_id": "staffID",
     "staff_branch": "",
-    "staff_position": "",
-    "staff_name": "",
-    "staff_idcard": "",
-    "staff_address": "",
-    "staff_tel": ""
+    "staff_position": "staffPosition",
+    "staff_name": "staffName",
+    "staff_idcard": "IDCardNumber",
+    "staff_address": "staffAddress",
+    "staff_tel": "staffTel"
   },
   "suppliers": {
     "supplier_id": "",
