@@ -314,8 +314,10 @@ function callHtmlFile(filename, mode = 0, pageHeader = '') {
       loadFunctionalElements()
     else if (mode == 2)
       loadExInfoPage(pageHeader)
-    else if (mode == 3)
+    else if (mode == 3) {
       document.getElementById('pageHeader').innerHTML = pageHeader
+      loadFunctionalElements()
+    }
   })
 };
 
@@ -401,37 +403,22 @@ function loadFunctionalElements() {
       showModal('searchModal')
     })
   }
+  
+  // date time picker
+  var idList = ['appointmentDate', 'purchaseDate', 'jobReceiveDate']
+  idList.forEach(value => {
+    if (document.getElementById(value)) {
+      loadDatePickerToID(value, true)
+    }
+  })
 
-  if (document.getElementById('appointmentDate')) {
-    $.datetimepicker.setLocale('th');
-    document.getElementById('appointmentDate').type = 'text'
-    $(function () {
-
-      var thaiYear = function (ct) {
-        var leap = 3;
-        var dayWeek = ["พฤ.", "ศ.", "ส.", "อา.", "จ.", "อ.", "พ."];
-        if (ct) {
-          var yearL = new Date(ct).getFullYear() - 543;
-          leap = (((yearL % 4 == 0) && (yearL % 100 != 0)) || (yearL % 400 == 0)) ? 2 : 3;
-          if (leap == 2) {
-            dayWeek = ["ศ.", "ส.", "อา.", "จ.", "อ.", "พ.", "พฤ."];
-          }
-        }
-        this.setOptions({
-          i18n: { th: { dayOfWeek: dayWeek } }, dayOfWeekStart: leap,
-        })
-      };
-
-      $("#appointmentDate").datetimepicker({
-        format: 'd/m/Y H:i',  // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000            
-        lang: 'th',  // แสดงภาษาไทย
-        onChangeMonth: thaiYear,
-        onShow: thaiYear,
-        yearOffset: 543,  // ใช้ปี พ.ศ. บวก 543 เพิ่มเข้าไปในปี ค.ศ
-        closeOnDateSelect: true,
-      });
-    });
-  }
+  // date only picker
+  idList = ['importDocDate', 'refImportDocDate', 'recieveDate', 'warrantyDate']
+  idList.forEach(value => {
+    if (document.getElementById(value)) {
+      loadDatePickerToID(value)
+    }
+  })
 
   var form = 'customer'; // need to refactor!
   if (document.getElementById(form + 'Type1') && document.getElementById(form + 'Type2')) {
@@ -503,6 +490,50 @@ function loadFunctionalElements() {
       }
     })
   }
+}
+function loadDatePickerToID(id, includeTimePicker = false) {
+  $.datetimepicker.setLocale('th');
+  document.getElementById(id).type = 'text'
+  $(function () {
+
+    var thaiYear = function (ct) {
+      var leap = 3;
+      var dayWeek = ["พฤ.", "ศ.", "ส.", "อา.", "จ.", "อ.", "พ."];
+      if (ct) {
+        var yearL = new Date(ct).getFullYear() - 543;
+        leap = (((yearL % 4 == 0) && (yearL % 100 != 0)) || (yearL % 400 == 0)) ? 2 : 3;
+        if (leap == 2) {
+          dayWeek = ["ศ.", "ส.", "อา.", "จ.", "อ.", "พ.", "พฤ."];
+        }
+      }
+      this.setOptions({
+        i18n: { th: { dayOfWeek: dayWeek } }, dayOfWeekStart: leap,
+      })
+    };
+
+    if (includeTimePicker) {
+      $(`#${id}`).datetimepicker({
+        format: 'd/m/Y H:i',  // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000            
+        lang: 'th',  // แสดงภาษาไทย
+        onChangeMonth: thaiYear,
+        onShow: thaiYear,
+        yearOffset: 543,  // ใช้ปี พ.ศ. บวก 543 เพิ่มเข้าไปในปี ค.ศ
+        closeOnDateSelect: true,
+      });
+    }
+    else {
+      $(`#${id}`).datetimepicker({
+        timepicker: false,
+        format: 'd/m/Y',  // กำหนดรูปแบบวันที่ ที่ใช้ เป็น 00-00-0000            
+        lang: 'th',  // แสดงภาษาไทย
+        onChangeMonth: thaiYear,
+        onShow: thaiYear,
+        yearOffset: 543,  // ใช้ปี พ.ศ. บวก 543 เพิ่มเข้าไปในปี ค.ศ
+        closeOnDateSelect: true,
+      });
+    }
+  });
+
 }
 
 // Others //
