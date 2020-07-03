@@ -1,5 +1,7 @@
 console.log('hello from home.js')
 window.$ = window.jQuery = require('jquery');
+require('jthailand/jquery.Thailand.js/dependencies/typeahead.bundle.js')
+require('jthailand/jquery.Thailand.js/dist/jquery.Thailand.min.js')
 
 // Read MyGlobalVariable.
 const { ipcRenderer, remote } = require("electron");
@@ -431,7 +433,7 @@ function loadFunctionalElements() {
     });
   }
 
-var form = 'customer'; // need to refactor!
+  var form = 'customer'; // need to refactor!
   if (document.getElementById(form + 'Type1') && document.getElementById(form + 'Type2')) {
     document.getElementById(form + 'Type1').addEventListener('click', function () {
       if (document.getElementById(form + 'Type1').checked) {
@@ -456,6 +458,33 @@ var form = 'customer'; // need to refactor!
     document.getElementById(form + 'Name').readOnly = true;
     document.getElementById(form + 'LastName').readOnly = true;
     document.getElementById('IDCardNumber').readOnly = true;
+  }
+
+  if (document.getElementById('input_zipcode')) {
+    $.Thailand({
+      database: './node_modules/jthailand/jquery.Thailand.js/database/db.json',
+
+      $district: $('#input_district'),
+      $amphoe: $('#input_amphoe'),
+      $province: $('#input_province'),
+      $zipcode: $('#input_zipcode'),
+
+      onDataFill: function (data) {
+        console.log(data);
+        /*
+        ผลลัพธ์ที่ได้
+        {
+            district: '',
+            district_code: '',
+            amphoe: '',
+            amphoe_code: '',
+            province: '',
+            province_code: '',
+            zipcode: ''
+        }
+        */
+      }
+    });
   }
 
   if (document.getElementById('productNoEquip') && document.getElementById('productWithEquip')) {
