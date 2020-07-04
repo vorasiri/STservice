@@ -408,7 +408,7 @@ function loadFunctionalElements() {
     }
   })
 
-  for (i = 1;i < 4;i++) {
+  for (i = 1; i < 4; i++) {
     let staffID = document.getElementById(`staffID${i}`)
     if (staffID) {
       staffID.addEventListener('change', async (event) => {
@@ -492,6 +492,34 @@ function loadFunctionalElements() {
         document.getElementById('equipmentID').readOnly = false;
         document.getElementById('equipmentQty').readOnly = false;
         document.getElementById('addBtn').disabled = false;
+      }
+    })
+  }
+  if (document.getElementById('installTypeSet')) {
+    document.getElementById('installTypeSet').addEventListener('change', function () {
+      if (document.getElementById('installTypeSet').checked) {
+        document.getElementById('refJob').style.display = 'none';
+      }
+    })
+  }
+  if (document.getElementById('installTypeFix')) {
+    document.getElementById('installTypeFix').addEventListener('change', function () {
+      if (document.getElementById('installTypeFix').checked) {
+        document.getElementById('refJob').style.display = 'block';
+      }
+    })
+  }
+  if (document.getElementById('installTypeClean')) {
+    document.getElementById('installTypeClean').addEventListener('change', function () {
+      if (document.getElementById('installTypeClean').checked) {
+        document.getElementById('refJob').style.display = 'block';
+      }
+    })
+  }
+  if (document.getElementById('installTypeAddOn')) {
+    document.getElementById('installTypeAddOn').addEventListener('change', function () {
+      if (document.getElementById('installTypeAddOn').checked) {
+        document.getElementById('refJob').style.display = 'block';
       }
     })
   }
