@@ -1,6 +1,5 @@
 console.log('hello from home.js')
 window.$ = window.jQuery = require('jquery');
-const thai = require('thai-data')
 
 // Read MyGlobalVariable.
 const { ipcRenderer, remote } = require("electron");
@@ -341,30 +340,33 @@ async function callfilledForm(pageHeader, id) {
       document.getElementById('mainContent').innerHTML = data.toString();
       loadFunctionalElements(complexTable)
       field.forEach((item, index) => {
-        let fieldDOM = document.getElementById(tableField[tableName][item.name])
-        if (fieldDOM) {
-          if (tableField[tableName][item.name].radio !== undefined) {
-            document.forms['form'][tableField[tableName][item.name].id + result[index]].checked = true;
-          }
-          else if (['customerName', 'partnerName'].includes(tableField[tableName][item.name])) {
-            var subject = 'partner'
-            if (tableField[tableName][item.name] == 'customerName')
-              subject = 'customer'
-            if (document.forms['form'][subject + 'Type1'].checked) {
-              let fullName = result[index].split(' ')
-              document.getElementById(subject + 'Name').value = fullName[0]
-              document.getElementById(subject + 'LastName').value = fullName[1]
-            }
-            else {
-              document.getElementById('companyName').value = result[index]
-            }
+        if (tableField[tableName][item.name].radio !== undefined) {
+          document.forms['form'][tableField[tableName][item.name].id + result[index]].checked = true;
+        }
+        else if (['customerName', 'partnerName'].includes(tableField[tableName][item.name])) {
+          var subject = 'partner'
+          if (tableField[tableName][item.name] == 'customerName')
+            subject = 'customer'
+          if (document.forms['form'][subject + 'Type1'].checked) {
+            let fullName = result[index].split(' ')
+            document.getElementById(subject + 'Name').value = fullName[0]
+            document.getElementById(subject + 'LastName').value = fullName[1]
           }
           else {
-            fieldDOM.value = result[index]
+            document.getElementById('companyName').value = result[index]
           }
-          event = document.createEvent('Event');
-          event.initEvent('change', true, false);
-          fieldDOM.dispatchEvent(event);
+        }
+        else if (document.getElementById('input_zipcode') && tableField[tableName][item.name] == 'customerAddress') {
+          //split whole address back to drop down
+        }
+        else {
+          let fieldDOM = document.getElementById(tableField[tableName][item.name])
+          if (fieldDOM) {
+            fieldDOM.value = result[index]
+            event = document.createEvent('Event');
+            event.initEvent('change', true, false);
+            fieldDOM.dispatchEvent(event);
+          }
         }
       })
 
@@ -447,7 +449,7 @@ function loadFunctionalElements(complex = false) {
         let result = await mysqlFetchingRow('customers', customerID.value)
         let idList = ['customerName', 'customerTel', 'customerAddress']
         let colNameList = ['customer_name', 'customer_tel', 'customer_address']
-        for(i = 0; i < colNameList.length; i++) {
+        for (i = 0; i < colNameList.length; i++) {
           $(`#${idList[i]}`).val(result[0][0][colNameList[i]])
         }
       }
@@ -694,6 +696,15 @@ function highlightPageNumber(pagination, pageNumber) {
     }
     else
       pagination.children[i].classList.remove("active")
+  }
+}
+
+// address related
+thailandAddress()
+class ThailandAddress {
+  constructor() {
+    const thai = require('thai-data')
+    
   }
 }
 
