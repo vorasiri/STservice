@@ -16,7 +16,7 @@
                         <tr>
                             <td>วันที่-เวลา ขาย</td>
                             <td>
-                                <input type="datetime" id="purchaseDate" name="purchaseDate" readonly>
+                                <input type="datetime" id="purchaseDate" name="purchaseDate">
                             </td>
                         </tr>
                         <tr>
@@ -27,15 +27,14 @@
                         <tr>
                             <td>รหัสพนักงาน</td>
                             <td>
-                                <!-- input the pk to search -->
-                                <input type="number" id="staffID" name="staffID">
+                                <input type="number" id="staffID1" name="staffID1">
                             </td>
                         </tr>
                         <tr>
                             <!-- display only -->
                             <td>ชื่อพนักงาน</td>
                             <td>
-                                <input type="text" id="staffName" name="staffName" readonly>
+                                <input type="text" id="staffName1" name="staffName1" readonly>
                             </td>
                         </tr>
                         <tr>
@@ -65,13 +64,14 @@
                         <tr>
                             <td>เลขที่ใบจัดส่ง</td>
                             <td>
-                                <input type="number" id="deliveryJobID" name="deliveryJobID" readonly> <!-- auto generate -->
+                                <input type="number" id="deliveryJobID" name="deliveryJobID" readonly>
+                                <!-- auto generate -->
                             </td>
                         </tr>
                         <tr>
                             <td>วันที่-เวลา การนัดหมาย</td>
                             <td>
-                                <input type="datetime" id="appointmentDate" name="appointmentDate" readonly>
+                                <input type="datetime" id="appointmentDate" name="appointmentDate">
                             </td>
                         </tr>
                         <tr>
@@ -85,14 +85,14 @@
                         <tr>
                             <td>รหัสพนักงาน</td>
                             <td>
-                                <input type="number" id="staffID" name="staffID">
+                                <input type="number" id="staffID2" name="staffID2">
                             </td>
                         </tr>
                         <tr>
                             <!-- display only -->
                             <td>ชื่อพนักงาน</td>
                             <td>
-                                <input type="text" id="staffName" name="staffName" readonly>
+                                <input type="text" id="staffName2" name="staffName2" readonly>
                             </td>
                         </tr>
                     </table>
@@ -112,10 +112,25 @@
                             <input type="number" class="table-field" id="customerID" name="customerID" readonly>
                         </td>
                         <td>
-                            <button class="btn" type="submit" id="customerSearchButton" disabled>ค้นหาลูกค้า</button>
+                            <!-- pop up modal form when search -->
+                            <input class="btn" type="submit" value="ค้นหาลูกค้า" id="customerSearchButton">
+                            <!-- The Modal -->
+                            <div id="searchModal" class="modal">
+                                <div class="modal-content">
+                                    <!-- searching by id, name, phone number  -->
+                                    <span class="close">&times;</span>
+                                    <select id="searchDropdown" name="searchDropdown">
+                                        <option value="customerID">รหัสลูกค้า</option>
+                                        <option value="customerName">ชื่อ-นามสกุล ลูกค้า</option>
+                                        <option value="customerTel">หมายเลขโทรศัพท์</option>
+                                    </select>
+                                    <input type="search" id="searchField" name="searchField">
+                                    <input class="btn" type="submit" value="ค้นหาลูกค้า">
+                                </div>
+                            </div>
                         </td>
                         <td>
-                            <button class="btn" type="submit" id="customerAddButton" disabled>เพิ่มลูกค้าใหม่</button>
+                            <input class="btn" type="submit" value="เพิ่มลูกค้าใหม่">
                         </td>
                     </tr>
                     <tr>
@@ -182,33 +197,36 @@
         <div class="row">
             <div class="installationInfo">
                 <p>อุปกรณ์ที่ใช้ในการติดตั้ง เพิ่มเติม</p>
-                <input type="radio" id="productEquip" name="productEquip">
+                <input type="radio" id="productNoEquip" name="productEquip" value="0">
                 <label for="productEquip">ไม่มี</label>
-                <input type="radio" id="productEquip" name="productEquip">
+                <input type="radio" id="productWithEquip" name="productEquip" value="1">
                 <label for="productEquip">มี</label>
-                <table class="product-table">
-                    <tr>
-                        <th>รหัสอุปกรณ์</th>
-                        <th>ชื่ออุปกรณ์</th>
-                        <th>จำนวน</th>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="number" class="table-field" id="equipmentID" name="equipmentID">
-                        </td>
-                        <td>
-                            <input type="text" class="table-field-long" id="equipmentName" name="equipmentName" readonly>
-                        </td>
-                        <td>
-                            <input type="number" class="table-field" id="equipmentQty" name="equipmentQty">
-                        </td>
-                    </tr>
-                </table>
-                <input class="add-btn" type="submit" value="เพิ่ม">
-                <div class="qty">
-                    <span>จำนวนอุปกรณ์</span>
-                    <span id="equipQty" name="equipQty">0</span>
-                    <span>ชิ้น</span>
+                <div id="equipment">
+                    <table class="product-table">
+                        <tr>
+                            <th>รหัสอุปกรณ์</th>
+                            <th>ชื่ออุปกรณ์</th>
+                            <th>จำนวน</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="number" class="table-field" id="equipmentID" name="equipmentID">
+                            </td>
+                            <td>
+                                <input type="text" class="table-field-long" id="equipmentName" name="equipmentName"
+                                    readonly>
+                            </td>
+                            <td>
+                                <input type="number" class="table-field" id="equipmentQty" name="equipmentQty">
+                            </td>
+                        </tr>
+                    </table>
+                    <button id="addBtn" class="add-btn">เพิ่ม</button>
+                    <div class="qty">
+                        <span>จำนวนอุปกรณ์</span>
+                        <span id="equipQty" name="equipQty">0</span>
+                        <span>ชิ้น</span>
+                    </div>
                 </div>
             </div>
         </div>

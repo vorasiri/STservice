@@ -323,39 +323,51 @@ function callHtmlFile(filename, mode = 0, pageHeader = '') {
 async function callfilledForm(pageHeader, id) {
   let tableName = headerInfo[pageHeader].table
   var filename = ''
-  if (headerInfo[pageHeader].viewPage === undefined)
+  var complexTable = false
+  if (headerInfo[pageHeader].viewPage === undefined) {
+    complexTable = false
     filename = headerInfo[pageHeader].form
-  else
+  }
+  else {
+    complexTable = true
     filename = headerInfo[pageHeader].viewPage
+  }
   try {
     let promise = await mysqlFetchingRow(tableName, id)
     let result = Object.values(promise[0][0])
     let field = Object.values(promise[1])
-    console.log([result[2], result[1]])
 
     fs.readFile(filename.toString(), function (err, data) {
       document.getElementById('mainContent').innerHTML = data.toString();
+      loadFunctionalElements(complexTable)
       field.forEach((item, index) => {
-        if (tableField[tableName][item.name].radio !== undefined) {
-          document.forms['form'][tableField[tableName][item.name].id + result[index]].checked = true;
-        }
-        else if (['customerName', 'partnerName'].includes(tableField[tableName][item.name])) {
-          var subject = 'partner'
-          if (tableField[tableName][item.name] == 'customerName')
-            subject = 'customer'
-          if (document.forms['form'][subject + 'Type1'].checked) {
-            let fullName = result[index].split(' ')
-            document.getElementById(subject + 'Name').value = fullName[0]
-            document.getElementById(subject + 'LastName').value = fullName[1]
+        let fieldDOM = document.getElementById(tableField[tableName][item.name])
+        if (fieldDOM) {
+          if (tableField[tableName][item.name].radio !== undefined) {
+            document.forms['form'][tableField[tableName][item.name].id + result[index]].checked = true;
+          }
+          else if (['customerName', 'partnerName'].includes(tableField[tableName][item.name])) {
+            var subject = 'partner'
+            if (tableField[tableName][item.name] == 'customerName')
+              subject = 'customer'
+            if (document.forms['form'][subject + 'Type1'].checked) {
+              let fullName = result[index].split(' ')
+              document.getElementById(subject + 'Name').value = fullName[0]
+              document.getElementById(subject + 'LastName').value = fullName[1]
+            }
+            else {
+              document.getElementById('companyName').value = result[index]
+            }
           }
           else {
-            document.getElementById('companyName').value = result[index]
+            fieldDOM.value = result[index]
           }
-        }
-        else {
-          document.getElementById(tableField[tableName][item.name]).value = result[index]
+          event = document.createEvent('Event');
+          event.initEvent('change', true, false);
+          fieldDOM.dispatchEvent(event);
         }
       })
+
     })
   }
   catch (err) {
@@ -382,7 +394,7 @@ function showModal(modalID) {
   document.getElementById(modalID).style.display = 'block'
 }
 
-function loadFunctionalElements() {
+function loadFunctionalElements(complex = false) {
   if (document.getElementById('customerSearchButton')) {
     console.log('try load up modal')
     document.getElementById('customerSearchButton').addEventListener('click', function (event) {
@@ -390,6 +402,9 @@ function loadFunctionalElements() {
       showModal('searchModal')
     })
   }
+
+  // auto generated id
+  // let id = document.getElementById()
 
   // date time picker
   var idList = ['appointmentDate', 'purchaseDate', 'jobReceiveDate']
@@ -407,14 +422,14 @@ function loadFunctionalElements() {
     }
   })
 
+  // fetch staffname on staffID change
   for (i = 1; i < 4; i++) {
     let staffID = document.getElementById(`staffID${i}`)
     if (staffID) {
+      console.log('autofill staffName by ID ready')
       staffID.addEventListener('change', async (event) => {
         try {
           let result = await mysqlFetchingRow('staff', staffID.value)
-          console.log(result[0][0].staff_name)
-          console.log(event.target.id)
           $(`#staffName${event.target.id.match(/\d/g)}`).val(`${result[0][0].staff_name}`)
         }
         catch (err) {
@@ -422,6 +437,24 @@ function loadFunctionalElements() {
         }
       })
     }
+  }
+
+  let customerID = document.getElementById('customerID')
+  if (Boolean(customerID) && complex) {
+    console.log('autofill customer information by ID ready')
+    customerID.addEventListener('change', async (event) => {
+      try {
+        let result = await mysqlFetchingRow('customers', customerID.value)
+        let idList = ['customerName', 'customerTel', 'customerAddress']
+        let colNameList = ['customer_name', 'customer_tel', 'customer_address']
+        for(i = 0; i < colNameList.length; i++) {
+          $(`#${idList[i]}`).val(result[0][0][colNameList[i]])
+        }
+      }
+      catch (err) {
+        console.log(err)
+      }
+    })
   }
 
   let zipCode = document.getElementById('input_zipcode')
