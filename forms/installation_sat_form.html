@@ -260,30 +260,32 @@
                     <label for="productEquip">ไม่มี</label>
                     <input type="radio" id="productWithEquip" name="productEquip" value="1">
                     <label for="productEquip">มี</label>
-                    <table class="product-table">
-                        <tr>
-                            <th>รหัสอุปกรณ์</th>
-                            <th>ชื่ออุปกรณ์</th>
-                            <th>จำนวน</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="number" class="table-field" id="equipmentID" name="equipmentID">
-                            </td>
-                            <td>
-                                <input type="text" class="table-field-long" id="equipmentName" name="equipmentName"
-                                    readonly>
-                            </td>
-                            <td>
-                                <input type="number" class="table-field" id="equipmentQty" name="equipmentQty">
-                            </td>
-                        </tr>
-                    </table>
-                    <button id="addBtn" class="add-btn">เพิ่ม</button>
-                    <div class="qty">
-                        <span>จำนวนอุปกรณ์</span>
-                        <span id="equipQty" name="equipQty">0</span>
-                        <span>ชิ้น</span>
+                    <div id="equipment">
+                        <table class="product-table">
+                            <tr>
+                                <th>รหัสอุปกรณ์</th>
+                                <th>ชื่ออุปกรณ์</th>
+                                <th>จำนวน</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="number" class="table-field" id="equipmentID" name="equipmentID">
+                                </td>
+                                <td>
+                                    <input type="text" class="table-field-long" id="equipmentName" name="equipmentName"
+                                        readonly>
+                                </td>
+                                <td>
+                                    <input type="number" class="table-field" id="equipmentQty" name="equipmentQty">
+                                </td>
+                            </tr>
+                        </table>
+                        <button id="addBtn" class="add-btn">เพิ่ม</button>
+                        <div class="qty">
+                            <span>จำนวนอุปกรณ์</span>
+                            <span id="equipQty" name="equipQty">0</span>
+                            <span>ชิ้น</span>
+                        </div>
                     </div>
                 </div>
             </div>

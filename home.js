@@ -482,19 +482,51 @@ function loadFunctionalElements() {
   if (document.getElementById('productNoEquip') && document.getElementById('productWithEquip')) {
     document.getElementById('productNoEquip').addEventListener('click', function () {
       if (document.getElementById('productNoEquip').checked) {
-        document.getElementById('equipmentID').readOnly = true;
-        document.getElementById('equipmentQty').readOnly = true;
-        document.getElementById('addBtn').disabled = true;
+        document.getElementById('equipment').style.display = 'none';
       }
     })
     document.getElementById('productWithEquip').addEventListener('click', function () {
       if (document.getElementById('productWithEquip').checked) {
-        document.getElementById('equipmentID').readOnly = false;
-        document.getElementById('equipmentQty').readOnly = false;
-        document.getElementById('addBtn').disabled = false;
+        document.getElementById('equipment').style.display = 'block';
       }
     })
   }
+
+  if (document.getElementById('productNoAcc') && document.getElementById('productWithAcc')) {
+    document.getElementById('productNoAcc').addEventListener('click', function () {
+      if (document.getElementById('productNoAcc').checked) {
+        document.getElementById('acc').style.display = 'none';
+      }
+    })
+    document.getElementById('productWithAcc').addEventListener('click', function () {
+      if (document.getElementById('productWithAcc').checked) {
+        document.getElementById('acc').style.display = 'block';
+      }
+    })
+  }
+
+  if (document.getElementById('productNoDeliver')) {
+    document.getElementById('productNoDeliver').addEventListener('click', function () {
+      if (document.getElementById('productNoDeliver').checked) {
+        document.getElementById('delivery').style.display = 'none';
+      }
+    })
+    document.getElementById('productPickUp').addEventListener('click', function () {
+      if (document.getElementById('productPickUp').checked) {
+        document.getElementById('delivery').style.display = 'block';
+        document.getElementById('appointmentDateDelivery').readOnly = true;
+        document.getElementById('staffID3').readOnly = true;
+      }
+    })
+    document.getElementById('productBothDeliver').addEventListener('click', function () {
+      if (document.getElementById('productBothDeliver').checked) {
+        document.getElementById('delivery').style.display = 'block';
+        document.getElementById('appointmentDateDelivery').readOnly = false;
+        document.getElementById('staffID3').readOnly = false;
+      }
+    })
+  }
+
   if (document.getElementById('installTypeSet')) {
     document.getElementById('installTypeSet').addEventListener('change', function () {
       if (document.getElementById('installTypeSet').checked) {
