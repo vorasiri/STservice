@@ -15,7 +15,7 @@
   "dependencies": {
     "jquery": "^3.5.1",
     "jquery-datetimepicker": "^2.5.21",
-    "jthailand": "^1.0.0",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "thai-data": "^1.0.9"
   }
 }

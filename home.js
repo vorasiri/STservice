@@ -1,7 +1,6 @@
 console.log('hello from home.js')
 window.$ = window.jQuery = require('jquery');
-require('jthailand/jquery.Thailand.js/dependencies/typeahead.bundle.js')
-require('jthailand/jquery.Thailand.js/dist/jquery.Thailand.min.js')
+const thai = require('thai-data')
 
 // Read MyGlobalVariable.
 const { ipcRenderer, remote } = require("electron");
@@ -425,31 +424,25 @@ function loadFunctionalElements() {
     }
   }
 
-  if (document.getElementById('input_zipcode')) {
-    $.Thailand({
-      database: './node_modules/jthailand/jquery.Thailand.js/database/db.json',
-
-      $district: $('#input_district'),
-      $amphoe: $('#input_amphoe'),
-      $province: $('#input_province'),
-      $zipcode: $('#input_zipcode'),
-
-      onDataFill: function (data) {
-        console.log(data);
-        /*
-        ผลลัพธ์ที่ได้
-        {
-            district: '',
-            district_code: '',
-            amphoe: '',
-            amphoe_code: '',
-            province: '',
-            province_code: '',
-            zipcode: ''
+  let zipCode = document.getElementById('input_zipcode')
+  if (zipCode) {
+    var allField
+    zipCode.addEventListener('change', () => {
+      allField = thai.allField(zipCode.value)
+      let idList = ['input_zipcode', 'input_district', 'input_amphoe', 'input_province']
+      Object.values(allField).forEach((value, index) => {
+        if (Array.isArray(value)) {
+          if (index > 0) {
+            var select = document.getElementById(idList[index])
+            select.options.length = 0
+            value.forEach((option) => {
+              option = Object.values(option)
+              select.options[select.options.length] = new Option(`${option[option.length - 1]}`, `${option[option.length - 1]}`, false, false);
+            })
+          }
         }
-        */
-      }
-    });
+      })
+    })
   }
 
   var form = 'customer'; // need to refactor!
