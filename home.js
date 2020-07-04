@@ -514,13 +514,26 @@ function loadFunctionalElements() {
     document.getElementById('productPickUp').addEventListener('click', function () {
       if (document.getElementById('productPickUp').checked) {
         document.getElementById('delivery').style.display = 'block';
+        document.getElementById('appointmentDatePickUp').readOnly = false;
+        document.getElementById('staffID2').readOnly = false;
         document.getElementById('appointmentDateDelivery').readOnly = true;
         document.getElementById('staffID3').readOnly = true;
+      }
+    })
+    document.getElementById('productDeliver').addEventListener('click', function () {
+      if (document.getElementById('productDeliver').checked) {
+        document.getElementById('delivery').style.display = 'block';
+        document.getElementById('appointmentDatePickUp').readOnly = true;
+        document.getElementById('staffID2').readOnly = true;
+        document.getElementById('appointmentDateDelivery').readOnly = false;
+        document.getElementById('staffID3').readOnly = false;
       }
     })
     document.getElementById('productBothDeliver').addEventListener('click', function () {
       if (document.getElementById('productBothDeliver').checked) {
         document.getElementById('delivery').style.display = 'block';
+        document.getElementById('appointmentDatePickUp').readOnly = false;
+        document.getElementById('staffID2').readOnly = false;
         document.getElementById('appointmentDateDelivery').readOnly = false;
         document.getElementById('staffID3').readOnly = false;
       }
