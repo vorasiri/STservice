@@ -356,9 +356,6 @@ async function callfilledForm(pageHeader, id) {
             document.getElementById('companyName').value = result[index]
           }
         }
-        else if (document.getElementById('input_zipcode') && tableField[tableName][item.name] == 'customerAddress') {
-          //split whole address back to drop down
-        }
         else {
           let fieldDOM = document.getElementById(tableField[tableName][item.name])
           if (fieldDOM) {
@@ -367,6 +364,11 @@ async function callfilledForm(pageHeader, id) {
             event.initEvent('change', true, false);
             fieldDOM.dispatchEvent(event);
           }
+        }
+
+        if (document.getElementById('input_zipcode') && tableField[tableName][item.name] == 'customerAddress') {
+          let customerAddress = document.getElementById('customerAddress')
+          customerAddress.value = thailandAddress.deCombine(customerAddress.value)
         }
       })
 
@@ -461,23 +463,7 @@ function loadFunctionalElements(complex = false) {
 
   let zipCode = document.getElementById('input_zipcode')
   if (zipCode) {
-    var allField
-    zipCode.addEventListener('change', () => {
-      allField = thai.allField(zipCode.value)
-      let idList = ['input_zipcode', 'input_district', 'input_amphoe', 'input_province']
-      Object.values(allField).forEach((value, index) => {
-        if (Array.isArray(value)) {
-          if (index > 0) {
-            var select = document.getElementById(idList[index])
-            select.options.length = 0
-            value.forEach((option) => {
-              option = Object.values(option)
-              select.options[select.options.length] = new Option(`${option[option.length - 1]}`, `${option[option.length - 1]}`, false, false);
-            })
-          }
-        }
-      })
-    })
+    thailandAddress.init()
   }
 
   var form = 'customer'; // need to refactor!
@@ -700,13 +686,78 @@ function highlightPageNumber(pagination, pageNumber) {
 }
 
 // address related
-thailandAddress()
 class ThailandAddress {
-  constructor() {
-    const thai = require('thai-data')
-    
+  thai = require('thai-data')
+  idList = ['input_zipcode', 'input_district', 'input_amphoe', 'input_province']
+  idListDisplay = ['input_zipcode', 'input_province', 'input_amphoe', 'input_district']
+  idListForCombine = idListDisplay.reverse()
+
+  constructor() { }
+
+  init() {
+    var allField
+    let zipCode = document.getElementById('input_zipcode')
+    zipCode.addEventListener('change', () => {
+      allField = this.thai.allField(zipCode.value)
+      Object.values(allField).forEach((value, index) => {
+        if (Array.isArray(value)) {
+          if (index > 0) {
+            var select = document.getElementById(this.idList[index])
+            select.options.length = 0
+            value.forEach((option) => {
+              option = Object.values(option)
+              select.options[select.options.length] = new Option(`${option[option.length - 1]}`, `${option[option.length - 1]}`, false, false);
+            })
+          }
+        }
+      })
+    })
+  }
+
+  combine(detail) {
+    var combinedAddress = detail
+    this.idListForCombine.forEach((DOM, index) => {
+      combinedAddress += ' '
+      if (index == 0)
+        combinedAddress += 'ต.'
+      else if (index == 1)
+        combinedAddress += 'อ.'
+      else if (index == 2)
+        combinedAddress += 'จ.'
+      combinedAddress += document.getElementById(DOM).value
+    })
+    return combinedAddress
+  }
+
+  deCombine(combinedAddress) {
+    let addressList = combinedAddress.split(' ')
+    console.log(addressList)
+    var j = 0
+    for (i = addressList.length - 1; i >= addressList.length - 4; i--) {
+      var pureName = addressList[i].split('.')[0]
+      if (j == 0) {
+        document.getElementById(this.idListDisplay[j]).value = pureName
+        j++
+        continue
+      }
+      var select = document.getElementById(this.idListDisplay[j])
+      console.log(select)
+      if (j > 0)
+        pureName = addressList[i].split('.')[1]
+
+      select.options.length = 0
+      select.options[select.options.length] = new Option(`${pureName}`, `${pureName}`, false, false);
+      j++
+    }
+
+    var leftOver = ''
+    for (i = 0; i < addressList.length - 4; i++) {
+      leftOver += addressList[i]
+    }
+    return leftOver
   }
 }
+let thailandAddress = new ThailandAddress()
 
 // table related
 function makeCompleteTable(pageHeader) {
