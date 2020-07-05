@@ -340,6 +340,7 @@ async function callfilledForm(pageHeader, id) {
       document.getElementById('mainContent').innerHTML = data.toString();
       loadFunctionalElements(complexTable)
       field.forEach((item, index) => {
+        let fieldDOM = document.getElementById(tableField[tableName][item.name])
         if (tableField[tableName][item.name].radio !== undefined) {
           document.forms['form'][tableField[tableName][item.name].id + result[index]].checked = true;
         }
@@ -356,9 +357,15 @@ async function callfilledForm(pageHeader, id) {
             document.getElementById('companyName').value = result[index]
           }
         }
+        else if(['appointmentDate', 'purchaseDate', 'jobReceiveDate'].includes(tableField[tableName][item.name])){
+          fieldDOM.value = result[index].format("dd/mm/yyyy HH:MM")
+        }
+        else if(['importDocDate', 'refImportDocDate', 'recieveDate', 'warrantyDate'].includes(tableField[tableName][item.name])){
+          fieldDOM.value = result[index].format("dd/mm/yyyy")
+        }
         else {
-          let fieldDOM = document.getElementById(tableField[tableName][item.name])
           if (fieldDOM) {
+
             fieldDOM.value = result[index]
             event = document.createEvent('Event');
             event.initEvent('change', true, false);
