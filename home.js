@@ -690,7 +690,7 @@ class ThailandAddress {
   thai = require('thai-data')
   idList = ['input_zipcode', 'input_district', 'input_amphoe', 'input_province']
   idListDisplay = ['input_zipcode', 'input_province', 'input_amphoe', 'input_district']
-  idListForCombine = this.idListDisplay.reverse()
+  idListForCombine = ['input_district', 'input_amphoe', 'input_province', 'input_zipcode']
 
   constructor() { }
 
