@@ -35,13 +35,26 @@
     "delivery_saleperson": "staffID1",
     "delivery_staff": "staffID2",
     "delivery_customer": "customerID",
-    "delivery_qty": "productQty",
-    "delivery_product": "productName",
-    "delivery_brand": "productBrand",
-    "delivery_product_model": "productModel",
-    "delivery_product_sn": "productSN",
-    "delivery_equip": "equipmentID",
-    "delivery_equip_qty": "equipmentQty",
+    "delivery_product": {
+      "column" : "1",
+      "table" : "1"
+    },
+    "delivery_brand": {
+      "column" : "2",
+      "table" : "1"
+    },
+    "delivery_product_model": {
+      "column" : "3",
+      "table" : "1"
+    },
+    "delivery_product_sn": {
+      "column" : "4",
+      "table" : "1"
+    },
+    "delivery_equip": {
+      "column" : "1",
+      "table" : "2"
+    },
     "delivery_location": "",
     "delivery_fee": "totalSpent",
     "delivery_cash_on": "totalPaid"

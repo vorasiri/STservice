@@ -336,9 +336,16 @@ async function callfilledForm(pageHeader, id) {
     let result = Object.values(promise[0][0])
     let field = Object.values(promise[1])
 
-    fs.readFile(filename.toString(), function (err, data) {
+    fs.readFile(filename.toString(), async function (err, data) {
       document.getElementById('mainContent').innerHTML = data.toString();
       loadFunctionalElements(complexTable)
+      var brandShortDict = {}
+      brandDictionary = await mysqlFetchingAll('brands')
+      brandDictionary.forEach(value => {
+        brandShortDict[value.brand_id] = value.brand_name
+      })
+      var multiRow1 = new MultiRow(1, brandShortDict)
+
       field.forEach((item, index) => {
         let fieldDOM = document.getElementById(tableField[tableName][item.name])
         if (tableField[tableName][item.name].radio !== undefined) {
@@ -357,11 +364,19 @@ async function callfilledForm(pageHeader, id) {
             document.getElementById('companyName').value = result[index]
           }
         }
-        else if(['appointmentDate', 'purchaseDate', 'jobReceiveDate'].includes(tableField[tableName][item.name])){
+        else if (['appointmentDate', 'purchaseDate', 'jobReceiveDate'].includes(tableField[tableName][item.name])) {
           fieldDOM.value = result[index].format("dd/mm/yyyy HH:MM")
         }
-        else if(['importDocDate', 'refImportDocDate', 'recieveDate', 'warrantyDate'].includes(tableField[tableName][item.name])){
+        else if (['importDocDate', 'refImportDocDate', 'recieveDate', 'warrantyDate'].includes(tableField[tableName][item.name])) {
           fieldDOM.value = result[index].format("dd/mm/yyyy")
+        }
+        else if (tableField[tableName][item.name].column !== undefined) {
+          if (tableField[tableName][item.name].table == 1) {
+            multiRow1.setProp([tableField[tableName][item.name].column], result[index])
+          }
+          // else {
+          //   multiRow2.setProp([tableField[tableName][item.name].column], result[index])
+          // }
         }
         else {
           if (fieldDOM) {
@@ -378,7 +393,8 @@ async function callfilledForm(pageHeader, id) {
           customerAddress.value = thailandAddress.deCombine(customerAddress.value)
         }
       })
-
+      console.log(multiRow1.output())
+      
     })
   }
   catch (err) {
@@ -650,6 +666,18 @@ function mysqlFetchingRow(table, id) {
   })
 }
 
+function mysqlFetchingAll(table) {
+  return new Promise((resolve, reject) => {
+    con.query(`SELECT * FROM ${table}`, function (err, result, field) {
+      if (err) {
+        reject(err);
+      }
+      else
+        resolve(result);
+    })
+  })
+}
+
 function contains(target, pattern) {
   var value = 0;
   pattern.forEach(function (word) {
@@ -689,6 +717,38 @@ function highlightPageNumber(pagination, pageNumber) {
     }
     else
       pagination.children[i].classList.remove("active")
+  }
+}
+
+// multiRow related
+class MultiRow {
+  constructor(joinColNumber, dictionary) {
+    this.data = {}
+    this.dataOut = [[], []]
+    this.joinColNumber = joinColNumber
+    this.dictionary = dictionary
+  }
+
+  output() { //all row
+    Object.values(this.data).forEach((colString, colIndex) => {
+      colString.split(',').forEach((value, rowIndex) => {
+        if (this.joinColNumber == colIndex) {
+          this.dataOut[rowIndex][colIndex] = this.dictionary[value]
+        }
+        else {
+          this.dataOut[rowIndex][colIndex] = value
+        }
+      })
+    })
+    return this.dataOut
+  }
+
+  setProp(propName, value) {
+    this.data[propName] = value
+  }
+
+  getProp(propName) {
+    return this.data[propName]
   }
 }
 

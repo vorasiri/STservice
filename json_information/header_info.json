@@ -15,7 +15,7 @@
       "form": "forms/delivery_form.html",
       "viewPage": "view_pages/delivery_view.html",
       "table": "info_delivery",
-      "query": "SELECT delivery_job_id, delivery_purchase, delivery_appoint, staff_name AS delivery_staff, customer_name, customer_tel, delivery_qty, delivery_product, brand_name AS delivery_brand, delivery_product_model FROM info_delivery i JOIN staff s ON i.delivery_staff = s.staff_id JOIN customers c ON i.delivery_customer = c.customer_id JOIN brands b ON i.delivery_brand = b.brand_id"
+      "query": "SELECT delivery_job_id, delivery_purchase, delivery_appoint, staff_name AS delivery_staff, customer_name, customer_tel, delivery_product, GROUP_CONCAT(brand_name) AS delivery_brand, delivery_product_model FROM info_delivery i JOIN staff s ON i.delivery_staff = s.staff_id JOIN customers c ON i.delivery_customer = c.customer_id JOIN brands b ON FIND_IN_SET(b.brand_id, i.delivery_brand) > 0 GROUP BY delivery_job_id"
     },
     "จานดาวเทียม": {
       "form": "forms/installation_sat_form.html",
