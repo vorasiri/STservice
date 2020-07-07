@@ -394,7 +394,7 @@ async function callfilledForm(pageHeader, id) {
         }
       })
       console.log(multiRow1.output())
-      
+
     })
   }
   catch (err) {
@@ -415,6 +415,15 @@ function loadExInfoPage(pageHeader) {
 }
 
 // Part form //
+// repeat the given element to given place fill or empty
+function elementRepeater(parentElement, empty = true, filler = []) {
+  var copiedElement = parentElement.lastElementChild.cloneNode(true)
+  var IDcounter = parseInt(copiedElement.id.match(/\d/g)) + 1
+  copiedElement.id = `${copiedElement.id.replace(/[0-9]/g, '')}${IDcounter}`
+  parentElement.appendChild(copiedElement)
+  console.log(copiedElement)
+}
+
 // modal function for modalID
 function showModal(modalID) {
   console.log('Loading Modal..')
@@ -427,6 +436,16 @@ function loadFunctionalElements(complex = false) {
     document.getElementById('customerSearchButton').addEventListener('click', function (event) {
       event.preventDefault()
       showModal('searchModal')
+    })
+  }
+
+  // add brands option with shortBranddict
+
+  let addProductRowButton = document.getElementById('addProductRowButton')
+  if (addProductRowButton) {
+    addProductRowButton.addEventListener('click', (event) => {
+      event.preventDefault()
+      elementRepeater(document.getElementById('productTable'))
     })
   }
 

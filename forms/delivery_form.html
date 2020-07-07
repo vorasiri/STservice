@@ -168,25 +168,27 @@
                         <th>รุ่น</th>
                         <th>หมายเลขเครื่อง</th>
                     </tr>
-                    <tr>
-                        <td>
-                            <input type="text" class="table-field" id="productName" name="productName">
-                        </td>
-                        <td>
-                            <select id="productBrand" class="dropdown-field" name="productBrand">
-                                <option value="Brand">Product Brand</option>
-                                <!-- data from brand table -->
-                            </select>
-                        </td>
-                        <td>
-                            <input type="text" class="table-field" id="productModel" name="productModel">
-                        </td>
-                        <td>
-                            <input type="text" class="table-field" id="productSN" name="productSN">
-                        </td>
-                    </tr>
+                    <tbody id="productTable">
+                        <tr id="productRow1">
+                            <td>
+                                <input type="text" class="table-field" id="productName" name="productName">
+                            </td>
+                            <td>
+                                <select id="productBrand" class="dropdown-field" name="productBrand">
+                                    <option value="Brand">Product Brand</option>
+                                    <!-- data from brand table -->
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="table-field" id="productModel" name="productModel">
+                            </td>
+                            <td>
+                                <input type="text" class="table-field" id="productSN" name="productSN">
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
-                <input class="add-btn" type="submit" value="เพิ่ม">
+                <input class="add-btn" type="submit" value="เพิ่ม" id="addProductRowButton">
                 <div class="qty">
                     <span>จำนวนสินค้า</span>
                     <span id="productQty" name="productQty">0</span>
