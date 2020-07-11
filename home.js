@@ -15,6 +15,24 @@ const tableField = require("./json_information/table_field.json")
 const position = require("./json_information/position.json")
 const notification = require("./json_information/notification_status.json")
 
+// fetching table form db and convert to dict
+var brandShortDict = {};
+
+(async () => {
+  var brandShortDict = {}
+  try {
+    await mysqlFetchingAll('brands')
+    brandDictionary = await mysqlFetchingAll('brands')
+    brandDictionary.forEach(value => {
+      brandShortDict[value.brand_id] = value.brand_name
+    })
+    window.brandShortDict = brandShortDict
+  }
+  catch (err) {
+    console.log(err)
+  }
+})();
+
 // drop down of mainMenu
 var dropdown = document.getElementsByClassName("dropdown-btn");
 
@@ -339,12 +357,7 @@ async function callfilledForm(pageHeader, id) {
     fs.readFile(filename.toString(), async function (err, data) {
       document.getElementById('mainContent').innerHTML = data.toString();
       loadFunctionalElements(complexTable)
-      var brandShortDict = {}
-      brandDictionary = await mysqlFetchingAll('brands')
-      brandDictionary.forEach(value => {
-        brandShortDict[value.brand_id] = value.brand_name
-      })
-      var multiRow1 = new MultiRow(1, brandShortDict)
+      var multiRow1 = new MultiRow(1, window.brandShortDict)
 
       field.forEach((item, index) => {
         let fieldDOM = document.getElementById(tableField[tableName][item.name])
@@ -394,6 +407,9 @@ async function callfilledForm(pageHeader, id) {
         }
       })
       console.log(multiRow1.output())
+      multiRow1.output().forEach(row => {
+        elementRepeater(document.getElementById('productTable'), false, row)
+      })
 
     })
   }
@@ -417,11 +433,31 @@ function loadExInfoPage(pageHeader) {
 // Part form //
 // repeat the given element to given place fill or empty
 function elementRepeater(parentElement, empty = true, filler = []) {
-  var copiedElement = parentElement.lastElementChild.cloneNode(true)
-  var IDcounter = parseInt(copiedElement.id.match(/\d/g)) + 1
-  copiedElement.id = `${copiedElement.id.replace(/[0-9]/g, '')}${IDcounter}`
-  parentElement.appendChild(copiedElement)
-  console.log(copiedElement)
+  if (empty) {
+    var copiedElement = parentElement.lastElementChild.cloneNode(true)
+    var IDcounter = parseInt(copiedElement.id.match(/\d/g)) + 1
+    copiedElement.id = `${copiedElement.id.replace(/[0-9]/g, '')}${IDcounter}`
+    parentElement.appendChild(copiedElement)
+    console.log(copiedElement)
+  }
+  else {
+    var copiedElement = parentElement.lastElementChild.cloneNode(true)
+    var IDcounter = parseInt(copiedElement.id.match(/\d/g)) + 1
+    copiedElement.id = `${copiedElement.id.replace(/[0-9]/g, '')}${IDcounter}`
+
+    var originalElement = parentElement.lastElementChild
+    filler.forEach((value, index) => {
+      if (originalElement.children[index].lastElementChild.value == '') {
+        originalElement.children[index].lastElementChild.value = value
+      }
+      else if (originalElement.children[index].lastElementChild.length != 0) {
+        let select = originalElement.children[index].lastElementChild
+        select.options[0] = new Option(`${value}`, `${value}`, true, true);
+      }
+    })
+
+    parentElement.appendChild(copiedElement)
+  }
 }
 
 // modal function for modalID
@@ -440,6 +476,14 @@ function loadFunctionalElements(complex = false) {
   }
 
   // add brands option with shortBranddict
+  let productBrandDropdown = document.getElementsByClassName('dropdown-field')
+  Object.values(productBrandDropdown).forEach(element => {
+    if (element.id == 'productBrand') {
+      Object.values(window.brandShortDict).forEach((brandName, index) => {
+        element.options[index + 1] = new Option(`${brandName}`, `${brandName}`, false, false);
+      })
+    }
+  })
 
   let addProductRowButton = document.getElementById('addProductRowButton')
   if (addProductRowButton) {
