@@ -467,11 +467,31 @@ function showModal(modalID) {
 }
 
 function loadFunctionalElements(complex = false) {
+  // modal for customerSearch
   if (document.getElementById('customerSearchButton')) {
     console.log('try load up modal')
     document.getElementById('customerSearchButton').addEventListener('click', function (event) {
       event.preventDefault()
       showModal('searchModal')
+    })
+  }
+
+  // add extra staff for add-extra-staff class
+  if (document.getElementsByClassName('add-extra-staff-button')) {
+    console.log('create handler of add-extra-staff-button')
+    document.getElementsByClassName('add-extra-staff-button')[0].addEventListener('click', function (event) {
+      event.preventDefault()
+      let subject = document.getElementsByClassName('inputStaff')
+      let parentTable = document.getElementById('appointmentTable')
+      Object.values(subject).forEach(element => {
+        var copiedElement = element.cloneNode(true)
+        var IDcounter = parseInt(copiedElement.lastElementChild.lastElementChild.id.match(/\d/g)) + 1
+        copiedElement.lastElementChild.lastElementChild.id = `${copiedElement.lastElementChild.lastElementChild.id.replace(/[0-9]/g, '')}${IDcounter}`
+        copiedElement.lastElementChild.lastElementChild.value = ''
+        parentTable.appendChild(copiedElement)
+      })
+      addEventStaffID()
+      document.getElementsByClassName('add-extra-staff-button')[0].disable = true // not working
     })
   }
 
@@ -513,21 +533,26 @@ function loadFunctionalElements(complex = false) {
   })
 
   // fetch staffname on staffID change
-  for (i = 1; i < 4; i++) {
-    let staffID = document.getElementById(`staffID${i}`)
-    if (staffID) {
-      console.log('autofill staffName by ID ready')
-      staffID.addEventListener('change', async (event) => {
-        try {
-          let result = await mysqlFetchingRow('staff', staffID.value)
-          $(`#staffName${event.target.id.match(/\d/g)}`).val(`${result[0][0].staff_name}`)
-        }
-        catch (err) {
-          console.log(err)
-        }
-      })
+  function addEventStaffID() {
+    for (i = 1; i < 4; i++) {
+      let staffID = document.getElementById(`staffID${i}`)
+      if (staffID) {
+        console.log('autofill staffName by ID ready')
+        staffID.addEventListener('change', async (event) => {
+          try {
+            let result = await mysqlFetchingRow('staff', staffID.value)
+            $(`#staffName${event.target.id.match(/\d/g)}`).val(`${result[0][0].staff_name}`)
+          }
+          catch (err) {
+            console.log(err)
+          }
+        })
+      }
     }
+
+
   }
+  addEventStaffID()
 
   let customerID = document.getElementById('customerID')
   if (Boolean(customerID) && complex) {

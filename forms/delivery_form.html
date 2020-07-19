@@ -60,7 +60,7 @@
             <div class="column">
                 <div class="appoinmentInfo">
                     <p>การนัดหมาย</p>
-                    <table>
+                    <table id="appointmentTable">
                         <tr>
                             <td>เลขที่ใบจัดส่ง</td>
                             <td>
@@ -79,16 +79,16 @@
                                 <span>พนักงานจัดส่ง</span>
                             </td>
                             <td>
-                                <input class="add-btn" type="submit" value="เพิ่ม">
+                                <input class="add-btn add-extra-staff-button" type="submit" value="เพิ่ม">
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="inputStaff">
                             <td>รหัสพนักงาน</td>
                             <td>
                                 <input type="number" id="staffID2" name="staffID2">
                             </td>
                         </tr>
-                        <tr>
+                        <tr class="inputStaff">
                             <!-- display only -->
                             <td>ชื่อพนักงาน</td>
                             <td>
