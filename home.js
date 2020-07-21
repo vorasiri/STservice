@@ -483,15 +483,17 @@ function loadFunctionalElements(complex = false) {
       event.preventDefault()
       let subject = document.getElementsByClassName('inputStaff')
       let parentTable = document.getElementById('appointmentTable')
-      Object.values(subject).forEach(element => {
-        var copiedElement = element.cloneNode(true)
-        var IDcounter = parseInt(copiedElement.lastElementChild.lastElementChild.id.match(/\d/g)) + 1
-        copiedElement.lastElementChild.lastElementChild.id = `${copiedElement.lastElementChild.lastElementChild.id.replace(/[0-9]/g, '')}${IDcounter}`
-        copiedElement.lastElementChild.lastElementChild.value = ''
-        parentTable.appendChild(copiedElement)
-      })
-      addEventStaffID()
-      document.getElementsByClassName('add-extra-staff-button')[0].disable = true // not working
+      if (parentTable.childElementCount <= 1) {
+        Object.values(subject).forEach(element => {
+          var copiedElement = element.cloneNode(true)
+          var IDcounter = parseInt(copiedElement.lastElementChild.lastElementChild.id.match(/\d/g)) + 1
+          copiedElement.lastElementChild.lastElementChild.id = `${copiedElement.lastElementChild.lastElementChild.id.replace(/[0-9]/g, '')}${IDcounter}`
+          copiedElement.lastElementChild.lastElementChild.value = ''
+          parentTable.appendChild(copiedElement)
+        })
+        addEventStaffID()
+      }
+
     })
   }
 
