@@ -512,7 +512,90 @@ function addEventStaffID() {
 
 }
 
+// string to Date only BE to AD
+function stringToDate(timeString) {
+  var date = new Date(timeString)
+  date.setFullYear(date.getFullYear() - 543)
+  return (date)
+}
+
+// compactor
+function elementValueCompactor(idKeyword, parentElement) {
+  var output = []
+  for (i = 1; i <= parentElement.childElementCount; i++) {
+    let subjectElement = document.getElementById(`${idKeyword}${i}`)
+    if (subjectElement.children[0].children[0].value != '') {
+      output.push([])
+
+      for (var colName in subjectElement.children) {
+        if (colName == 'length') {
+          break
+        }
+        if (subjectElement.children[colName].children[0].id.includes('Brand')) {
+          output[i - 1].push(getKeyByValue(window.brandShortDict, subjectElement.children[colName].children[0].value))
+        }
+        else {
+          output[i - 1].push(subjectElement.children[colName].children[0].value)
+        }
+      }
+    }
+  }
+  var reverseOutput = []
+  for (var rowIndex in output) {
+    for (var colIndex in output[rowIndex]) {
+      if (!reverseOutput[colIndex])
+        reverseOutput.push([])
+      reverseOutput[colIndex].push(output[rowIndex][colIndex])
+    }
+  }
+  console.log(output)
+  return reverseOutput
+}
+
 function loadFunctionalElements(complex = false) {
+  // get pageHeader for further use
+  let pageHeader = document.getElementById('pageHeader').innerText.replace(/\s/g, '')
+
+  // event handler for submitButton
+  let submitButton = document.getElementsByClassName('submit-btn')[0]
+  if (submitButton) {
+    submitButton.addEventListener('click', function (event) {
+      event.preventDefault()
+      var valueList, fieldList, table
+      table = headerInfo[pageHeader].table
+      fieldList = []
+      valueList = []
+      var i = 0
+      for (var key in tableField[table]) {
+        if (key != 'pk') {
+          fieldList.push(key)
+          if (document.getElementById(`${tableField[table][key]}`)) {
+            if (tableField[table][key].includes('Date')) {
+              valueList.push(stringToDate(document.getElementById(`${tableField[table][key]}`).value))
+            }
+            else {
+              valueList.push(document.getElementById(`${tableField[table][key]}`).value)
+            }
+          }
+          else {
+            try {
+              let readTable = elementValueCompactor(tableField[table][key].rowID, document.getElementById(tableField[table][key].tableID))
+              valueList.push(readTable[i].join(','))
+            }
+            catch (err) {
+              console.log(err)
+              valueList.push(null)
+            }
+            i++
+          }
+        }
+      }
+      console.log(fieldList)
+      console.log(valueList)
+      mysqlUpdateSubmit(table, fieldList, [valueList])
+    })
+  }
+
   // modal for customerSearch
   if (document.getElementById('customerSearchButton')) {
     console.log('try load up modal')
@@ -759,6 +842,17 @@ function loadDatePickerToID(id, includeTimePicker = false) {
 
 // Others //
 
+function mysqlUpdateSubmit(table, fieldList, valueList) {
+  let stmt = `REPLACE INTO ${table}(${fieldList.join(',')})  VALUES ?  `;
+  con.query(stmt, [valueList], (err, results, fields) => {
+    if (err) {
+      return console.error(err.message);
+    }
+    // get inserted rows
+    console.log('Row affected:' + results.affectedRows);
+  });
+}
+
 function mysqlFetchingRow(table, id) {
   return new Promise((resolve, reject) => {
     con.query(`SELECT * FROM ${table} WHERE ${tableField[table].pk} = ${id}`, function (err, result, field) {
@@ -781,6 +875,10 @@ function mysqlFetchingAll(table) {
         resolve(result);
     })
   })
+}
+
+function getKeyByValue(object, value) {
+  return Object.keys(object).find(key => object[key] === value);
 }
 
 function contains(target, pattern) {

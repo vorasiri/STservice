@@ -37,23 +37,33 @@
     "delivery_customer": "customerID",
     "delivery_product": {
       "column" : "1",
-      "table" : "1"
+      "table" : "1",
+      "tableID" : "productTable",
+      "rowID" : "productRow"
     },
     "delivery_brand": {
       "column" : "2",
-      "table" : "1"
+      "table" : "1",
+      "tableID" : "productTable",
+      "rowID" : "productRow"
     },
     "delivery_product_model": {
       "column" : "3",
-      "table" : "1"
+      "table" : "1",
+      "tableID" : "productTable",
+      "rowID" : "productRow"
     },
     "delivery_product_sn": {
       "column" : "4",
-      "table" : "1"
+      "table" : "1",
+      "tableID" : "productTable",
+      "rowID" : "productRow"
     },
     "delivery_equip": {
       "column" : "1",
-      "table" : "2"
+      "table" : "2",
+      "tableID" : "equipTable",
+      "rowID" : "equipRow"
     },
     "delivery_location": "",
     "delivery_fee": "totalSpent",
