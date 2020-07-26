@@ -420,7 +420,9 @@ async function callfilledForm(pageHeader, id) {
       })
       console.log(multiRow1.output())
       multiRow1.output().forEach(row => {
-        elementRepeater(document.getElementById('productTable'), false, row)
+        if (row.length > 0) {
+          elementRepeater(document.getElementById('productTable'), false, row)
+        }
       })
 
     })
