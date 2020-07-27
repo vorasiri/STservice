@@ -43,10 +43,6 @@ autoUpdater.on('update-downloaded', () => {
   win.webContents.send('update_downloaded');
 });
 
-ipcMain.on('restart_app', () => {
-  autoUpdater.quitAndInstall();
-});
-
 app.on('ready', createWindow);
 
 
@@ -65,6 +61,10 @@ app.on('activate', () => {
 const { ipcMain } = require( "electron" );
 
 var mysql = require('mysql');
+
+ipcMain.on('restart_app', () => {
+  autoUpdater.quitAndInstall();
+});
 
 ipcMain.on("createMysqlCon", (event) => {
   var con = mysql.createConnection({
