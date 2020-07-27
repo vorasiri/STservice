@@ -16,6 +16,16 @@
     <div id="responseText"></div>
   </div>
 
+  <div id="notification" class="hidden">
+    <p id="message"></p>
+    <button id="close-button" onClick="closeNotification()">
+      Close
+    </button>
+    <button id="restart-button" onClick="restartApp()" class="hidden">
+      Restart
+    </button>
+  </div>
+
   <script>
     require('./login.js');
   </script>

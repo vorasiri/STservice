@@ -6,6 +6,7 @@ const BrowserWindow = electron.BrowserWindow;
 //const {app, BrowserWindow} = require('electron')
 const path = require('path')
 const url = require('url')
+const { autoUpdater } = require('electron-updater');
 
 
 let win;
@@ -26,10 +27,25 @@ function createWindow () {
 
   win.maximize()
 
+  win.once('ready-to-show', () => {
+    autoUpdater.checkForUpdatesAndNotify();
+  });
+
   win.on('closed', () => {
     win = null
   });
 }
+
+autoUpdater.on('update-available', () => {
+  win.webContents.send('update_available');
+});
+autoUpdater.on('update-downloaded', () => {
+  win.webContents.send('update_downloaded');
+});
+
+ipcMain.on('restart_app', () => {
+  autoUpdater.quitAndInstall();
+});
 
 app.on('ready', createWindow);
 

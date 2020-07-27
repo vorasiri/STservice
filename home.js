@@ -573,14 +573,14 @@ function elementValueCompactor(idKeyword, parentElement) {
 function loadFunctionalElements(complex = false) {
   // get pageHeader for further use
   let pageHeader = document.getElementById('pageHeader').innerText.replace(/\s/g, '')
+  let table = headerInfo[pageHeader].table
 
   // event handler for submitButton
   let submitButton = document.getElementsByClassName('submit-btn')[0]
   if (submitButton) {
     submitButton.addEventListener('click', function (event) {
       event.preventDefault()
-      var valueList, fieldList, table
-      table = headerInfo[pageHeader].table
+      var valueList, fieldList
       fieldList = []
       valueList = []
       var i = 0
@@ -655,7 +655,7 @@ function loadFunctionalElements(complex = false) {
   }
 
   // auto generated id
-  // let id = document.getElementById()
+  let id = document.getElementById(tableField[tableField[table].pk])
 
   // date time picker
   var idList = ['appointmentDate', 'purchaseDate', 'jobReceiveDate']
