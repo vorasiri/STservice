@@ -65,7 +65,7 @@
       "tableID" : "equipTable",
       "rowID" : "equipRow"
     },
-    "delivery_location": "",
+    "delivery_location": "deliveryLocation",
     "delivery_fee": "totalSpent",
     "delivery_cash_on": "totalPaid"
   },

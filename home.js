@@ -361,7 +361,8 @@ async function callfilledForm(pageHeader, id) {
 
       field.forEach((item, index) => {
         let fieldDOM = document.getElementById(tableField[tableName][item.name])
-        if (tableField[tableName][item.name].radio !== undefined) {
+        if (tableField[tableName][item.name] === undefined) { }
+        else if (tableField[tableName][item.name].radio !== undefined) {
           document.forms['form'][tableField[tableName][item.name].id + result[index]].checked = true;
         }
         else if (['customerName', 'partnerName'].includes(tableField[tableName][item.name])) {
@@ -522,6 +523,21 @@ function stringToDate(timeString) {
 }
 
 // compactor
+function inputStaffCompactor(idKeyword) {
+  var i = 2
+  var output = []
+  while (true) {
+    let subjectElement = document.getElementById(`${idKeyword}${i}`)
+    if (subjectElement !== null) {
+      output.push(subjectElement.value)
+      i++
+    }
+    else
+      break
+  }
+  return output
+}
+
 function elementValueCompactor(idKeyword, parentElement) {
   var output = []
   for (i = 1; i <= parentElement.childElementCount; i++) {
@@ -574,6 +590,9 @@ function loadFunctionalElements(complex = false) {
           if (document.getElementById(`${tableField[table][key]}`)) {
             if (tableField[table][key].includes('Date')) {
               valueList.push(stringToDate(document.getElementById(`${tableField[table][key]}`).value))
+            }
+            else if (tableField[table][key].includes('staffID2')) {
+              valueList.push(inputStaffCompactor('staffID').join(','))
             }
             else {
               valueList.push(document.getElementById(`${tableField[table][key]}`).value)
