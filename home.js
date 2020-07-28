@@ -85,7 +85,7 @@ var pageHeader;
 const allNavButton = document.getElementsByClassName('navButton');
 Array.from(allNavButton).forEach(navButton => {
   navButton.addEventListener('click', function (e) {
-    fs.readFile('info_page.html', function (err, data) {
+    fs.readFile('./info_page.html', function (err, data) {
       pageHeader = e.target.innerText.replace(/\s/g, '')
       console.log(pageHeader)
       document.getElementById('mainContent').innerHTML = data.toString();
@@ -103,7 +103,7 @@ Array.from(allNavButton).forEach(navButton => {
         callHtmlFile(headerInfo[pageHeader].form, 1)
       });
       document.getElementById('importButton').addEventListener('click', function () {
-        callHtmlFile('info_page.html', 2, pageHeader)
+        callHtmlFile('./info_page.html', 2, pageHeader)
       });
 
       makeCompleteTable(pageHeader)
