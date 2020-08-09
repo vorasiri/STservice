@@ -627,7 +627,7 @@ function loadFunctionalElements(complex = false) {
   }
 
   // add extra staff for add-extra-staff class
-  if (document.getElementsByClassName('add-extra-staff-button')) {
+  if (document.getElementsByClassName('add-extra-staff-button') > 0) {
     console.log('create handler of add-extra-staff-button')
     document.getElementsByClassName('add-extra-staff-button')[0].addEventListener('click', function (event) {
       event.preventDefault()
@@ -1044,6 +1044,7 @@ class ThailandAddress {
     var leftOver = ''
     for (i = 0; i < addressList.length - 4; i++) {
       leftOver += addressList[i]
+      leftOver += ' '
     }
     return leftOver
   }
