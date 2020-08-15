@@ -87,7 +87,8 @@ Array.from(allNavButton).forEach(navButton => {
   navButton.addEventListener('click', function (e) {
     fs.readFile('./info_page.html', function (err, data) {
       pageHeader = e.target.innerText.replace(/\s/g, '')
-      console.log(pageHeader)
+      window.pageHeader = pageHeader
+      console.log("global pageHeader: " + pageHeader)
       document.getElementById('mainContent').innerHTML = data.toString();
       if (contains(e.target.innerHTML, ['แอร์', 'เครื่องทำน้ำอุ่น', 'จานดาวเทียม'])) {
         document.getElementById('pageHeader').innerHTML = 'ข้อมูลการติดตั้ง ' + e.target.innerText;
@@ -100,10 +101,10 @@ Array.from(allNavButton).forEach(navButton => {
         document.getElementById('pageHeader').innerHTML = e.target.innerText;
       }
       document.getElementById('addButton').addEventListener('click', function () {
-        callHtmlFile(headerInfo[pageHeader].form, 1)
+        callHtmlFile(headerInfo[window.pageHeader].form, 1)
       });
       document.getElementById('importButton').addEventListener('click', function () {
-        callHtmlFile('./info_page.html', 2, pageHeader)
+        callHtmlFile('./info_page.html', 2, window.pageHeader)
       });
 
       makeCompleteTable(pageHeader)
@@ -439,10 +440,11 @@ function loadExInfoPage(pageHeader) {
     document.getElementById('pageHeader').innerHTML = 'รับสินค้า อะไหล่'
   else
     document.getElementById('pageHeader').innerHTML = 'รับสินค้า อุปกรณ์'
+  window.pageHeader = document.getElementById('pageHeader').innerHTML
   document.getElementById('addButton').addEventListener('click', function () {
-    callHtmlFile(headerInfo[`${document.getElementById('pageHeader').innerHTML}`].form, 3, `${document.getElementById('pageHeader').innerHTML}`)
+    callHtmlFile(headerInfo[`${window.pageHeader}`].form, 3, `${window.pageHeader}`)
   });
-  makeCompleteTable(`${document.getElementById('pageHeader').innerHTML}`)
+  makeCompleteTable(`${window.pageHeader}`)
 }
 
 // Part form //
@@ -572,7 +574,7 @@ function elementValueCompactor(idKeyword, parentElement) {
 
 function loadFunctionalElements(complex = false) {
   // get pageHeader for further use
-  let pageHeader = document.getElementById('pageHeader').innerText.replace(/\s/g, '')
+  let pageHeader = window.pageHeader
   let table = headerInfo[pageHeader].table
 
   // event handler for submitButton
@@ -1070,7 +1072,7 @@ function makeCompleteTable(pageHeader) {
       for (var i = 1; i < infoTable.table[0].rows.length; i++) {
         let id = infoTable.table[0].rows[i].getElementsByTagName('td')[0].innerText
         infoTable.table[0].rows[i].addEventListener('click', function () {
-          callfilledForm(pageHeader, id)
+          callfilledForm(window.pageHeader, id)
         })
       }
 
