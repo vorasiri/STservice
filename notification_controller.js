@@ -1,29 +1,31 @@
-require('./event_emitter.js')
+const EventEmitter = require('./event_emitter.js')
+
 class NotificationController {
     constructor(model, view) {
         this._model = model;
         this._view = view;
 
-        view.on('listModified', idx => this.updateSelected(idx));
-        view.on('addButtonClicked', () => this.addItem());
-        view.on('delButtonClicked', () => this.delItem());
+        view.on('editButtonClicked', e => this.edit(e));
+        view.on('confirmButtonClicked', e => this.confirm(e));
+        view.on('dismissButtonClicked', e => this.dismiss(e));
     }
 
-    addItem() {
-        const item = window.prompt('Add item:', '');
-        if (item) {
-            this._model.addItem(item);
-        }
+    confirm(e) {
+        job = e.id.split('_')
+        this._model.confirmItem(job[0], job[1])
+        console.log(job[0], job[1], 'confirm clicked')
     }
 
-    delItem() {
-        const index = this._model.selectedIndex;
-        if (index !== -1) {
-            this._model.removeItemAt(index);
-        }
+    dismiss(e) {
+        job = e.id.split('_')
+        this._model.dismissItem(job[0], job[1]);
+        console.log(job[0], job[1], 'dismiss clicked')
     }
 
-    updateSelected(index) {
-        this._model.selectedIndex = index;
+    edit(e) {
+        job = e.id.split('_')
+        // display form (which not included in this partial of code)
     }
 }
+
+module.exports = NotificationController

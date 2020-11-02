@@ -1,5 +1,9 @@
 console.log('hello from home.js')
 window.$ = window.jQuery = require('jquery');
+const NotificationController = require('./notification_controller.js')
+const NotificationModel = require('./notification_model.js')
+const NotificationView = require('./notification_view.js')
+
 
 // Read MyGlobalVariable.
 const { ipcRenderer, remote } = require("electron");
@@ -149,136 +153,143 @@ async function refreshNotificationBar(updateStatus = false) {
   // clear the bar
   notificationBar.empty()
 
-  // add
-  for (var l = 0; l < notification.initTable.length; l++) {
-    try {
-      let promise = await mysqlFetchingNotification(notification.initTable[l], l)
-      let result = promise[0]
-      let i = promise[2]
+  const model = new NotificationModel()
+  const view = new NotificationView(model, {
+    'sidebar' : notificationBar
+  })
+  const controller = new NotificationController(model, view);
+  view.show();
 
-      if (result.length > 0) {
-        let installingTask = [notification.header[1], notification.header[2], notification.header[3]]
-        if (installingTask.includes(notification.header[i]) && !(includeInAttr(notificationBar[0].children, 'innerText', 'งานติดตั้ง'))) {
-          notificationBar.append('<h3>งานติดตั้ง</h3>');
-        }
-        notificationBar.append(`${notification.header[i]}`);
-        for (var j = 0; j < result.length; j++) {
-          let resultValue = Object.values(result[j])
-          if (i == 0) { // deli
-            notificationBar.append(`<div class="card">
-            <div class="jobID">
-                <b>${resultValue[0]}</b>
-            </div>
-            <div class="jobDetail">
-                นัดหมาย:${resultValue[1].format("dd/mm/yyyy HH:MM")}<br>
-                ${resultValue[2]}<br>
-                ${resultValue[3]}<br>
-                ${deliveryProductRead(resultValue[4], resultValue[5], resultValue[6])}
-                พนักงานติดตั้ง:${resultValue[7]}
-            </div>
-            <div class="groupbtn">
-                <button class="editbtn">แก้ไข</button>
-                <button class="checkbtn">&#10003;</button>
-                <button class="crossbtn">&#10005;</button>
-            </div>
-            </div>`);
-          }
-          else if (i == 1 || i == 3) { // installing AC and WH
-            notificationBar.append(`<div class="card">
-            <div class="jobID">
-                <b>${resultValue[0]} ${notification.installingType[resultValue[1]]}</b>
-            </div>
-            <div class="jobDetail">
-                นัดหมาย:${resultValue[2].format("dd/mm/yyyy HH:MM")}<br>
-                ${resultValue[3]}<br>
-                ${resultValue[4]}<br>
-                ${resultValue[5]}/${resultValue[6]}<br>
-                พนักงานติดตั้ง:${resultValue[7]}
-            </div>
-            <div class="groupbtn">
-                <button class="editbtn">แก้ไข</button>
-                <button class="checkbtn">&#10003;</button>
-                <button class="crossbtn">&#10005;</button>
-            </div>
-            </div>`);
-          }
-          else if (i == 2) { // installing SAT
-            notificationBar.append(`<div class="card">
-            <div class="jobID">
-                <b>${resultValue[0]} ${notification.installingType[resultValue[1]]}</b>
-            </div>
-            <div class="jobDetail">
-                นัดหมาย:${resultValue[2].format("dd/mm/yyyy HH:MM")}<br>
-                ${resultValue[3]}<br>
-                ${resultValue[4]}<br>
-                ${resultValue[5]}/${resultValue[6]}/${resultValue[7]} = ${resultValue[8]}<br>
-                พนักงานติดตั้ง:${resultValue[9]}
-            </div>
-            <div class="groupbtn">
-                <button class="editbtn">แก้ไข</button>
-                <button class="checkbtn">&#10003;</button>
-                <button class="crossbtn">&#10005;</button>
-            </div>
-            </div>`);
-          }
-          else if (i == 4) { // repair
-            notificationBar.append(`<div class="card">
-            <div class="jobID">
-                <b>${resultValue[0]}</b>
-            </div>
-            <div class="jobDetail">
-                วันที่-เวลา ${resultValue[1].format("dd/mm/yyyy HH:MM")}<br>
-                ชื่อ-นามสกุล ${resultValue[2]}<br>
-                หมายเลขโทรศัพท์ ${resultValue[3]}<br>
-                ${resultValue[4]}/${resultValue[5]}/<br>${resultValue[6]} <br>
-                พนักงานติดตั้ง ${resultValue[7]}
-            </div>
-            <div class="groupbtn">
-                <button class="editbtn">แก้ไข</button>
-                <button class="checkbtn">&#10003;</button>
-                <button class="crossbtn">&#10005;</button>
-            </div>
-            </div>`);
-          }
-          else if (i == 5) { // return
-            notificationBar.append(`<div class="card">
-            <div class="jobID">
-                <b>${resultValue[0]}</b>
-            </div>
-            <div class="jobDetail">
-                สถานะ:${notification[notification.initTable[i]].read[resultValue[1]].text}<br>
-                สิ่งที่ต้องทำ:${notification[notification.initTable[i]].read[resultValue[1]].task}<br>
-                ${resultValue[2]}/${resultValue[3]}/${resultValue[4]}<br>
-                อาการ:${resultValue[5]}
-            </div>
-            <div class="groupbtn">
-                <button class="editbtn">แก้ไข</button>
-                <button class="checkbtn">&#10003;</button>
-                <button class="crossbtn">&#10005;</button>
-            </div>
-            </div>`);
-          }
-          // get target row of that table
-          let jobID = notificationBar.children().last()[0].innerText.split('<br>')[0][0]
-          let currentTable = notification.initTable[i]
-          // console.log(currentTable, jobID)
+  // // add
+  // for (var l = 0; l < notification.initTable.length; l++) {
+  //   try {
+  //     let promise = await mysqlFetchingNotification(notification.initTable[l], l)
+  //     let result = promise[0]
+  //     let i = promise[2]
 
-          // add event handler
-          notificationBar.children().last()[0].getElementsByClassName('editbtn')[0].addEventListener('click', () => {
+  //     if (result.length > 0) {
+  //       let installingTask = [notification.header[1], notification.header[2], notification.header[3]]
+  //       if (installingTask.includes(notification.header[i]) && !(includeInAttr(notificationBar[0].children, 'innerText', 'งานติดตั้ง'))) {
+  //         notificationBar.append('<h3>งานติดตั้ง</h3>');
+  //       }
+  //       notificationBar.append(`${notification.header[i]}`);
+  //       for (var j = 0; j < result.length; j++) {
+  //         let resultValue = Object.values(result[j])
+  //         if (i == 0) { // deli
+  //           notificationBar.append(`<div class="card">
+  //           <div class="jobID">
+  //               <b>${resultValue[0]}</b>
+  //           </div>
+  //           <div class="jobDetail">
+  //               นัดหมาย:${resultValue[1].format("dd/mm/yyyy HH:MM")}<br>
+  //               ${resultValue[2]}<br>
+  //               ${resultValue[3]}<br>
+  //               ${deliveryProductRead(resultValue[4], resultValue[5], resultValue[6])}
+  //               พนักงานติดตั้ง:${resultValue[7]}
+  //           </div>
+  //           <div class="groupbtn">
+  //               <button class="editbtn">แก้ไข</button>
+  //               <button class="checkbtn">&#10003;</button>
+  //               <button class="crossbtn">&#10005;</button>
+  //           </div>
+  //           </div>`);
+  //         }
+  //         else if (i == 1 || i == 3) { // installing AC and WH
+  //           notificationBar.append(`<div class="card">
+  //           <div class="jobID">
+  //               <b>${resultValue[0]} ${notification.installingType[resultValue[1]]}</b>
+  //           </div>
+  //           <div class="jobDetail">
+  //               นัดหมาย:${resultValue[2].format("dd/mm/yyyy HH:MM")}<br>
+  //               ${resultValue[3]}<br>
+  //               ${resultValue[4]}<br>
+  //               ${resultValue[5]}/${resultValue[6]}<br>
+  //               พนักงานติดตั้ง:${resultValue[7]}
+  //           </div>
+  //           <div class="groupbtn">
+  //               <button class="editbtn">แก้ไข</button>
+  //               <button class="checkbtn">&#10003;</button>
+  //               <button class="crossbtn">&#10005;</button>
+  //           </div>
+  //           </div>`);
+  //         }
+  //         else if (i == 2) { // installing SAT
+  //           notificationBar.append(`<div class="card">
+  //           <div class="jobID">
+  //               <b>${resultValue[0]} ${notification.installingType[resultValue[1]]}</b>
+  //           </div>
+  //           <div class="jobDetail">
+  //               นัดหมาย:${resultValue[2].format("dd/mm/yyyy HH:MM")}<br>
+  //               ${resultValue[3]}<br>
+  //               ${resultValue[4]}<br>
+  //               ${resultValue[5]}/${resultValue[6]}/${resultValue[7]} = ${resultValue[8]}<br>
+  //               พนักงานติดตั้ง:${resultValue[9]}
+  //           </div>
+  //           <div class="groupbtn">
+  //               <button class="editbtn">แก้ไข</button>
+  //               <button class="checkbtn">&#10003;</button>
+  //               <button class="crossbtn">&#10005;</button>
+  //           </div>
+  //           </div>`);
+  //         }
+  //         else if (i == 4) { // repair
+  //           notificationBar.append(`<div class="card">
+  //           <div class="jobID">
+  //               <b>${resultValue[0]}</b>
+  //           </div>
+  //           <div class="jobDetail">
+  //               วันที่-เวลา ${resultValue[1].format("dd/mm/yyyy HH:MM")}<br>
+  //               ชื่อ-นามสกุล ${resultValue[2]}<br>
+  //               หมายเลขโทรศัพท์ ${resultValue[3]}<br>
+  //               ${resultValue[4]}/${resultValue[5]}/<br>${resultValue[6]} <br>
+  //               พนักงานติดตั้ง ${resultValue[7]}
+  //           </div>
+  //           <div class="groupbtn">
+  //               <button class="editbtn">แก้ไข</button>
+  //               <button class="checkbtn">&#10003;</button>
+  //               <button class="crossbtn">&#10005;</button>
+  //           </div>
+  //           </div>`);
+  //         }
+  //         else if (i == 5) { // return
+  //           notificationBar.append(`<div class="card">
+  //           <div class="jobID">
+  //               <b>${resultValue[0]}</b>
+  //           </div>
+  //           <div class="jobDetail">
+  //               สถานะ:${notification[notification.initTable[i]].read[resultValue[1]].text}<br>
+  //               สิ่งที่ต้องทำ:${notification[notification.initTable[i]].read[resultValue[1]].task}<br>
+  //               ${resultValue[2]}/${resultValue[3]}/${resultValue[4]}<br>
+  //               อาการ:${resultValue[5]}
+  //           </div>
+  //           <div class="groupbtn">
+  //               <button class="editbtn">แก้ไข</button>
+  //               <button class="checkbtn">&#10003;</button>
+  //               <button class="crossbtn">&#10005;</button>
+  //           </div>
+  //           </div>`);
+  //         }
+  //         // get target row of that table
+  //         let jobID = notificationBar.children().last()[0].innerText.split('<br>')[0][0]
+  //         let currentTable = notification.initTable[i]
+  //         // console.log(currentTable, jobID)
 
-          })
+  //         // add event handler
+  //         notificationBar.children().last()[0].getElementsByClassName('editbtn')[0].addEventListener('click', () => {
 
-          if (result.length > 1 && j != result.length - 1) {
-            notificationBar.append(`<br><br>`)
-          }
-        }
-      }
-    }
-    catch (err) {
-      console.log(err)
-    }
+  //         })
 
-  }
+  //         if (result.length > 1 && j != result.length - 1) {
+  //           notificationBar.append(`<br><br>`)
+  //         }
+  //       }
+  //     }
+  //   }
+  //   catch (err) {
+  //     console.log(err)
+  //   }
+
+  // }
   notificationBar.append(`<br><br><br>`)
 }
 

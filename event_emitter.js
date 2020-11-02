@@ -10,3 +10,5 @@ class EventEmitter {
         (this._events[evt] || []).slice().forEach(lsn => lsn(arg));
     }
 }
+
+module.exports = EventEmitter
