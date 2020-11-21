@@ -1,4 +1,4 @@
-require('./event_emitter.js')
+const EventEmitter = require('./event_emitter.js')
 /**
  * The Model. Model stores items and notifies
  * observers about changes.

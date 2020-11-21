@@ -1,4 +1,4 @@
-class EventEmitter {
+module.exports = class EventEmitter {
     constructor() {
         this._events = {};
     }
@@ -10,5 +10,3 @@ class EventEmitter {
         (this._events[evt] || []).slice().forEach(lsn => lsn(arg));
     }
 }
-
-module.exports = EventEmitter

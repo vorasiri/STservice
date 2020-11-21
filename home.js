@@ -1,8 +1,8 @@
 console.log('hello from home.js')
 window.$ = window.jQuery = require('jquery');
-const NotificationController = require('./notification_controller.js')
-const NotificationModel = require('./notification_model.js')
-const NotificationView = require('./notification_view.js')
+const NotificationController = require('./controllers/notification_controller.js')
+const NotificationModel = require('./models/notification_model.js')
+const NotificationView = require('./views/notification_view.js')
 
 
 // Read MyGlobalVariable.

@@ -1,7 +1,19 @@
-const EventEmitter = require('./event_emitter.js')
-const notification = require("./json_information/notification_status.json")
+class Notification {
+    constructor(type, id, appointmentTime, customerName, customerTel, details, staffName, status) {
+        this._type = type
+        this._id = id
+        this._appointmentTime = appointmentTime
+        this._customerName = customerName
+        this._customerTel = customerTel
+        this.details = details || []
+        this._staffName = staffName
+        this._status = status
+    }
+}
 
-class NotificationModel extends EventEmitter {
+const EventEmitter = require('../event_emitter.js')
+
+module.exports = class NotificationModel extends EventEmitter {
 
     constructor(items) {
         super()
@@ -50,19 +62,3 @@ class NotificationModel extends EventEmitter {
         this.emit('itemRemoved', item);
     }
 }
-
-class NotificationBlock {
-    constructor(type, id, appointmentTime, customerName, customerTel, details, staffName, status) {
-        this._type = type
-        this._id = id
-        this._appointmentTime = appointmentTime
-        this._customerName = customerName
-        this._customerTel = customerTel
-        this.details = details || []
-        this._staffName = staffName
-        this._status = status
-    }
-}
-
-module.exports = NotificationModel
-module.exports = NotificationBlock
