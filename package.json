@@ -10,7 +10,7 @@
     "url": "https://github.com/vorasiri/STservice.git"
   },
   "devDependencies": {
-    "electron": "^8.4.1",
+    "electron": "^8.5.2",
     "electron-builder": "^22.8.0",
     "eslint": "^7.5.0"
   },
