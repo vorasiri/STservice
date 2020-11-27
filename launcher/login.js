@@ -22,7 +22,7 @@ function restartApp() {
 }
 
 (async () => {
-    const admin = require('./models/person_orm.js').admin;
+    const admin = require('../models/person_orm.js').admin;
 
     document.getElementById('loginForm').addEventListener('submit', async (event) => {
         event.preventDefault();

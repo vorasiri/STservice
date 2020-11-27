@@ -1,15 +1,15 @@
 console.log('hello from home.js')
 window.$ = window.jQuery = require('jquery');
-const NotificationController = require('./controllers/notification_controller.js')
-const NotificationModel = require('./models/notification_model.js')
-const NotificationView = require('./views/notification_view.js')
+const NotificationController = require('../controllers/notification_controller.js')
+const NotificationModel = require('../models/notification_model.js')
+const NotificationView = require('./notification_view.js')
 
 
 // Read MyGlobalVariable.
 const { ipcRenderer, remote } = require("electron");
 let user = remote.getGlobal("user")
 ipcRenderer.send('createMysqlCon')
-const sequelize = require('./config/connection.js');
+const sequelize = require('../config/connection.js');
 
 (async () => {
   try {
@@ -21,12 +21,12 @@ const sequelize = require('./config/connection.js');
 })()
 
 // Read json
-const thaiTranslate = require("./json_information/thai_translate.json")
-const headerInfo = require("./json_information/header_info.json")
-const colName = require("./json_information/col_name.json")
-const tableField = require("./json_information/table_field.json")
-const position = require("./json_information/position.json")
-const notification = require("./json_information/notification_status.json")
+const thaiTranslate = require("../json_information/thai_translate.json")
+const headerInfo = require("../json_information/header_info.json")
+const colName = require("../json_information/col_name.json")
+const tableField = require("../json_information/table_field.json")
+const position = require("../json_information/position.json")
+const notification = require("../json_information/notification_status.json")
 
 // fetching table form db and convert to dict
 var brandShortDict = {};
