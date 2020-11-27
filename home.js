@@ -9,7 +9,16 @@ const NotificationView = require('./views/notification_view.js')
 const { ipcRenderer, remote } = require("electron");
 let user = remote.getGlobal("user")
 ipcRenderer.send('createMysqlCon')
-var con = remote.getGlobal("con");
+const sequelize = require('./config/connection.js');
+
+(async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+})()
 
 // Read json
 const thaiTranslate = require("./json_information/thai_translate.json")

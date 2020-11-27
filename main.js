@@ -8,12 +8,18 @@ const path = require('path')
 const url = require('url')
 const { autoUpdater } = require('electron-updater');
 
+(async () => {
+  const sequelize = require('./config/connection.js')
+  sequelize.sync({ alter: true });
+})()
+
 
 let win;
 
-function createWindow () {
+function createWindow() {
 
-  win = new BrowserWindow({width: 800, height: 600,
+  win = new BrowserWindow({
+    width: 800, height: 600,
     webPreferences: {
       nodeIntegration: true
     }
@@ -58,30 +64,8 @@ app.on('activate', () => {
   }
 });
 
-const { ipcMain } = require( "electron" );
-
-var mysql = require('mysql');
+const { ipcMain } = require("electron");
 
 ipcMain.on('restart_app', () => {
   autoUpdater.quitAndInstall();
 });
-
-ipcMain.on("createMysqlCon", (event) => {
-  var con = mysql.createConnection({
-    host: "seutrongluckydraw.ddns.net",
-    user: "remote",
-    password: "seutrongRemote_1",
-    database: "seutrong_service"
-  });
-  
-  con.connect(function (err) {
-    if (err) throw err;
-    console.log("Connected!");
-  });
-  
-  global.con = con;
-})
-
-ipcMain.on( "loginUser", ( event, user ) => {
-  global.user = user;
-} );

@@ -21,30 +21,32 @@ function restartApp() {
     ipcRenderer.send('restart_app');
 }
 
+(async () => {
+    const admin = require('./models/person_orm.js').admin;
 
-document.getElementById('loginForm').addEventListener('submit', function (event) {
-    event.preventDefault();
-    ipcRenderer.send('createMysqlCon')
-    var con = remote.getGlobal("con");
-    let username = document.getElementById('username').value
-    let password = document.getElementById('password').value
-    let responseText = document.getElementById('responseText')
-    console.log(`${username}, ${password}`)
-    if (username != '' && password != '') {
-        con.query(`SELECT users.*, staff_name, staff_position FROM users JOIN staff ON users.staff_id = staff.staff_id WHERE username = '${username}' AND password = '${password}'`, function (err, result, fields) {
-            if (err) throw err;
-
-            if (result.length > 0) {
+    document.getElementById('loginForm').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        let username = document.getElementById('username').value
+        let password = document.getElementById('password').value
+        let responseText = document.getElementById('responseText')
+        console.log(`${username}, ${password}`)
+        if (username != '' && password != '') {
+            userMatch = await admin.findAll({
+                where: {
+                    _username: username,
+                    _password: password
+                }
+            })
+            if (userMatch.length > 0) {
                 // Set MyGlobalVariable.
-                ipcRenderer.send("loginUser", [result[0].staff_name, result[0].staff_position]);
-
+                console.log('auth sucsess')
                 location.replace("./home.html")
             } else {
                 responseText.innerHTML = 'Incorrect Username and/or Password!'
             }
-        })
-    }
-    else {
-        responseText.innerHTML = 'Please enter Username and Password!'
-    }
-})
+        }
+        else {
+            responseText.innerHTML = 'Please enter Username and Password!'
+        }
+    })
+})()
