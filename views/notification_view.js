@@ -1,7 +1,7 @@
 const EventEmitter = require('./event_emitter.js')
 window.$ = window.jQuery = require('jquery');
 
-class NotificationView extends EventEmitter {
+module.exports = class NotificationView extends EventEmitter {
     constructor(model, elements) {
         super();
         this._model = model;
@@ -105,5 +105,3 @@ class NotificationView extends EventEmitter {
         return notiString
     }
 }
-
-module.exports = NotificationView

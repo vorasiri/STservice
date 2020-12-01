@@ -2,89 +2,31 @@
 
 <head>
     <title>Seutrong Service</title>
-    <link rel="stylesheet" href="styles/side_nav.css">
+    <link rel="stylesheet" href="../src/styles/side_nav.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
 
 <body>
     <!-- LEFT  -->
     <div class="leftsidenav">
-        <img border="0" alt="SEUTRONG" src="images/LOGO_square_or.jpg" width="200" height="200">
-        <a href="#" class="navButton">ข้อมูลบริการซ่อม</a>
-        <a href="#" class="navButton">ข้อมูลการคืนสินค้า</a>
-        <a href="#" class="navButton">ข้อมูลการจัดส่งสินค้า</a>
-        <button class="dropdown-btn">
-            ข้อมูลการติดตั้ง
-            <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-container">
-            <a href="#" class="navButton">
-                <i class="fa fa-caret-right"></i>
-                จานดาวเทียม
-            </a>
-            <a href="#" class="navButton">
-                <i class="fa fa-caret-right"></i>
-                แอร์
-            </a>
-            <a href="#" class="navButton">
-                <i class="fa fa-caret-right"></i>
-                เครื่องทำน้ำอุ่น
-            </a>
-        </div>
-        <button class="dropdown-btn">
-            จัดการรายละเอียด
-            <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-container">
-            <a href="#" class="navButton">
-                <i class="fa fa-caret-right"></i>
-                รายชื่อยี่ห้อ
-            </a>
-            <a href="#" class="navButton">
-                <i class="fa fa-caret-right"></i>
-                รายชื่อลูกค้า
-            </a>
-            <a href="#" class="navButton">
-                <i class="fa fa-caret-right"></i>
-                รายชื่อพนักงาน
-            </a>
-            <a href="#" class="navButton">
-                <i class="fa fa-caret-right"></i>
-                รายชื่อศูนย์บริการ
-            </a>
-            <a href="#" class="navButton">
-                <i class="fa fa-caret-right"></i>
-                รายชื่อผู้จัดจำหน่าย
-            </a>
-        </div>
-        <button class="dropdown-btn">
-            จัดการรายการสินค้า
-            <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-container">
-            <a href="#" class="navButton">
-                <i class="fa fa-caret-right"></i>
-                รายการอะไหล่
-            </a>
-            <a href="#" class="navButton">
-                <i class="fa fa-caret-right"></i>
-                รายการอุปกรณ์
-            </a>
-        </div>
-        <div class="profile">
-            <button class="profile-btn">
-                <i class="fa fa-fw fa-user"></i>
-                <span id="staffName">
-                    Staff Name
-                </span>
-                <span> | </span>
-                <span id="staffPosition">
-                    Position
-                </span>
-            </button>
-            <div class="profile-logout">
-                <a href="#" id="logoutButton">ออกจากระบบ</a>
+        <img border="0" alt="SEUTRONG" src="../src/images/LOGO_square_or.jpg" width="200" height="200">
+        <div id="menuBar">
+            <div class="profile">
+                <button class="profile-btn">
+                    <i class="fa fa-fw fa-user"></i>
+                    <span id="staffName">
+                        Staff Name
+                    </span>
+                    <span> | </span>
+                    <span id="staffPosition">
+                        Position
+                    </span>
+                </button>
+
             </div>
+        </div>
+        <div class="profile-logout">
+            <a href="#" id="logoutButton">ออกจากระบบ</a>
         </div>
     </div>
 
@@ -368,11 +310,9 @@
             <input class="btn" type="submit" value="ตกลง">
         </div>
     </div>
-    <script>
-        require('./home.js');
-    </script>
 </body>
-<link rel="stylesheet" type="text/css" href="node_modules/jquery-datetimepicker/jquery.datetimepicker.css" />
-<script src="node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js"></script>
+<script src="home.js"></script>
+<link rel="stylesheet" type="text/css" href="../node_modules/jquery-datetimepicker/jquery.datetimepicker.css" />
+<script src="../node_modules/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js"></script>
 
 </html>

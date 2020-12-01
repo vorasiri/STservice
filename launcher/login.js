@@ -37,8 +37,9 @@ function restartApp() {
                     _password: password
                 }
             })
-            if (userMatch.length > 0) {
+            if (userMatch.length = 1) {
                 // Set MyGlobalVariable.
+                window.sessionStorage.setItem('user', JSON.stringify(userMatch, null, 2))
                 console.log('auth sucsess')
                 location.replace("./home.html")
             } else {
