@@ -22,7 +22,9 @@ function restartApp() {
 }
 
 (async () => {
-    const admin = require('../models/person_orm.js').admin;
+    const personOrm = require('../models/person_orm.js')
+    const branch = personOrm.branch
+    const admin = personOrm.admin;
 
     document.getElementById('loginForm').addEventListener('submit', async (event) => {
         event.preventDefault();
@@ -32,6 +34,7 @@ function restartApp() {
         console.log(`${username}, ${password}`)
         if (username != '' && password != '') {
             userMatch = await admin.findAll({
+                include: branch,
                 where: {
                     _username: username,
                     _password: password

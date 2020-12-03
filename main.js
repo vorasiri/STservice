@@ -10,6 +10,9 @@ const { autoUpdater } = require('electron-updater');
 
 (async () => {
   const sequelize = require('./config/connection.js')
+  const personOrm = require('./models/person_orm.js')
+  admin = await personOrm.admin
+  branch = await personOrm.branch
   sequelize.sync({ alter: true });
 })()
 

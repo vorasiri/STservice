@@ -43,7 +43,7 @@ class Staff extends GeneralPerson {
     constructor(){
         super()
         this._branch = {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
         }
     }
 }
@@ -60,4 +60,24 @@ class Admin extends Staff {
     }
 }
 
-module.exports.admin = sequelize.define('admin', new Admin());
+class Branch {
+    constructor(){
+        this._name = {
+            type: DataTypes.STRING(30)
+        }
+    }
+}
+
+let admin = sequelize.define('admin', new Admin());
+let branch = sequelize.define('branch', new Branch());
+
+branch.hasMany(admin, {
+    foreignKey: '_branch',
+    sourceKey: 'id',
+})
+admin.belongsTo(branch, {
+    foreignKey: '_branch',
+})
+
+module.exports.admin = admin
+module.exports.branch = branch
