@@ -112,7 +112,7 @@ module.exports = class TableView extends EventEmitter {
     async loadUser() {
         let user = await JSON.parse(window.sessionStorage.getItem('user'))[0]
         console.log(user)
-        $('#staffName')[0].innerText = `${user._title} ${user._name}`
-        $('#staffPosition')[0].innerText = `${user.branch._name}`
+        $('#staffName')[0].innerText = `${user.staff.person.general_person._title} ${user.staff.person._name}`
+        $('#staffPosition')[0].innerText = `${user.staff.branch._name}`
     }
 }

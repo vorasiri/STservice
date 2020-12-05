@@ -23,8 +23,6 @@ function restartApp() {
 
 (async () => {
     const personOrm = require('../models/person_orm.js')
-    const branch = personOrm.branch
-    const admin = personOrm.admin;
 
     document.getElementById('loginForm').addEventListener('submit', async (event) => {
         event.preventDefault();
@@ -33,8 +31,10 @@ function restartApp() {
         let responseText = document.getElementById('responseText')
         console.log(`${username}, ${password}`)
         if (username != '' && password != '') {
-            userMatch = await admin.findAll({
-                include: branch,
+            userMatch = await personOrm.admin.findAll({
+                include: [{ model: personOrm.staff, 
+                    include: [{ model: personOrm.branch }, { model: personOrm.person,
+                    include: [ personOrm.generalPerson ]}]}],
                 where: {
                     _username: username,
                     _password: password
@@ -42,6 +42,7 @@ function restartApp() {
             })
             if (userMatch.length = 1) {
                 // Set MyGlobalVariable.
+                console.log(userMatch)
                 window.sessionStorage.setItem('user', JSON.stringify(userMatch, null, 2))
                 console.log('auth sucsess')
                 location.replace("./home.html")
