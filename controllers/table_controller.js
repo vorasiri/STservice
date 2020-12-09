@@ -10,7 +10,6 @@ module.exports = class TableController extends EventEmitter {
     }
 
     updateTable(e){
-        console.log(e)
         this._model.loadTable(e)
     }
 

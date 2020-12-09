@@ -1,5 +1,4 @@
 const { DataTypes } = require("sequelize");
-const { drop } = require("../config/connection.js");
 const sequelize = require('../config/connection.js');
 
 class Person {

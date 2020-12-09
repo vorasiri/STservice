@@ -9,8 +9,10 @@ const url = require('url')
 const { autoUpdater } = require('electron-updater');
 
 (async () => {
-  const sequelize = require('./config/connection.js')
-  const personOrm = await require('./models/person_orm.js')
+  const sequelize = require('./config/connection.js');
+  const personOrm = await require('./models/person_orm.js');
+  const serviceOrm = await require('./models/service_orm.js');
+  const itemOrm = await require('./models/item_orm.js');
   sequelize.sync({ alter: true });
 })()
 

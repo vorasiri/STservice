@@ -1,22 +1,33 @@
+const { DataTypes } = require("sequelize")
+const sequelize = require("../config/connection")
+const personOrm = require("./person_orm.js")
+const itemOrm = require("./item_orm.js")
+
 class Service {
     constructor(){
         this._status = {
             type: DataTypes.STRING
         }
         this._date = {
-            type: DataTypes.NOW
+            type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
         }
         this._appointment = {
             type: DataTypes.DATE
         }
-        this._product = {
-            type: DataTypes.ARRAY
-        }
         this._receive_admin = {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            references: {
+                model: personOrm.admin,
+                key: 'id',
+            }
         }
         this._return_admin = {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            references: {
+                model: personOrm.admin,
+                key: 'id',
+            }
         }
     }
 }
@@ -28,7 +39,7 @@ class Delivery extends Service {
             type: DataTypes.TEXT
         }
         this._equipment = {
-            type: DataTypes.ARRAY
+            type: DataTypes.INTEGER
         }
         this._fee_amount = {
             type: DataTypes.INTEGER
@@ -49,7 +60,7 @@ class Installation extends Service {
             type: DataTypes.TEXT
         }
         this._equipment = {
-            type: DataTypes.ARRAY
+            type: DataTypes.INTEGER
         }
         this._fee_amount = {
             type: DataTypes.INTEGER
@@ -106,7 +117,7 @@ class Repairing extends Service {
             type: DataTypes.TEXT
         }
         this._spare_part = {
-            type: DataTypes.ARRAY
+            type: DataTypes.INTEGER
         }
         this._fee_amount = {
             type: DataTypes.INTEGER
@@ -139,7 +150,7 @@ class Returning extends Service {
             type: DataTypes.STRING
         }
         this._compensate_date = {
-            type: DataTypes.DATEONLY
+            type: DataTypes.DATE
         }
         this._compemsate_product_sn = {
             type: DataTypes.STRING
@@ -149,3 +160,15 @@ class Returning extends Service {
         }
     }
 }
+
+let delivery = sequelize.define('delivery', new Delivery())
+let installation = sequelize.define('installation', new Installation())
+let repairing = sequelize.define('repairing', new Repairing())
+let returning = sequelize.define('returning', new Returning())
+
+
+
+module.exports.delivery = delivery
+module.exports.installation = installation
+module.exports.repairing = repairing
+module.exports.returning = returning
