@@ -1,5 +1,8 @@
-module.exports = class NotificationController {
+const EventEmitter = require('../event_emitter.js')
+
+module.exports = class NotificationController extends EventEmitter {
     constructor(model, view) {
+        super()
         this._model = model;
         this._view = view;
 

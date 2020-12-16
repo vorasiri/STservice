@@ -1,4 +1,4 @@
-const EventEmitter = require('./event_emitter.js')
+const EventEmitter = require('../event_emitter.js')
 window.$ = window.jQuery = require('jquery');
 
 module.exports = class NotificationView extends EventEmitter {

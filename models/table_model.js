@@ -1,6 +1,4 @@
 const EventEmitter = require('../event_emitter.js')
-const { branch } = require('./person_orm.js')
-
 
 module.exports = class TableModel extends EventEmitter {
     constructor(models) {

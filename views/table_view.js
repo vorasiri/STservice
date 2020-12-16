@@ -1,6 +1,8 @@
 const EventEmitter = require('../event_emitter.js')
 window.$ = window.jQuery = require('jquery')
 const thaiTranslate = require('../src/json_information/thai_translate.json')
+const fs = require('fs');
+const fsPromises = fs.promises;
 
 module.exports = class TableView extends EventEmitter {
   constructor(model, elements) {
@@ -8,20 +10,81 @@ module.exports = class TableView extends EventEmitter {
     this._model = model
     this._elements = elements
     this._elements.menuBar = $('#menuBar')
-    this._elements.infoTable = $('#infoTable')
+    this._elements.mainContent = $('#mainContent')
+    this._elements.infoTable = () => $('#infoTable')
+    this._elements.pagination = () => $('#pagination')
+    this._elements.header = () => $('#pageHeader')
+    this._elements.addButton = () => $('addButton')
+    this._elements.importButton = () => document.getElementById('importButton')
+    this._elements.searchSubmitButton = () => $('searchSubmit')
+    this._elements.searchField = () => $('searchField')
 
     this.loadMenu()
     this.loadUser()
-    this._model.on('tableUpdated', () => this.rebuildTable())
+    this._model.on('tableUpdated', () => this.buildTable())
   }
 
-  rebuildTable() {
+  async buildInfoPage() {
+    //elements
+    this._elements.mainContent[0].innerHTML = await fsPromises.readFile('./views/info_page.html', 'utf8')
+    //header
+    this._elements.header()[0].innerHTML = thaiTranslate.header[this._model._tableName]
+    //search
+    //add
+    //import
+    if(['Spare_Part', 'Equipment'].includes(this._model._tableName)){
+      this._elements.importButton().style.visibility = 'visible'
+      this._elements.importButton().addEventListener('click', () => {
+        this.emit('importButtonClicked')
+      })
+    }
+    //pagination
 
+  }
+
+  buildTable() {
+    //table
+    //row handler
+  }
+
+  paginationButton() {
+    var currentPage = 1
+    let pagination = this._elements.pagination[0]
+    pagination.appendChild(aTag('&laquo;')).addEventListener('click', function () {
+      if (currentPage != 1)
+        currentPage--;
+    })
+    console.log(this._elements.infoTable)
+    for (var i = 1; i <= this._elements.infoTable.totalPage; i++) {
+      pagination.appendChild(aTag(`${i}`)).addEventListener('click', function () {
+        currentPage = parseInt(this.innerHTML);
+      })
+    }
+    pagination.appendChild(aTag('&raquo;')).addEventListener('click', function () {
+      if (currentPage != this._elements.infoTable.totalPage)
+        currentPage++;
+    })
+    pagination.addEventListener('click', function () {
+      this._elements.infoTable.clearTable(1)
+      this._elements.infoTable.loadTable(currentPage)
+      highlightPageNumber(pagination, currentPage)
+    })
+    highlightPageNumber(pagination, currentPage)
+  }
+
+  highlightPageNumber(pagination, currentPage) {
+    for (let i = 0; i < pagination.children.length; i++) {
+      if (pagination.children[i].text == pageNumber) {
+        pagination.children[i].classList.add("active")
+      }
+      else
+        pagination.children[i].classList.remove("active")
+    }
   }
 
   clearTable(startRow = 0) {
-    while (this.table[0].rows.length > startRow) {
-      this.table[0].deleteRow(startRow);
+    while (this._elements.infoTable[0].rows.length > startRow) {
+      this._elements.infoTable[0].deleteRow(startRow);
     }
   }
 
@@ -32,7 +95,7 @@ module.exports = class TableView extends EventEmitter {
         tagTH += `<th>${thaiTranslate[0][value.name]}</th>`
       }
     }
-    this.table.append(`<tr>${tagTH}</tr>`);
+    this._elements.infoTable.append(`<tr>${tagTH}</tr>`);
   }
 
   loadTable(page = 1, loadAll = false) {
@@ -62,14 +125,14 @@ module.exports = class TableView extends EventEmitter {
             }
           }
         }
-        this.table.append(`<tr>${tagTD}</tr>`);
+        this._elements.infoTable.append(`<tr>${tagTD}</tr>`);
       }
     }
   }
 
   search(spacifiColName, keyword) {
     var table, tr, td, i, txtValue;
-    table = this.table[0]
+    table = this._elements.infoTable[0]
     tr = table.getElementsByTagName("tr");
     for (i = 0; i < tr.length; i++) {
       if (spacifiColName == 'any') {
@@ -116,6 +179,7 @@ module.exports = class TableView extends EventEmitter {
       }
     }
   }
+
   loadMenu() {
     ['Repairing', 'Returning', 'Delivery'].forEach(
       menu => {
