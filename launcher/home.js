@@ -29,6 +29,7 @@ let formModel = new FormModel()
 let formController = new FormController(
     formModel,
     new FormView(formModel, {}),
+    tableModel,
     tableView
 )
 

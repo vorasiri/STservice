@@ -17,11 +17,11 @@ module.exports = class TableModel extends EventEmitter {
             'Customer': () => this._models.personOrm.customer.findAll(),
             'Staff': () => this._models.personOrm.staff.findAll({
                 include: [{
-                    model: personOrm.branch
+                    model: this._models.personOrm.branch
                 }, {
-                    model: personOrm.person,
+                    model: this._models.personOrm.person,
                     include: [{
-                        model: personOrm.generalPerson
+                        model: this._models.personOrm.generalPerson
                     }]
                 }],
             }),

@@ -14,10 +14,10 @@ module.exports = class TableView extends EventEmitter {
     this._elements.infoTable = () => $('#infoTable')
     this._elements.pagination = () => $('#pagination')
     this._elements.header = () => $('#pageHeader')
-    this._elements.addButton = () => $('addButton')
+    this._elements.addButton = () => $('#addButton')
     this._elements.importButton = () => document.getElementById('importButton')
-    this._elements.searchSubmitButton = () => $('searchSubmit')
-    this._elements.searchField = () => $('searchField')
+    this._elements.searchSubmitButton = () => $('#searchSubmit')
+    this._elements.searchField = () => $('#searchField')
 
     this.loadMenu()
     this.loadUser()
@@ -31,6 +31,9 @@ module.exports = class TableView extends EventEmitter {
     this._elements.header()[0].innerHTML = thaiTranslate.header[this._model._tableName]
     //search
     //add
+    this._elements.addButton().on('click', () => {
+      this.emit('addButtonClicked')
+    })
     //import
     if(['Spare_Part', 'Equipment'].includes(this._model._tableName)){
       this._elements.importButton().style.visibility = 'visible'
