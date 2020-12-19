@@ -42,7 +42,7 @@ module.exports = class TableView extends EventEmitter {
       })
     }
     //pagination
-
+    this.paginationButton()
   }
 
   buildTable() {
@@ -58,7 +58,7 @@ module.exports = class TableView extends EventEmitter {
         currentPage--;
     })
     console.log(this._elements.infoTable)
-    for (var i = 1; i <= this._elements.infoTable.totalPage; i++) {
+    for (var i = 1; i <= this._model._totalPage; i++) {
       pagination.appendChild(aTag(`${i}`)).addEventListener('click', function () {
         currentPage = parseInt(this.innerHTML);
       })
@@ -68,14 +68,14 @@ module.exports = class TableView extends EventEmitter {
         currentPage++;
     })
     pagination.addEventListener('click', function () {
-      this._elements.infoTable.clearTable(1)
-      this._elements.infoTable.loadTable(currentPage)
-      highlightPageNumber(pagination, currentPage)
+      this.clearTable(1)
+      this.loadTable(currentPage)
+      this.highlightPageNumber(pagination, currentPage)
     })
-    highlightPageNumber(pagination, currentPage)
+    this.highlightPageNumber(pagination, currentPage)
   }
 
-  highlightPageNumber(pagination, currentPage) {
+  highlightPageNumber(pagination, pageNumber) {
     for (let i = 0; i < pagination.children.length; i++) {
       if (pagination.children[i].text == pageNumber) {
         pagination.children[i].classList.add("active")
@@ -86,8 +86,8 @@ module.exports = class TableView extends EventEmitter {
   }
 
   clearTable(startRow = 0) {
-    while (this._elements.infoTable[0].rows.length > startRow) {
-      this._elements.infoTable[0].deleteRow(startRow);
+    while (this._elements.infoTable()[0].rows.length > startRow) {
+      this._elements.infoTable()[0].deleteRow(startRow);
     }
   }
 

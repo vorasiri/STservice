@@ -40,7 +40,7 @@ function restartApp() {
                     _password: password
                 }
             })
-            if (userMatch.length = 1) {
+            if (userMatch.length != 0) {
                 // Set MyGlobalVariable.
                 console.log(userMatch)
                 window.sessionStorage.setItem('user', JSON.stringify(userMatch, null, 2))

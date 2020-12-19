@@ -14,11 +14,11 @@ module.exports = class FormController extends EventEmitter {
 
     loadEmptyForm(){
         console.log('Load Empty Form')
-        this._view.loadEmptyForm(this._tableModel._tableName)
+        this._view.buildEmptyForm(this._tableModel._tableName)
     }
 
     loadImportForm(){
         console.log('Load Import Form')
-        this._view.loadImportForm(this._tableModel._tableName)
+        this._view.buildImportForm(this._tableModel._tableName)
     }
 }

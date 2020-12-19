@@ -12,7 +12,7 @@ module.exports = class FormView extends EventEmitter {
 
     }
 
-    async loadEmptyForm(tableName) {
+    async buildEmptyForm(tableName) {
         let formFileLocation = {
             'Returning': './views/forms/returning_form.html',
             'Delivery': './views/forms/delivery_form.html',
@@ -39,7 +39,7 @@ module.exports = class FormView extends EventEmitter {
         }
     }
 
-    async loadImportForm(tableName) {
+    async buildImportForm(tableName) {
         this._elements.mainContent[0].innerHTML = await fsPromises.readFile('./views/forms/import_form.html', 'utf8')
         if (tableName === 'Spare_Part') {
             this._elements.header()[0].innerHTML = 'รับสินค้า อะไหล่'

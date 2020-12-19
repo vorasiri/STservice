@@ -6,6 +6,8 @@ module.exports = class TableModel extends EventEmitter {
         this._models = models
         this._tableName
         this._tableJson
+        this._pageSize = 30
+        this._totalPage
         this._combindTable = {
             'Repairing': () => this._models.serviceOrm.repairing.findAll(),
             'Returning': () => this._models.serviceOrm.returning.findAll(),
@@ -36,7 +38,8 @@ module.exports = class TableModel extends EventEmitter {
         console.log(tableName)
         this._tableName = tableName
         this._tableJson = await this._combindTable[this._tableName]()
-        this.simplify()
+        this._tableJson = await this.simplify()
+        this._totalPage = Math.ceil(this._tableJson.length / this._pageSize)
         console.log(this._tableJson)
         this.emit('tableUpdated')
     }
@@ -79,7 +82,7 @@ module.exports = class TableModel extends EventEmitter {
             'Spare_Part': () => { },
             'Equipment': () => { },
         }
-        this._tableJson = process[this._tableName]()
+        return process[this._tableName]()
     }
 
 }
