@@ -57,7 +57,6 @@ module.exports = class TableModel extends EventEmitter {
             'Staff': () => {
                 var simplifiedJson = []
                 this._tableJson.forEach((element, index) => {
-                    console.log(element, index)
                     simplifiedJson[index] = {
                         id: element.id,
                         branch: element.branch._name,

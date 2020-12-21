@@ -16,6 +16,7 @@ module.exports = class TableView extends EventEmitter {
     this._elements.header = () => $('#pageHeader')
     this._elements.addButton = () => $('#addButton')
     this._elements.importButton = () => document.getElementById('importButton')
+    this._elements.searchDropdown = () => $('#searchDropdown')
     this._elements.searchSubmitButton = () => $('#searchSubmit')
     this._elements.searchField = () => $('#searchField')
 
@@ -35,39 +36,42 @@ module.exports = class TableView extends EventEmitter {
       this.emit('addButtonClicked')
     })
     //import
-    if(['Spare_Part', 'Equipment'].includes(this._model._tableName)){
+    if (['Spare_Part', 'Equipment'].includes(this._model._tableName)) {
       this._elements.importButton().style.visibility = 'visible'
       this._elements.importButton().addEventListener('click', () => {
         this.emit('importButtonClicked')
       })
     }
+  }
+  
+  buildTable() {
     //pagination
     this.paginationButton()
-  }
-
-  buildTable() {
     //table
+    this.clearTable()
+    this.loadField()
+    this.loadTable()
     //row handler
   }
 
   paginationButton() {
     var currentPage = 1
-    let pagination = this._elements.pagination[0]
-    pagination.appendChild(aTag('&laquo;')).addEventListener('click', function () {
+    let pagination = this._elements.pagination()
+    pagination.append($('<a />', {html: '&laquo;'})).on('click', () => {
       if (currentPage != 1)
         currentPage--;
     })
-    console.log(this._elements.infoTable)
+    console.log(this._elements.infoTable())
     for (var i = 1; i <= this._model._totalPage; i++) {
-      pagination.appendChild(aTag(`${i}`)).addEventListener('click', function () {
+      pagination.append($('<a />', {text: `${i}`})).on('click', () => {
         currentPage = parseInt(this.innerHTML);
       })
     }
-    pagination.appendChild(aTag('&raquo;')).addEventListener('click', function () {
-      if (currentPage != this._elements.infoTable.totalPage)
+    pagination.append($('<a />', {html: '&raquo;'})).on('click', () => {
+      if (currentPage != this._model._totalPage)
         currentPage++;
     })
-    pagination.addEventListener('click', function () {
+    pagination.on('click', () => {
       this.clearTable(1)
       this.loadTable(currentPage)
       this.highlightPageNumber(pagination, currentPage)
@@ -76,6 +80,8 @@ module.exports = class TableView extends EventEmitter {
   }
 
   highlightPageNumber(pagination, pageNumber) {
+    pagination = pagination[0]
+    console.log(pagination)
     for (let i = 0; i < pagination.children.length; i++) {
       if (pagination.children[i].text == pageNumber) {
         pagination.children[i].classList.add("active")
@@ -93,23 +99,26 @@ module.exports = class TableView extends EventEmitter {
 
   loadField() {
     var tagTH = ''
-    for (var value of this.field) {
-      if (value !== undefined) {
-        tagTH += `<th>${thaiTranslate[0][value.name]}</th>`
-      }
-    }
-    this._elements.infoTable.append(`<tr>${tagTH}</tr>`);
+    Object.keys(this._model._tableJson[0]).forEach(value => {
+      tagTH += `<th>${thaiTranslate.field[value]}</th>`
+      this._elements.searchDropdown().append(
+        $('<option />',{
+          text: thaiTranslate.field[value],
+          value: value
+        }))
+    })
+    this._elements.infoTable().append(`<tr>${tagTH}</tr>`);
   }
 
   loadTable(page = 1, loadAll = false) {
-    let start = (page - 1) * this.pageSize
-    let end = start + this.pageSize
+    let start = (page - 1) * this._model._pageSize
+    let end = start + this._model._pageSize
     if (loadAll) {
       start = 0
-      end = this.result.length
+      end = this._model._tableJson.length
     }
     for (var i = start; i < end; i++) {
-      let row = this.result[i]
+      let row = this._model._tableJson[i]
       if (row !== undefined) {
         var tagTD = ''
         for (var propName in row) {
@@ -128,14 +137,14 @@ module.exports = class TableView extends EventEmitter {
             }
           }
         }
-        this._elements.infoTable.append(`<tr>${tagTD}</tr>`);
+        this._elements.infoTable().append(`<tr>${tagTD}</tr>`);
       }
     }
   }
 
   search(spacifiColName, keyword) {
     var table, tr, td, i, txtValue;
-    table = this._elements.infoTable[0]
+    table = this._elements.infoTable()[0]
     tr = table.getElementsByTagName("tr");
     for (i = 0; i < tr.length; i++) {
       if (spacifiColName == 'any') {

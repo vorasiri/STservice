@@ -9,10 +9,9 @@ module.exports = class TableController extends EventEmitter {
         view.on('menuClicked', e => this.updateTable(e))
     }
 
-    async updateTable(e){
-        await this._model.loadTable(e)
-        await this._view.buildInfoPage()
-        this._view.buildTable()
+    updateTable(e){
+        this._model.loadTable(e)
+        this._view.buildInfoPage()
     }
 
     loadForm(){
