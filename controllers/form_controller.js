@@ -10,6 +10,7 @@ module.exports = class FormController extends EventEmitter {
 
         this._tableView.on('importButtonClicked', () => this.loadImportForm())
         this._tableView.on('addButtonClicked', () => this.loadEmptyForm())
+        this._tableView.on('rowClicked', (e) => this.loadFilledForm(e))
     }
 
     loadEmptyForm(){
@@ -20,5 +21,9 @@ module.exports = class FormController extends EventEmitter {
     loadImportForm(){
         console.log('Load Import Form')
         this._view.buildImportForm(this._tableModel._tableName)
+    }
+
+    loadFilledForm(e){
+        console.log('Load Filled Form', this._tableModel._tableName, e.currentTarget.cells[0].innerText)
     }
 }

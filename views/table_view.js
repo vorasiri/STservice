@@ -20,6 +20,7 @@ module.exports = class TableView extends EventEmitter {
     this._elements.searchSubmitButton = () => $('#searchSubmit')
     this._elements.searchField = () => $('#searchField')
 
+    this._currentPage = 1
     this.loadMenu()
     this.loadUser()
     this._model.on('tableUpdated', () => this.buildTable())
@@ -31,6 +32,27 @@ module.exports = class TableView extends EventEmitter {
     //header
     this._elements.header()[0].innerHTML = thaiTranslate.header[this._model._tableName]
     //search
+    this._elements.searchField().on('change', () => {
+      var keyword = this._elements.searchField()[0].value
+      if (keyword.length != 0) {
+        this.clearTable(1)
+        this.loadTable(0, true)
+        this.search(this._elements.searchDropdown()[0].value, keyword)
+      }
+      else {
+        this.clearTable(1)
+        this.loadTable()
+      }
+    })
+    this._elements.searchSubmitButton().on('click', event => {
+      event.preventDefault()
+      var keyword = this._elements.searchField()[0].value
+      if (keyword.length != 0) {
+        this.clearTable(1)
+        this.loadTable(0, true)
+        this.search(this._elements.searchDropdown()[0].value, keyword)
+      }
+    })
     //add
     this._elements.addButton().on('click', () => {
       this.emit('addButtonClicked')
@@ -43,7 +65,7 @@ module.exports = class TableView extends EventEmitter {
       })
     }
   }
-  
+
   buildTable() {
     //pagination
     this.paginationButton()
@@ -51,37 +73,36 @@ module.exports = class TableView extends EventEmitter {
     this.clearTable()
     this.loadField()
     this.loadTable()
-    //row handler
   }
 
   paginationButton() {
-    var currentPage = 1
     let pagination = this._elements.pagination()
-    pagination.append($('<a />', {html: '&laquo;'})).on('click', () => {
-      if (currentPage != 1)
-        currentPage--;
-    })
-    console.log(this._elements.infoTable())
+    pagination.append($('<a />', { html: '&laquo;' }).on('click', (e) => {
+      if (this._currentPage != 1) {
+        this._currentPage = this._currentPage - 1
+      }
+    }))
     for (var i = 1; i <= this._model._totalPage; i++) {
-      pagination.append($('<a />', {text: `${i}`})).on('click', () => {
-        currentPage = parseInt(this.innerHTML);
-      })
+      pagination.append($('<a />', { text: `${i}` }).on('click', (e) => {
+        this._currentPage = parseInt(e.target.text);
+      }))
     }
-    pagination.append($('<a />', {html: '&raquo;'})).on('click', () => {
-      if (currentPage != this._model._totalPage)
-        currentPage++;
-    })
-    pagination.on('click', () => {
+    pagination.append($('<a />', { html: '&raquo;' }).on('click', (e) => {
+      if (this._currentPage != this._model._totalPage) {
+        this._currentPage = this._currentPage + 1
+      }
+    }))
+    pagination.on('click', (e) => {
+      console.log(this._currentPage)
       this.clearTable(1)
-      this.loadTable(currentPage)
-      this.highlightPageNumber(pagination, currentPage)
+      this.loadTable(this._currentPage)
+      this.highlightPageNumber(pagination, this._currentPage)
     })
-    this.highlightPageNumber(pagination, currentPage)
+    this.highlightPageNumber(pagination, this._currentPage)
   }
 
   highlightPageNumber(pagination, pageNumber) {
     pagination = pagination[0]
-    console.log(pagination)
     for (let i = 0; i < pagination.children.length; i++) {
       if (pagination.children[i].text == pageNumber) {
         pagination.children[i].classList.add("active")
@@ -102,7 +123,7 @@ module.exports = class TableView extends EventEmitter {
     Object.keys(this._model._tableJson[0]).forEach(value => {
       tagTH += `<th>${thaiTranslate.field[value]}</th>`
       this._elements.searchDropdown().append(
-        $('<option />',{
+        $('<option />', {
           text: thaiTranslate.field[value],
           value: value
         }))
@@ -137,12 +158,15 @@ module.exports = class TableView extends EventEmitter {
             }
           }
         }
-        this._elements.infoTable().append(`<tr>${tagTD}</tr>`);
+        this._elements.infoTable().append($(`<tr>${tagTD}</tr>`).on('click', (e) => {
+          this.emit('rowClicked', e)
+        }));
       }
     }
   }
 
   search(spacifiColName, keyword) {
+    console.log(spacifiColName, keyword)
     var table, tr, td, i, txtValue;
     table = this._elements.infoTable()[0]
     tr = table.getElementsByTagName("tr");
@@ -164,7 +188,12 @@ module.exports = class TableView extends EventEmitter {
         }
       }
       else {
-        let colNameIndex = findWithAttr(this.field, 'name', spacifiColName)
+        var colNameIndex
+        Object.keys(this._model._tableJson[0]).forEach((value, index) => {
+          if (value === spacifiColName) {
+            colNameIndex = index
+          }
+        })
         td = tr[i].getElementsByTagName("td")[colNameIndex];
         if (td) {
           txtValue = td.textContent || td.innerText;
@@ -174,7 +203,6 @@ module.exports = class TableView extends EventEmitter {
             tr[i].style.display = "none";
           }
         }
-
       }
     }
     var alter = 1
