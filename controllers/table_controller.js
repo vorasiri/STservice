@@ -7,9 +7,10 @@ module.exports = class TableController extends EventEmitter {
         this._view = view
 
         view.on('menuClicked', e => this.updateTable(e))
+        view.on('detailSaved', () => this.updateTable(this._model._tableName))
     }
 
-    updateTable(e){
+    async updateTable(e){
         this._model.loadTable(e)
         this._view.buildInfoPage()
     }

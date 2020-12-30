@@ -25,7 +25,7 @@ let tableController = new TableController(
     tableView
 );
 
-let formModel = new FormModel()
+let formModel = new FormModel(orm)
 let formController = new FormController(
     formModel,
     new FormView(formModel, {}),

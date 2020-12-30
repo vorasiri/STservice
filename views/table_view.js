@@ -32,7 +32,7 @@ module.exports = class TableView extends EventEmitter {
     //header
     this._elements.header()[0].innerHTML = thaiTranslate.header[this._model._tableName]
     //search
-    this._elements.searchField().on('change', () => {
+    this._elements.searchField().keyup(() => {
       var keyword = this._elements.searchField()[0].value
       if (keyword.length != 0) {
         this.clearTable(1)
@@ -314,7 +314,7 @@ module.exports = class TableView extends EventEmitter {
   async loadUser() {
     let user = await JSON.parse(window.sessionStorage.getItem('user'))[0]
     console.log(user)
-    $('#staffName')[0].innerText = `${user.staff.person.general_person._title} ${user.staff.person._name}`
-    $('#staffPosition')[0].innerText = `${user.staff.branch._name}`
+    $('#userName')[0].innerText = `${user.staff.person.general_person._title} ${user.staff.person._name}`
+    $('#userBranch')[0].innerText = `${user.staff.branch._name}`
   }
 }
