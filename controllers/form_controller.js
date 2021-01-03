@@ -13,7 +13,7 @@ module.exports = class FormController extends EventEmitter {
         this._tableView.on('addButtonClicked', () => this.loadEmptyForm())
         this._tableView.on('rowClicked', (e) => this.loadFilledForm(e))
         this._view.on('formSubmitted', () => this.updateData())
-        this._model.on('detailSaved', () => this._tableView.emit('detailSaved'))
+        this._model.on('detailSaved', () => this._tableView.emit('detailSaved', this._tableModel._tableName))
     }
 
     loadEmptyForm() {
@@ -38,10 +38,10 @@ module.exports = class FormController extends EventEmitter {
 
     updateData() {
         if (this._formType === 'create') {
-
+            this._model.create(this._tableModel._tableName)
         }
         else if (this._formType === 'update') {
-            this._model.saveDetail()
+            this._model.saveDetail(this._tableModel._tableName)
         }
     }
 }

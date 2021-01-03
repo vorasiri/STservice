@@ -9,28 +9,45 @@ module.exports = class TableModel extends EventEmitter {
         this._pageSize = 30
         this._totalPage
         this._combindTable = {
-            'Repairing': () => this._models.serviceOrm.repairing.findAll(),
-            'Returning': () => this._models.serviceOrm.returning.findAll(),
-            'Delivery': () => this._models.serviceOrm.delivery.findAll(),
-            'Satellite_Installation': () => this._models.serviceOrm.installation.findAll(),
-            'AC_Installation': () => this._models.serviceOrm.installation.findAll(),
-            'Water_Heater_Installation': () => this._models.serviceOrm.installation.findAll(),
-            'Brand': () => this._models.itemOrm.brand.findAll(),
-            'Customer': () => this._models.personOrm.customer.findAll(),
-            'Staff': () => this._models.personOrm.staff.findAll({
-                include: [{
-                    model: this._models.personOrm.branch
-                }, {
-                    model: this._models.personOrm.person,
-                    include: [{
-                        model: this._models.personOrm.generalPerson
-                    }]
-                }],
+            'Repairing': () => this._models.serviceOrm.repairing.findAll({
+                include: { all: true, nested: true }
             }),
-            'Service_Partner': () => this._models.personOrm.servicePartner.findAll(),
-            'Supplier': () => this._models.personOrm.supplier.findAll(),
-            'Spare_Part': () => this._models.itemOrm.sparePart.findAll(),
-            'Equipment': () => this._models.itemOrm.equipment.findAll(),
+            'Returning': () => this._models.serviceOrm.returning.findAll({
+                include: { all: true, nested: true }
+            }),
+            'Delivery': () => this._models.serviceOrm.delivery.findAll({
+                include: { all: true, nested: true }
+            }),
+            'Satellite_Installation': () => this._models.serviceOrm.installation.findAll({
+                include: { all: true, nested: true }
+            }),
+            'AC_Installation': () => this._models.serviceOrm.installation.findAll({
+                include: { all: true, nested: true }
+            }),
+            'Water_Heater_Installation': () => this._models.serviceOrm.installation.findAll({
+                include: { all: true, nested: true }
+            }),
+            'Brand': () => this._models.itemOrm.brand.findAll({
+                include: { all: true, nested: true }
+            }),
+            'Customer': () => this._models.personOrm.customer.findAll({
+                include: { all: true, nested: true }
+            }),
+            'Staff': () => this._models.personOrm.staff.findAll({
+                include: { all: true, nested: true }
+            }),
+            'Service_Partner': () => this._models.personOrm.servicePartner.findAll({
+                include: { all: true, nested: true }
+            }),
+            'Supplier': () => this._models.personOrm.supplier.findAll({
+                include: { all: true, nested: true }
+            }),
+            'Spare_Part': () => this._models.itemOrm.sparePart.findAll({
+                include: { all: true, nested: true }
+            }),
+            'Equipment': () => this._models.itemOrm.equipment.findAll({
+                include: { all: true, nested: true }
+            }),
         }
     }
 
@@ -45,6 +62,7 @@ module.exports = class TableModel extends EventEmitter {
     }
 
     simplify() {
+        var simplifiedJson = []
         let process = {
             'Repairing': () => { },
             'Returning': () => { },
@@ -55,7 +73,6 @@ module.exports = class TableModel extends EventEmitter {
             'Brand': () => { },
             'Customer': () => { },
             'Staff': () => {
-                var simplifiedJson = []
                 this._tableJson.forEach((element, index) => {
                     simplifiedJson[index] = {
                         id: element.id,
@@ -74,14 +91,14 @@ module.exports = class TableModel extends EventEmitter {
                         tel: element.person._tel,
                     }
                 });
-                return simplifiedJson
             },
             'Service_Partner': () => { },
             'Supplier': () => { },
             'Spare_Part': () => { },
             'Equipment': () => { },
         }
-        return process[this._tableName]()
+        process[this._tableName]()
+        return simplifiedJson
     }
 
 }

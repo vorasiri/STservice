@@ -35,13 +35,56 @@ module.exports = class FormModel extends EventEmitter {
         this.emit('formLoaded', tableName)
     }
 
-    async saveDetail() {
+    saveDetail(tableName) {
         let details = this._details
-        console.log(details)
-        await details.save()
-        await details.person.save()
-        await details.person.general_person.save()
+        let table = {
+            'Returning': () => { },
+            'Delivery': () => { },
+            'Satellite_Installation': () => { },
+            'AC_Installation': () => { },
+            'Water_Heater_Installation': () => { },
+            'Brand': () => { },
+            'Customer': () => { },
+            'Staff': () => { 
+                details.save()
+                details.person.save()
+                details.person.general_person.save()
+            },
+            'Service_Partner': () => { },
+            'Supplier': () => { },
+            'Spare_Part': () => { },
+            'Equipment': () => { },
+        }
+        table[tableName]()
         this.emit('detailSaved')
+    }
+
+    create(tableName) {
+        let details = this._details
+        let table = {
+            'Returning': () => { },
+            'Delivery': () => { },
+            'Satellite_Installation': () => { },
+            'AC_Installation': () => { },
+            'Water_Heater_Installation': () => { },
+            'Brand': () => { },
+            'Customer': () => { },
+            'Staff': () => { 
+                let obj = {}
+                this._models.personOrm.staff.create( obj )        
+            },
+            'Service_Partner': () => { },
+            'Supplier': () => { },
+            'Spare_Part': () => { },
+            'Equipment': () => { },
+        }
+        table[tableName]()
+        this.emit('detailSaved')
+    }
+
+    staffType() {
+        
+        return
     }
 }
 // this._combindTable = {
